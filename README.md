@@ -12,8 +12,8 @@ Works on Windows with Python 2.x
 5. ctypes
 
 # Objective of the game
--Collect as many coins from the coin fall in 30 seconds. 
--Blue coins are worth thrice the normal coins! 
--Avoid the bombs! 
+1. Use your arrow keys to collect as many coins from the coin fall in 30 seconds. 
+2. Blue coins are worth thrice the normal coins! 
+3. Avoid the bombs! 
 
 ![alt text](https://github.com/vineetjc/pygame-Coin-Fall-/blob/master/screenshot.png)
