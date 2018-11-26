@@ -2,11 +2,7 @@ import pygame, sys, random, math
 from pygame.locals import *
 #for initialisation of necessary steps
 pygame.init()  
-import ctypes #foreign function library, provides C compatible data types etc.
 
-user32 = ctypes.windll.user32
-screenSize =  user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-size=(screenSize)
 size=(1024,768)
 #setup the window display
 windowSurface = pygame.display.set_mode((size), 0, 32) #the tuple has pixels #display is a module within pygame 
@@ -80,9 +76,10 @@ class Coin(Cart):  #have to make this derived class to access Cart coordinates
                 try:
                     if self.image==bluecoin:
                         A.Points+=3 #bonus coin
-                    elif self.image==bomb:                        
-                        global loop
-                        loop=0
+                    elif self.image==bomb:
+                        pygame.time.delay(500)
+                        pygame.quit()
+                        sys.exit()
                     else:
                         A.Points+=1
                     del self.image                    
@@ -138,13 +135,17 @@ def CoinGame():
 result=0
 i=1
 coinlist=[]
-loop=1 #loop variable
 gameclock = pygame.time.Clock()     
 timer=0
-while loop==1:
+while True:
+    for event in pygame.event.get():
+        if event.type==QUIT:
+            pygame.quit()
+            sys.exit()
     q=CoinGame()
     if q==0:
-        break
+        pygame.quit()
+        sys.exit()
     seconds=gameclock.tick()/1000.0
     timer+=seconds
     displaytimer=math.trunc(timer) #returns real value of timer to integer value "truncated"
@@ -173,4 +174,6 @@ while loop==1:
         Keeper=pointscore.get_rect(center=(100,200))
         windowSurface.blit(pointscore,Keeper)
         pygame.display.flip()
-        loop=0
+        pygame.time.delay(500)
+        pygame.quit()
+        sys.exit()
