@@ -1,5 +1,7 @@
 # pygame-Coin-Fall-
 
+[![Join the chat at https://gitter.im/pygame-Coin-Fall/Lobby](https://badges.gitter.im/pygame-Coin-Fall/Lobby.svg)](https://gitter.im/pygame-Coin-Fall/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Made using pygame.
 Works on Windows with Python 2.x
 
