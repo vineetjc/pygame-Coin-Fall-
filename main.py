@@ -4,32 +4,31 @@ from pygame.locals import *
 pygame.init()
 
 #setup the window display
-size=(1024,768)
+size=(1024, 768)
 windowSurface = pygame.display.set_mode((size), 0, 32)
 pygame.display.set_caption('Super Mumbo Epicness')
 
 # set up fonts
 basicFont = pygame.font.SysFont(None, 48) #none is for default system font, number is size of font
 
-#set colors R,G,B code
+#set colors R, G, B code
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 #images
-cart=pygame.image.load('Images/bb.jpg')
-coin=pygame.image.load('Images/coin.jpg')
-bluecoin=pygame.image.load('Images/bluecoin.jpg')
-bomb=pygame.image.load('Images/bomb.png')
-R=random.randint(1,4)
-BG=pygame.image.load('Images/coinfallbg'+str(R)+'.jpg')
+cart_img = pygame.image.load('Images/bb.jpg')
+coin_img = pygame.image.load('Images/coin.jpg')
+bluecoin = pygame.image.load('Images/bluecoin.jpg')
+bomb = pygame.image.load('Images/bomb.png')
+R = random.randint(1, 4)
+BG = pygame.image.load('Images/coinfallbg'+str(R)+'.jpg')
 
 class Cart(object):
     def __init__(self):
-        global cart
-        self.image = cart
+        self.image = cart_img
         self.x = (size[0]/2)-80
         self.y = size[1]-120
-        self.Points=0
+        self.Points = 0
 
     def handle_keys(self):
         key = pygame.key.get_pressed()
@@ -46,124 +45,113 @@ class Cart(object):
                 self.x-=0
 
     def draw(self, surface):
-        surface.blit(self.image, (self.x,self.y))
+        surface.blit(self.image, (self.x, self.y))
 
-A=Cart()
-
-class Coin(Cart):  #have to make this derived class to access Cart coordinates
-    def __init__(self):
-        global coin
-        self.image=coin
-        self.x=random.randint(0,size[0]-55)
-        self.y=-15
-
-    def fall(self):
-        self.y+=7 #change this value if necessary
-        if 645>self.y>633:
-            if A.x<self.x+(55.0/2)<(A.x+160) and A.x<self.x and A.x+160>self.x+55:
+    def collect_item(self, coin):
+        if 645>coin.y>633:
+            if self.x<coin.x+(55.0/2)<(self.x+160) and self.x<coin.x and self.x+160>coin.x+55:
                 try:
-                    if self.image==bluecoin:
-                        A.Points+=3 #bonus coin
-                    elif self.image==bomb:
+                    if coin.image==bluecoin:
+                        self.Points+=3 #bonus coin
+                    elif coin.image==bomb:
                         pygame.time.delay(500)
                         pygame.quit()
                         sys.exit()
                     else:
-                        A.Points+=1
-                    del self.image
+                        self.Points+=1
+                    del coin.image
                 except AttributeError:
                     pass
-    def draw(self,surface):
+
+class Coin():
+    def __init__(self):
+        self.image = coin_img
+        self.x = random.randint(0, size[0]-55)
+        self.y = -15
+
+    def fall(self):
+        self.y+=7 #change this value if necessary
+
+    def draw(self, surface):
         try:
-            surface.blit(self.image, (self.x,self.y))
+            surface.blit(self.image, (self.x, self.y))
         except AttributeError:
             pass
 
 class BlueCoin(Coin): #bonus coin
     def __init__(self):
-        global bluecoin
         Coin.__init__(self)
-        self.image=bluecoin
+        self.image = bluecoin
 
 class Bomb(Coin): #bomb
     def __init__(self):
-        global bomb
         Coin.__init__(self)
-        self.image=bomb
+        self.image = bomb
 
-def CoinGame():
-    global A
-    global BG
-    global i, coinlist, gameclock
-    global Coin, BlueCoin, Bomb
+def CoinGame(cart, i, coinlist):
     for event in pygame.event.get():
         if event.type==QUIT:
             pygame.quit()
             sys.exit()
-    A.handle_keys()
-    windowSurface.blit(pygame.transform.scale(BG,(size)),(0,0))
-    A.draw(windowSurface)
+    cart.handle_keys()
+    windowSurface.blit(pygame.transform.scale(BG,(size)),(0, 0))
+    cart.draw(windowSurface)
 
     #randomizing bonus coin/bomb/coin fall rate, can change this
     if i%3==0 or i%4==0:
-        select=random.randint(1,2)
+        select = random.randint(1, 2)
         if select==1:
-            C=BlueCoin()
+            C = BlueCoin()
         if select==2:
-            C=Bomb()
+            C = Bomb()
     elif i%5==0 or i%7==0 or i&11==0:
-        C=Bomb()
+        C = Bomb()
     else:
-        C=Coin()
+        C = Coin()
     coinlist.append(C)
     for B in coinlist[0:i:15]: #use 14 or 15
         B.draw(windowSurface)
         B.fall()
+        cart.collect_item(B)
     pygame.display.flip()
     i+=1
+    return i, coinlist
 
-result=0
-i=1
+result = 0
+i = 1
 coinlist=[]
 gameclock = pygame.time.Clock()
-timer=0
-while True:
+timer = 0
+cart = Cart()
+
+time_text = basicFont.render('TIMER:',True, BLACK, WHITE)
+textbox = time_text.get_rect(center=(900, 170))
+points_text = basicFont.render('POINTS:',True, BLACK, WHITE)
+pointbox = points_text.get_rect(center=(100, 170))
+display_time = basicFont.render('0',True, BLACK, WHITE)
+timebox = display_time.get_rect(center=(900, 200))
+score = basicFont.render(str(cart.Points),True, BLACK, WHITE)
+scorebox = score.get_rect(center=(100, 200))
+
+while timer<=30:
     for event in pygame.event.get():
         if event.type==QUIT:
             pygame.quit()
             sys.exit()
-    q=CoinGame()
-    if q==0:
-        pygame.quit()
-        sys.exit()
-    seconds=gameclock.tick()/1000.0
+    i, coinlist = CoinGame(cart, i, coinlist)
+    seconds = gameclock.tick()/1000.0
     timer+=seconds
-    displaytimer=math.trunc(timer) #returns real value of timer to integer value
+    int_timer = math.trunc(timer) #returns real value of timer to integer value
     if timer<30:
-        TIME=basicFont.render('TIMER:',True,BLACK,WHITE)
-        Keeper=TIME.get_rect(center=(900,170))
-        windowSurface.blit(TIME,Keeper)
-        TIME=basicFont.render(str(displaytimer),True,BLACK,WHITE)
-        Keeper=TIME.get_rect(center=(900,200))
-        windowSurface.blit(TIME,Keeper)
-        pointboard=basicFont.render('POINTS:',True,BLACK,WHITE)
-        Keeper=pointboard.get_rect(center=(100,170))
-        windowSurface.blit(pointboard,Keeper)
-        pointscore=basicFont.render(str(A.Points),True,BLACK,WHITE)
-        Keeper=pointscore.get_rect(center=(100,200))
-        windowSurface.blit(pointscore,Keeper)
-        pygame.display.flip()
+        display_time = basicFont.render(str(int_timer),True, BLACK, WHITE)
+        windowSurface.blit(display_time, timebox)
     if timer>=30:
-        TIME=basicFont.render('TIME UP!',True,BLACK,WHITE)
-        Keeper=TIME.get_rect(center=(900,170))
-        windowSurface.blit(TIME,Keeper)
-        pointboard=basicFont.render('POINTS:',True,BLACK,WHITE)
-        Keeper=pointboard.get_rect(center=(100,170))
-        windowSurface.blit(pointboard,Keeper)
-        pointscore=basicFont.render(str(A.Points),True,BLACK,WHITE)
-        Keeper=pointscore.get_rect(center=(100,200))
-        windowSurface.blit(pointscore,Keeper)
-        pygame.display.flip()
-        pygame.time.delay(500)
-        pygame.quit()
-        sys.exit()
+        time_text = basicFont.render('TIME UP!',True, BLACK, WHITE)
+    windowSurface.blit(time_text, textbox)
+    windowSurface.blit(points_text, pointbox)
+    score = basicFont.render(str(cart.Points),True, BLACK, WHITE)
+    windowSurface.blit(score, scorebox)
+    pygame.display.flip()
+pygame.time.delay(500)
+pygame.quit()
+sys.exit()
