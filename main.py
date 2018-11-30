@@ -88,70 +88,70 @@ class Bomb(Coin): #bomb
         Coin.__init__(self)
         self.image = bomb
 
-def CoinGame(cart, i, coinlist):
-    for event in pygame.event.get():
-        if event.type==QUIT:
-            pygame.quit()
-            sys.exit()
-    cart.handle_keys()
-    windowSurface.blit(pygame.transform.scale(BG,(size)),(0, 0))
-    cart.draw(windowSurface)
+def CoinGame():
+    result = 0
+    i = 1
+    coinlist=[]
+    gameclock = pygame.time.Clock()
+    timer = 0
+    cart = Cart()
 
-    #randomizing bonus coin/bomb/coin fall rate, can change this
-    if i%3==0 or i%4==0:
-        select = random.randint(1, 2)
-        if select==1:
-            C = BlueCoin()
-        if select==2:
-            C = Bomb()
-    elif i%5==0 or i%7==0 or i&11==0:
-        C = Bomb()
-    else:
-        C = Coin()
-    coinlist.append(C)
-    for B in coinlist[0:i:15]: #use 14 or 15
-        B.draw(windowSurface)
-        B.fall()
-        cart.collect_item(B)
-    pygame.display.flip()
-    i+=1
-    return i, coinlist
-
-result = 0
-i = 1
-coinlist=[]
-gameclock = pygame.time.Clock()
-timer = 0
-cart = Cart()
-
-time_text = basicFont.render('TIMER:',True, BLACK, WHITE)
-textbox = time_text.get_rect(center=(900, 170))
-points_text = basicFont.render('POINTS:',True, BLACK, WHITE)
-pointbox = points_text.get_rect(center=(100, 170))
-display_time = basicFont.render('0',True, BLACK, WHITE)
-timebox = display_time.get_rect(center=(900, 200))
-score = basicFont.render(str(cart.Points),True, BLACK, WHITE)
-scorebox = score.get_rect(center=(100, 200))
-
-while timer<=30:
-    for event in pygame.event.get():
-        if event.type==QUIT:
-            pygame.quit()
-            sys.exit()
-    i, coinlist = CoinGame(cart, i, coinlist)
-    seconds = gameclock.tick()/1000.0
-    timer+=seconds
-    int_timer = math.trunc(timer) #returns real value of timer to integer value
-    if timer<30:
-        display_time = basicFont.render(str(int_timer),True, BLACK, WHITE)
-        windowSurface.blit(display_time, timebox)
-    if timer>=30:
-        time_text = basicFont.render('TIME UP!',True, BLACK, WHITE)
-    windowSurface.blit(time_text, textbox)
-    windowSurface.blit(points_text, pointbox)
+    #set up texts
+    time_text = basicFont.render('TIMER:',True, BLACK, WHITE)
+    textbox = time_text.get_rect(center=(900, 170))
+    points_text = basicFont.render('POINTS:',True, BLACK, WHITE)
+    pointbox = points_text.get_rect(center=(100, 170))
+    display_time = basicFont.render('0',True, BLACK, WHITE)
+    timebox = display_time.get_rect(center=(900, 200))
     score = basicFont.render(str(cart.Points),True, BLACK, WHITE)
-    windowSurface.blit(score, scorebox)
-    pygame.display.flip()
-pygame.time.delay(500)
-pygame.quit()
-sys.exit()
+    scorebox = score.get_rect(center=(100, 200))
+
+    while timer<=30:
+        for event in pygame.event.get():
+            if event.type==QUIT:
+                pygame.quit()
+                sys.exit()
+
+        cart.handle_keys()
+        windowSurface.blit(pygame.transform.scale(BG,(size)),(0, 0))
+        cart.draw(windowSurface)
+
+        #randomizing bonus coin/bomb/coin fall rate, can change this
+        if i%3==0 or i%4==0:
+            select = random.randint(1, 2)
+            if select==1:
+                C = BlueCoin()
+            if select==2:
+                C = Bomb()
+        elif i%5==0 or i%7==0 or i&11==0:
+            C = Bomb()
+        else:
+            C = Coin()
+        coinlist.append(C)
+        for B in coinlist[0:i:15]: #(use 14 or 15) this is for the rate at which objects fall, can change this
+            B.draw(windowSurface)
+            B.fall()
+            cart.collect_item(B)
+        pygame.display.flip()
+        i+=1
+
+        #update time
+        seconds = gameclock.tick()/1000.0
+        timer+=seconds
+        int_timer = math.trunc(timer) #returns real value of timer to integer value
+        if timer<30:
+            display_time = basicFont.render(str(int_timer),True, BLACK, WHITE)
+            windowSurface.blit(display_time, timebox)
+        if timer>=30:
+            time_text = basicFont.render('TIME UP!',True, BLACK, WHITE)
+        windowSurface.blit(time_text, textbox)
+        windowSurface.blit(points_text, pointbox)
+        score = basicFont.render(str(cart.Points),True, BLACK, WHITE)
+        windowSurface.blit(score, scorebox)
+        pygame.display.flip()
+    pygame.time.delay(500)
+    pygame.quit()
+    return
+
+if __name__=='__main__':
+    CoinGame()
