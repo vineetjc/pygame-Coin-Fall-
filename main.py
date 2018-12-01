@@ -36,13 +36,9 @@ class Cart(object):
         if key[pygame.K_RIGHT]:
             if self.x<size[0]-140:
                 self.x += dist
-            if self.x>=size[0]-140:
-                self.x+=0
         elif key[pygame.K_LEFT]:
             if self.x>-10:
                 self.x -= dist
-            if self.x<=-10:
-                self.x-=0
 
     def draw(self, surface):
         surface.blit(self.image, (self.x, self.y))
@@ -88,7 +84,7 @@ class Bomb(Coin): #bomb
         Coin.__init__(self)
         self.image = bomb
 
-def CoinGame():
+def coin_game():
     result = 0
     i = 1
     coinlist=[]
@@ -154,4 +150,4 @@ def CoinGame():
     return
 
 if __name__=='__main__':
-    CoinGame()
+    coin_game()
