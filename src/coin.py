@@ -40,3 +40,7 @@ class Coin():
 
             if self.anim_index >= len(self.images):
                 self.anim_index = 0
+
+    def collect(self):
+        self.collected = True
+        del self.image

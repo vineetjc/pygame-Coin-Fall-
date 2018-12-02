@@ -38,6 +38,6 @@ class Cart(object):
                     else:
                         self.points += 1
 
-                    coin.collected = True
+                    coin.collect()
                 except AttributeError:
                     pass
