@@ -15,7 +15,8 @@ class Resources:
         # set colors R, G, B code
         self.BLACK = (0, 0, 0)
         self.WHITE = (255, 255, 255)
-        self.BGCOLOR = (255, 191, 128)
+        self.BGCOLOR = (4, 145, 145)
+        self.BUTTONCOLOR = (150, 0, 0)
 
         # images
         # convert for easy blitting

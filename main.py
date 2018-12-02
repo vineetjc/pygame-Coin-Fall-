@@ -30,7 +30,7 @@ def game_loop():
 
     # initialize resources and game mode
     res = Resources(pygame)
-    game_mode = Game_mode.GAME_OVER
+    game_mode = Game_mode.MAIN_MENU
 
     # initialize screens
     main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
@@ -62,7 +62,7 @@ def game_loop():
 
         else:
             pygame.quit()
-            sys.quit()
+            sys.exit()
 
         game_clock.tick(60)
 

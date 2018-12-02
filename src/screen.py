@@ -5,6 +5,7 @@ class Screen(object):
         self.pygame = pygame
         self.res = res
         self.surface = surface
+        self.buttons = {}
 
     def update(self, events):
         return Game_mode.MAIN_MENU
