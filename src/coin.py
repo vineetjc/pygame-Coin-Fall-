@@ -3,6 +3,7 @@
 ################
 import random
 
+
 class Coin():
     def __init__(self, res, size):
         self.image = res.coin_img
@@ -15,6 +16,9 @@ class Coin():
 
     def draw(self, surface):
         try:
-            surface.blit(self.image, (self.x, self.y))
+            if len(self.images) == 0:
+                surface.blit(self.image, (self.x, self.y))
+            else:
+                surface.blit(self.images[0], (self.x, self.y))
         except AttributeError:
             pass
