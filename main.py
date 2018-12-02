@@ -1,15 +1,10 @@
-######################################
-# - Fix Basic syntax
-# - Port to Python3
-# - Add Game Restart
-######################################
-
 import pygame
 import sys
 import random
 import math
 
 from pygame.locals import QUIT, KEYUP
+
 from src.resources import Resources
 from src.cart import Cart
 from src.coin import Coin
