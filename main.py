@@ -49,8 +49,10 @@ class Cart(object):
         if key[pygame.K_RIGHT]:
             if self.x < size[0] - 140:
                 self.x += dist
+                
             else: #Removed redundant condition
                 pass
+              
         elif key[pygame.K_LEFT]:
             if self.x > -10:
                 self.x -= dist
@@ -109,8 +111,8 @@ class Bomb(Coin):
     def __init__(self):
         Coin.__init__(self)
         self.image = bomb
-
-
+        
+        
 def coinGame(): #Renamed from CoinGame to coinGame
     result = 0
     i = 1
@@ -204,7 +206,7 @@ def coinGame(): #Renamed from CoinGame to coinGame
     pygame.time.delay(500)
     pygame.quit()
     return
-
+  
 
 if __name__ == "__main__":
     coinGame()
