@@ -3,6 +3,7 @@
 ##########################################
 import random
 
+
 class Resources:
 
     def __init__(self, pygame):
@@ -26,6 +27,20 @@ class Resources:
 
         # load images for animation
 
-        self coin_imgs = [
-            pygame.image.load('Images/CoinAnimation/coin1.png').convert(),
+        self.gold_coin_images = [
+            pygame.image.load('Images/GoldCoinAnimation/coin1.png').convert(),
+            pygame.image.load('Images/GoldCoinAnimation/coin2.png').convert(),
+            pygame.image.load('Images/GoldCoinAnimation/coin3.png').convert(),
+            pygame.image.load('Images/GoldCoinAnimation/coin4.png').convert(),
+            pygame.image.load('Images/GoldCoinAnimation/coin5.png').convert(),
+            pygame.image.load('Images/GoldCoinAnimation/coin6.png').convert()
+        ]
+
+        self.silver_coin_images = [
+            pygame.image.load('Images/SilverCoinAnimation/coin1.png').convert(),
+            pygame.image.load('Images/SilverCoinAnimation/coin2.png').convert(),
+            pygame.image.load('Images/SilverCoinAnimation/coin3.png').convert(),
+            pygame.image.load('Images/SilverCoinAnimation/coin4.png').convert(),
+            pygame.image.load('Images/SilverCoinAnimation/coin5.png').convert(),
+            pygame.image.load('Images/SilverCoinAnimation/coin6.png').convert()
         ]

@@ -6,6 +6,7 @@ import random
 class Coin():
     def __init__(self, res, size):
         self.image = res.coin_img
+        self.images = res.silver_coin_images
         self.x = random.randint(0, size[0] - 55)
         self.y = -15
 

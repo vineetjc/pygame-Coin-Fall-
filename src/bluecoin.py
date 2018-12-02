@@ -8,3 +8,4 @@ class BlueCoin(Coin):  # bonus coin
     def __init__(self, res, size):
         Coin.__init__(self, res, size)
         self.image = res.bluecoin
+        self.images = res.gold_coin_images
