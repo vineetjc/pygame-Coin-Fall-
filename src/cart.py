@@ -18,14 +18,9 @@ class Cart(object):
             if self.x < size[0] - 140:
                 self.x += dist
 
-            else:  # Removed redundant condition
-                pass
-
         elif key[pygame.K_LEFT]:
             if self.x > -10:
                 self.x -= dist
-            else:
-                pass
 
     def draw(self, surface):
         surface.blit(self.image, (self.x, self.y))
@@ -40,8 +35,6 @@ class Cart(object):
                     elif coin.image == res.bomb:
                         pygame.time.delay(500)
                         self.dead = True  # Replace quit with death
-# pygame.quit()
-# sys.exit()
                     else:
                         self.points += 1
                     del coin.image
