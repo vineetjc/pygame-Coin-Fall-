@@ -176,7 +176,7 @@ def coin_game():
             i += 1
 
         #Update time
-        seconds = gameclock.tick(30)/1000.0
+        seconds = gameclock.tick(60)/1000.0
         timer += seconds
         int_timer = math.trunc(timer) #returns real value of timer to int value
         if int_timer < 30 and not (cart.dead or over):
