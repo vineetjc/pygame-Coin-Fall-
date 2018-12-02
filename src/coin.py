@@ -5,7 +5,8 @@ import random
 
 
 class Coin():
-    def __init__(self, res, size):
+    def __init__(self, res, size, surface):
+        self.surface = surface
         self.image = res.coin_img
         self.images = res.silver_coin_images
         self.x = random.randint(0, size[0] - 55)
@@ -18,15 +19,15 @@ class Coin():
     def fall(self):
         self.y += 7  # Change the value if necessary
 
-    def draw(self, surface):
+    def draw(self):
         if self.collected:
             return
             
         try:
             if len(self.images) == 0:
-                surface.blit(self.image, (self.x, self.y))
+                self.surface.blit(self.image, (self.x, self.y))
             else:
-                surface.blit(self.images[self.anim_index], (self.x, self.y))
+                self.surface.blit(self.images[self.anim_index], (self.x, self.y))
                 self.advance_animation()
         except AttributeError:
             pass

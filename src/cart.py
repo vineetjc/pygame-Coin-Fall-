@@ -4,7 +4,8 @@
 
 
 class Cart(object):
-    def __init__(self, res, size):
+    def __init__(self, res, size, surface):
+        self.surface = surface
         self.image = res.cart_img
         self.x = (size[0] / 2) - 80
         self.y = size[1] - 120
@@ -22,8 +23,8 @@ class Cart(object):
             if self.x > -10:
                 self.x -= dist
 
-    def draw(self, surface):
-        surface.blit(self.image, (self.x, self.y))
+    def draw(self):
+        self.surface.blit(self.image, (self.x, self.y))
 
     def collect_item(self, pygame, res, coin):
         if 645 > coin.y > 633:

@@ -6,20 +6,65 @@ import math
 from pygame.locals import QUIT, KEYUP
 
 from src.resources import Resources
+from src.game_enums import Game_mode, Entity
+
 from src.cart import Cart
 from src.coin import Coin
 from src.bluecoin import BlueCoin
 from src.bomb import Bomb
 
-pygame.init()
+from src.main_menu_screen import Main_menu_screen
+from src.game_screen import Game_screen
+from src.settings_screen import Settings_screen
+from src.game_over_screen import Game_over_screen
+from src.tutorial_screen import Tutorial_screen
 
-# setup the window display
-size = (1024, 768)
-windowSurface = pygame.display.set_mode(size, 0, 32)
-pygame.display.set_caption('Super Mumbo Epicness')
 
-# initialize resources
-res = Resources(pygame)
+def game_loop():
+    pygame.init()
+
+    # setup the window display
+    size = (1024, 768)
+    windowSurface = pygame.display.set_mode(size, 0, 32)
+    pygame.display.set_caption('Super Mumbo Epicness')
+
+    # initialize resources and game mode
+    res = Resources(pygame)
+    game_mode = Game_mode.GAME_OVER
+
+    # initialize screens
+    main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
+    game_screen = Game_screen(pygame, res, windowSurface)
+    settings_screen = Settings_screen(pygame, res, windowSurface)
+    game_over_screen = Game_over_screen(pygame, res, windowSurface)
+    tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
+
+    game_clock = pygame.time.Clock()
+
+    # game loop starts
+    while True:
+        events = pygame.event.get()
+
+        if game_mode == Game_mode.MAIN_MENU:
+            game_mode = main_menu_screen.update(events)
+
+        elif game_mode == Game_mode.GAME:
+            game_mode = game_screen.update(events)
+
+        elif game_mode == Game_mode.SETTINGS:
+            game_mode = settings_screen.update(events)
+
+        elif game_mode == Game_mode.GAME_OVER:
+            game_mode = game_over_screen.update(events)
+
+        elif game_mode == Game_mode.TUTORIAL:
+            game_mode = tutorial_screen.update(events)
+
+        else:
+            pygame.quit()
+            sys.quit()
+
+        game_clock.tick(60)
 
 
 def coin_game():
@@ -28,7 +73,7 @@ def coin_game():
     coinlist = []
     gameclock = pygame.time.Clock()
     timer = 0
-    cart = Cart(res, size)
+    cart = Cart(res, size, windowSurface)
 
     # Set up texts
     time_text = res.basicFont.render('TIMER:', True, res.BLACK, res.WHITE)
@@ -39,7 +84,8 @@ def coin_game():
     timebox = display_time.get_rect(center=(900, 200))
     score = res.basicFont.render(str(cart.points), True, res.BLACK, res.WHITE)
     scorebox = score.get_rect(center=(100, 200))
-    restart = res.basicFont.render('Press R to restart!', True, res.BLACK, res.WHITE)
+    restart = res.basicFont.render(
+        'Press R to restart!', True, res.BLACK, res.WHITE)
     restartbox = restart.get_rect(center=(512, 384))
 
     over = False  # Flag variable to check if game over
@@ -57,8 +103,9 @@ def coin_game():
             elif event.type == KEYUP:
                 if event.key == pygame.K_r and (cart.dead or over):
                     over = False
-                    time_text = res.basicFont.render('TIMER:', True, res.BLACK, res.WHITE)
-                    cart = Cart(res, size)
+                    time_text = res.basicFont.render(
+                        'TIMER:', True, res.BLACK, res.WHITE)
+                    cart = Cart(res, size, windowSurface)
                     timer = 0
                     coinlist = []
                     i = 1
@@ -66,26 +113,26 @@ def coin_game():
         if not over:
             cart.handle_keys(pygame, size)
             windowSurface.blit(pygame.transform.scale(res.BG, size), (0, 0))
-            cart.draw(windowSurface)
+            cart.draw()
 
             # randomizing bonus coin/bomb/coin fall frequency, can change this
             if not i % 3 or not i % 4:
                 select = random.randint(1, 2)
                 if select == 1:
-                    c = BlueCoin(res, size)
+                    c = BlueCoin(res, size, windowSurface)
                 else:  # select = 2
-                    c = Bomb(res, size)
+                    c = Bomb(res, size, windowSurface)
             elif not i % 5 or not i % 7 or not i % 11:
-                c = Bomb(res, size)
+                c = Bomb(res, size, windowSurface)
             else:
-                c = Coin(res, size)
+                c = Coin(res, size, windowSurface)
 
             coinlist.append(c)
 
             for b in coinlist[0:i:15]:
                 # (use 14 or 15) this is for the rate at which
                 # objects fall, can change this
-                b.draw(windowSurface)
+                b.draw()
                 b.fall()
                 cart.collect_item(pygame, res, b)
 
@@ -97,13 +144,16 @@ def coin_game():
         # returns real value of timer to int value
         int_timer = math.trunc(timer)
         if int_timer < 30 and not (cart.dead or over):
-            display_time = res.basicFont.render(str(int_timer), True, res.BLACK, res.WHITE)
+            display_time = res.basicFont.render(
+                str(int_timer), True, res.BLACK, res.WHITE)
             windowSurface.blit(display_time, timebox)
         else:
-            time_text = res.basicFont.render('TIME UP!', True, res.BLACK, res.WHITE)
+            time_text = res.basicFont.render(
+                'TIME UP!', True, res.BLACK, res.WHITE)
         windowSurface.blit(time_text, textbox)
         windowSurface.blit(point_text, pointbox)
-        score = res.basicFont.render(str(cart.points), True, res.BLACK, res.WHITE)
+        score = res.basicFont.render(
+            str(cart.points), True, res.BLACK, res.WHITE)
         windowSurface.blit(score, scorebox)
 
         # Add a restart display if dead or timeup
@@ -117,4 +167,4 @@ def coin_game():
 
 
 if __name__ == "__main__":
-    coin_game()
+    game_loop()
