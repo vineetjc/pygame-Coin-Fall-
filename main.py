@@ -186,7 +186,7 @@ def coinGame(): #Renamed from CoinGame to coinGame
         seconds = gameclock.tick(30)/1000.0
         timer += seconds
         int_timer = math.trunc(timer) #returns real value of timer to int value
-        if int_timer < 30:
+        if int_timer < 30 and not (cart.dead or over):
             display_time = basicFont.render(str(int_timer), True, BLACK, WHITE)
             windowSurface.blit(display_time, timebox)
         else: #Removed redundant check
