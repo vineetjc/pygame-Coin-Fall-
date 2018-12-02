@@ -33,11 +33,6 @@ bomb = pygame.image.load('Images/bomb.png').convert()
 R = random.randint(1, 4)
 BG = pygame.image.load('Images/coinfallbg'+str(R)+'.jpg').convert()
 
-cart_img.fill((255, 0, 0))
-coin_img.fill((255, 255, 0))
-bluecoin.fill((0, 0, 255))
-bomb.fill((125, 125, 125))
-BG.fill((0, 255, 0))
 
 class Cart(object):
     def __init__(self):
@@ -188,7 +183,7 @@ def coinGame(): #Renamed from CoinGame to coinGame
             i += 1
 
         #Update time
-        seconds = gameclock.tick()/1000.0
+        seconds = gameclock.tick(30)/1000.0
         timer += seconds
         int_timer = math.trunc(timer) #returns real value of timer to int value
         if int_timer < 30:
