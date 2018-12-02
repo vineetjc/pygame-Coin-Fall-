@@ -3,6 +3,7 @@
 # - Port to Python3
 # - Add Game Restart
 ######################################
+
 import pygame
 import sys
 import random
@@ -24,8 +25,7 @@ basicFont = pygame.font.SysFont(None, 48) #None is for default system font
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-#images
-#convert for easy blitting
+#images; convert() for easy blitting
 cart_img = pygame.image.load('Images/bb.jpg').convert()
 coin_img = pygame.image.load('Images/coin.jpg').convert()
 bluecoin = pygame.image.load('Images/bluecoin.jpg').convert()
@@ -39,7 +39,7 @@ class Cart(object):
         self.image = cart_img
         self.x = (size[0] / 2) - 80
         self.y = size[1] - 120
-        self.points = 0 #Changed Points to points
+        self.points = 0
         self.dead = False #Add this for game end check
 
 
@@ -49,17 +49,12 @@ class Cart(object):
         if key[pygame.K_RIGHT]:
             if self.x < size[0] - 140:
                 self.x += dist
-                
-            else: #Removed redundant condition
-                pass
-              
+
         elif key[pygame.K_LEFT]:
             if self.x > -10:
                 self.x -= dist
-            else:
-                pass
 
-            
+
     def draw(self, surface):
         surface.blit(self.image, (self.x, self.y))
 
@@ -74,8 +69,6 @@ class Cart(object):
                     elif coin.image == bomb:
                         pygame.time.delay(500)
                         self.dead = True #Replace quit with death
-##                        pygame.quit()
-##                        sys.exit()
                     else:
                         self.points += 1
                     del coin.image
@@ -111,9 +104,9 @@ class Bomb(Coin):
     def __init__(self):
         Coin.__init__(self)
         self.image = bomb
-        
-        
-def coinGame(): #Renamed from CoinGame to coinGame
+
+
+def coin_game():
     result = 0
     i = 1
     coinlist = []
@@ -130,21 +123,20 @@ def coinGame(): #Renamed from CoinGame to coinGame
     timebox = display_time.get_rect(center=(900, 200))
     score = basicFont.render(str(cart.points), True, BLACK, WHITE)
     scorebox = score.get_rect(center=(100, 200))
-
-    #Add a restart text
     restart = basicFont.render('Press R to restart!', True, BLACK, WHITE)
     restartbox = restart.get_rect(center=(512, 384))
 
-    over = False
+    over = False #Flag variable to check if game over
 
-    while True: #Changed to infinite loop
+    while True:
         if timer > 30 or cart.dead:
             over = True
-        
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
             #Add a restart key
             elif event.type == KEYUP:
                 if event.key == pygame.K_r and (cart.dead or over):
@@ -164,8 +156,8 @@ def coinGame(): #Renamed from CoinGame to coinGame
             if not i%3 or not i%4:
                 select = random.randint(1, 2)
                 if select == 1:
-                    c = BlueCoin() #Changed C to c
-                else: #Remove redundant check
+                    c = BlueCoin()
+                else: #select = 2
                     c = Bomb()
             elif not i%5 or not i%7 or not i%11:
                 c = Bomb()
@@ -181,7 +173,6 @@ def coinGame(): #Renamed from CoinGame to coinGame
                 b.fall()
                 cart.collect_item(b)
 
-    ##        pygame.display.flip() #Redundant call
             i += 1
 
         #Update time
@@ -191,7 +182,7 @@ def coinGame(): #Renamed from CoinGame to coinGame
         if int_timer < 30 and not (cart.dead or over):
             display_time = basicFont.render(str(int_timer), True, BLACK, WHITE)
             windowSurface.blit(display_time, timebox)
-        else: #Removed redundant check
+        else:
             time_text = basicFont.render('TIME UP!', True, BLACK, WHITE)
         windowSurface.blit(time_text, textbox)
         windowSurface.blit(point_text, pointbox)
@@ -201,12 +192,12 @@ def coinGame(): #Renamed from CoinGame to coinGame
         #Add a restart display if dead or timeup
         if cart.dead or over:
             windowSurface.blit(restart, restartbox)
-        
+
         pygame.display.flip()
     pygame.time.delay(500)
     pygame.quit()
     return
-  
+
 
 if __name__ == "__main__":
-    coinGame()
+    coin_game()
