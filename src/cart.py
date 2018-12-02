@@ -37,6 +37,7 @@ class Cart(object):
                         self.dead = True  # Replace quit with death
                     else:
                         self.points += 1
-                    del coin.image
+
+                    coin.collected = True
                 except AttributeError:
                     pass
