@@ -23,3 +23,9 @@ class Resources:
         self.bomb = pygame.image.load('Images/bomb.png').convert()
         self.R = random.randint(1, 4)
         self.BG = pygame.image.load('Images/coinfallbg'+str(self.R)+'.jpg').convert()
+
+        # load images for animation
+
+        self coin_imgs = [
+            pygame.image.load('Images/CoinAnimation/coin1.png').convert(),
+        ]
