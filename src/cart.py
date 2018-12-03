@@ -1,10 +1,11 @@
 ##################
 # Cart Class
 ##################
-
+from src.game_enums import Entity
 
 class Cart(object):
     def __init__(self, res, size, surface):
+        self.type = Entity.CART
         self.surface = surface
         self.image = res.cart_img
         self.x = (size[0] / 2) - 80

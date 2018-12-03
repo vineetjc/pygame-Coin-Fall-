@@ -2,10 +2,12 @@
 # Coin class
 ################
 import random
+from src.game_enums import Entity
 
 
 class Coin():
     def __init__(self, res, size, surface):
+        self.type = Entity.COIN
         self.surface = surface
         self.image = res.coin_img
         self.images = res.silver_coin_images
@@ -22,12 +24,13 @@ class Coin():
     def draw(self):
         if self.collected:
             return
-            
+
         try:
             if len(self.images) == 0:
                 self.surface.blit(self.image, (self.x, self.y))
             else:
-                self.surface.blit(self.images[self.anim_index], (self.x, self.y))
+                self.surface.blit(
+                    self.images[self.anim_index], (self.x, self.y))
                 self.advance_animation()
         except AttributeError:
             pass

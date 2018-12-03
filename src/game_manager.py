@@ -11,3 +11,4 @@ class Game_manager(object):
     def reset(self):
         self.score = 0
         self.time - 0
+        
