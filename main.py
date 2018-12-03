@@ -7,6 +7,7 @@ from pygame.locals import QUIT, KEYUP
 
 from src.resources import Resources
 from src.game_enums import Game_mode, Entity
+from src.game_manager import Game_manager
 
 from src.cart import Cart
 from src.coin import Coin
@@ -32,12 +33,13 @@ def game_loop():
     res = Resources(pygame)
     game_clock = pygame.time.Clock()
     game_mode = Game_mode.MAIN_MENU
+    game_manager = Game_manager()
 
     # initialize screens
     main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
-    game_screen = Game_screen(pygame, res, windowSurface, size, game_clock)
+    game_screen = Game_screen(pygame, res, windowSurface, size, game_clock, game_manager)
     settings_screen = Settings_screen(pygame, res, windowSurface)
-    game_over_screen = Game_over_screen(pygame, res, windowSurface)
+    game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
 
     # game loop starts

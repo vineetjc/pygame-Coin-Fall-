@@ -12,7 +12,7 @@ from src.bomb import Bomb
 
 
 class Game_screen(Screen):
-    def __init__(self, pygame, res, surface, size, gameclock):
+    def __init__(self, pygame, res, surface, size, gameclock, game_manager):
         Screen.__init__(self, pygame, res, surface)
 
         # set up initial variables
@@ -22,6 +22,7 @@ class Game_screen(Screen):
         self.i = 1
         self.coinlist = []
         self.gameclock = gameclock
+        self.game_manager = game_manager
         self.timer = 0
         self.cart = Cart(res, self.size, surface)
 
@@ -41,6 +42,7 @@ class Game_screen(Screen):
         self.i = 1
         self.coinlist = []
         self.timer = 0
+        self.game_manager.reset()
         del self.cart
         self.cart = Cart(self.res, self.size, self.surface)
 
@@ -82,6 +84,7 @@ class Game_screen(Screen):
 
         if self.timer > 30 or self.cart.dead:
             self.need_reset = True
+            self.game_manager.score = self.cart.points
             return Game_mode.GAME_OVER
 
         for event in events:

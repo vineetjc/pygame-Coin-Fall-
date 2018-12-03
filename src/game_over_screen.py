@@ -5,8 +5,9 @@ from src.button import Button
 
 
 class Game_over_screen(Screen):
-    def __init__(self, pygame, res, surface):
+    def __init__(self, pygame, res, surface, game_manager):
         Screen.__init__(self, pygame, res, surface)
+        self.game_manager = game_manager
         self.font = pygame.font.SysFont('cambria', 60)
         self.font2 = pygame.font.SysFont('cambria', 30)
         self.buttons['Restart'] =   Button(pygame, res, surface, [20, 290, 300, 50], "Restart")
@@ -14,7 +15,7 @@ class Game_over_screen(Screen):
 
     def update(self, events):
         textsurface = self.font.render('Game Over', True, (0, 0, 0))
-        textsurface2 = self.font2.render('Game Over! restart or go back to main menu.', True, (0, 0, 0))
+        textsurface2 = self.font2.render('Score: ' + str(self.game_manager.score), True, (0, 0, 0))
         self.surface.fill(self.res.BGCOLOR)
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
