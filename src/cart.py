@@ -3,6 +3,7 @@
 ##################
 from src.game_enums import Entity
 
+
 class Cart(object):
     def __init__(self, res, size, surface):
         self.type = Entity.CART
@@ -32,14 +33,15 @@ class Cart(object):
             if ((self.x < coin.x + (55.0 / 2) < self.x + 160) and
                     (self.x < coin.x) and (self.x + 160 > coin.x + 55)):
                 try:
-                    if coin.image == res.bluecoin:
-                        self.points += 3  # Bonus coin
-                    elif coin.image == res.bomb:
-                        pygame.time.delay(500)
-                        self.dead = True  # Replace quit with death
-                    else:
-                        self.points += 1
+                    if not coin.collected:
+                        if coin.type == Entity.BLUE_COIN:
+                            self.points += 3  # Bonus coin
+                        elif coin.type == Entity.BOMB:
+                            pygame.time.delay(500)
+                            self.dead = True  # Replace quit with death
+                        else:
+                            self.points += 1
 
-                    coin.collect()
+                        coin.collect()
                 except AttributeError:
                     pass
