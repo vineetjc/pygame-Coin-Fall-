@@ -30,16 +30,15 @@ def game_loop():
 
     # initialize resources and game mode
     res = Resources(pygame)
+    game_clock = pygame.time.Clock()
     game_mode = Game_mode.MAIN_MENU
 
     # initialize screens
     main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
-    game_screen = Game_screen(pygame, res, windowSurface, size)
+    game_screen = Game_screen(pygame, res, windowSurface, size, game_clock)
     settings_screen = Settings_screen(pygame, res, windowSurface)
     game_over_screen = Game_over_screen(pygame, res, windowSurface)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
-
-    game_clock = pygame.time.Clock()
 
     # game loop starts
     while True:

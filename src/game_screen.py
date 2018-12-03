@@ -12,7 +12,7 @@ from src.bomb import Bomb
 
 
 class Game_screen(Screen):
-    def __init__(self, pygame, res, surface, size):
+    def __init__(self, pygame, res, surface, size, gameclock):
         Screen.__init__(self, pygame, res, surface)
 
         # set up initial variables
@@ -21,7 +21,7 @@ class Game_screen(Screen):
         self.result = 0
         self.i = 1
         self.coinlist = []
-        self.gameclock = pygame.time.Clock()
+        self.gameclock = gameclock
         self.timer = 0
         self.cart = Cart(res, self.size, surface)
 
@@ -66,18 +66,14 @@ class Game_screen(Screen):
         self.i += 1
 
         # Update time
-        seconds = self.gameclock.tick(60)/1000.0
+        seconds = self.gameclock.get_time() / 1000.0
         self.timer += seconds
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        if int_timer < 30 and not (self.cart.dead):
-            self.display_time = self.res.basicFont.render(str(int_timer), True, self.res.BLACK, self.res.WHITE)
-            self.surface.blit(self.display_time, self.timebox)
-        else:
-            self.time_text = self.res.basicFont.render('TIME UP!', True, self.res.BLACK, self.res.WHITE)
-            
+        self.display_time = self.res.basicFont.render(str(int_timer), True, self.res.BLACK, self.res.WHITE)    
         self.surface.blit(self.time_text, self.textbox)
+        self.surface.blit(self.display_time, self.timebox)
         self.surface.blit(self.point_text, self.pointbox)
         self.score = self.res.basicFont.render(str(self.cart.points), True, self.res.BLACK, self.res.WHITE)
         self.surface.blit(self.score, self.scorebox)
