@@ -12,4 +12,3 @@ class Game_manager(object):
         self.score = 0
         self.time = 0
         
-        
