@@ -11,7 +11,7 @@ class Button():
 
     def draw(self):
         self.pygame.draw.rect(self.surface, self.res.BUTTONCOLOR, self.rect)
-        textsurface = self.font.render(self.text, False, self.res.WHITE)
+        textsurface = self.font.render(self.text, True, self.res.WHITE)
         self.surface.blit(textsurface, self.rect)
 
     def check_click(self, pos):

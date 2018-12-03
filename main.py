@@ -34,7 +34,7 @@ def game_loop():
 
     # initialize screens
     main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
-    game_screen = Game_screen(pygame, res, windowSurface)
+    game_screen = Game_screen(pygame, res, windowSurface, size)
     settings_screen = Settings_screen(pygame, res, windowSurface)
     game_over_screen = Game_over_screen(pygame, res, windowSurface)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
@@ -65,105 +65,6 @@ def game_loop():
             sys.exit()
 
         game_clock.tick(60)
-
-
-def coin_game():
-    result = 0
-    i = 1
-    coinlist = []
-    gameclock = pygame.time.Clock()
-    timer = 0
-    cart = Cart(res, size, windowSurface)
-
-    # Set up texts
-    time_text = res.basicFont.render('TIMER:', True, res.BLACK, res.WHITE)
-    textbox = time_text.get_rect(center=(900, 170))
-    point_text = res.basicFont.render('POINTS:', True, res.BLACK, res.WHITE)
-    pointbox = point_text.get_rect(center=(100, 170))
-    display_time = res.basicFont.render('0', True, res.BLACK, res.WHITE)
-    timebox = display_time.get_rect(center=(900, 200))
-    score = res.basicFont.render(str(cart.points), True, res.BLACK, res.WHITE)
-    scorebox = score.get_rect(center=(100, 200))
-    restart = res.basicFont.render(
-        'Press R to restart!', True, res.BLACK, res.WHITE)
-    restartbox = restart.get_rect(center=(512, 384))
-
-    over = False  # Flag variable to check if game over
-
-    while True:
-        if timer > 30 or cart.dead:
-            over = True
-
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-
-            # Add a restart key
-            elif event.type == KEYUP:
-                if event.key == pygame.K_r and (cart.dead or over):
-                    over = False
-                    time_text = res.basicFont.render(
-                        'TIMER:', True, res.BLACK, res.WHITE)
-                    cart = Cart(res, size, windowSurface)
-                    timer = 0
-                    coinlist = []
-                    i = 1
-
-        if not over:
-            cart.handle_keys(pygame, size)
-            windowSurface.blit(pygame.transform.scale(res.BG, size), (0, 0))
-            cart.draw()
-
-            # randomizing bonus coin/bomb/coin fall frequency, can change this
-            if not i % 3 or not i % 4:
-                select = random.randint(1, 2)
-                if select == 1:
-                    c = BlueCoin(res, size, windowSurface)
-                else:  # select = 2
-                    c = Bomb(res, size, windowSurface)
-            elif not i % 5 or not i % 7 or not i % 11:
-                c = Bomb(res, size, windowSurface)
-            else:
-                c = Coin(res, size, windowSurface)
-
-            coinlist.append(c)
-
-            for b in coinlist[0:i:15]:
-                # (use 14 or 15) this is for the rate at which
-                # objects fall, can change this
-                b.draw()
-                b.fall()
-                cart.collect_item(pygame, res, b)
-
-            i += 1
-
-        # Update time
-        seconds = gameclock.tick(60)/1000.0
-        timer += seconds
-        # returns real value of timer to int value
-        int_timer = math.trunc(timer)
-        if int_timer < 30 and not (cart.dead or over):
-            display_time = res.basicFont.render(
-                str(int_timer), True, res.BLACK, res.WHITE)
-            windowSurface.blit(display_time, timebox)
-        else:
-            time_text = res.basicFont.render(
-                'TIME UP!', True, res.BLACK, res.WHITE)
-        windowSurface.blit(time_text, textbox)
-        windowSurface.blit(point_text, pointbox)
-        score = res.basicFont.render(
-            str(cart.points), True, res.BLACK, res.WHITE)
-        windowSurface.blit(score, scorebox)
-
-        # Add a restart display if dead or timeup
-        if cart.dead or over:
-            windowSurface.blit(restart, restartbox)
-
-        pygame.display.flip()
-    pygame.time.delay(500)
-    pygame.quit()
-    return
 
 
 if __name__ == "__main__":
