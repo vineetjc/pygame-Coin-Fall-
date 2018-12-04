@@ -34,6 +34,7 @@ def game_loop():
     game_clock = pygame.time.Clock()
     game_mode = Game_mode.MAIN_MENU
     game_manager = Game_manager()
+    pygame.mixer.music.load("Music/background_music.mp3")
 
     # initialize screens
     main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
@@ -41,6 +42,9 @@ def game_loop():
     settings_screen = Settings_screen(pygame, res, windowSurface)
     game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
+
+    #play the music
+    pygame.mixer.music.play(-1)
 
     # game loop starts
     while True:
