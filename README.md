@@ -1,4 +1,4 @@
-# pygame-Coin-Fall-
+# pygame-Coin-Fall
 ---
 >Collect as many coins from the coin fall in 30 seconds. Avoid the bombs!
 
@@ -32,10 +32,16 @@ A strategy board game made with python. More like a shorter version of chess, wh
 
 ### How it works?
 
-# Objective of the game
+#### Objective of the game :
+
 1. Use your arrow keys to collect as many coins from the coin fall in 30 seconds. 
 2. Blue coins are worth thrice the normal coins! 
 3. Avoid the bombs! 
+
+
+#### pygame-Coin-Fall game running :
+
+![coinfall](https://user-images.githubusercontent.com/30645315/49618512-ebdd3980-f9de-11e8-9691-132b1d119dbb.gif)
 
 
 
