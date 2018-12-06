@@ -17,7 +17,7 @@ class Main_menu_screen(Screen):
     def update(self, events):
         textsurface = self.font.render('Main Menu', True, (0, 0, 0))
         textsurface2 = self.font2.render('This is the main menu.', True, (0, 0, 0))
-        self.surface.fill(self.res.BGCOLOR)
+        self.surface.blit(self.res.EBG,(0,0))
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
 
