@@ -16,10 +16,10 @@ class Game_over_screen(Screen):
     def update(self, events):
         textsurface = self.font.render('Game Over', True, (0, 0, 0))
         textsurface2 = self.font2.render('Score: ' + str(self.game_manager.score), True, (0, 0, 0))
-        self.surface.fill(self.res.BGCOLOR)
+        self.surface.blit(self.res.EBG,(0,0))
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
-	self.surface.blit(self.pygame.transform.scale(self.res.EBG, (1024,768)), (0, 0))
+	
 
         for button in self.buttons:
             self.buttons[button].draw()
