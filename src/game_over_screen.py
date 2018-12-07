@@ -25,11 +25,13 @@ class Game_over_screen(Screen):
 
         textsurface = self.font.render('Game Over', True, (0, 0, 0))
         textsurface2 = self.font2.render('Score: ' + str(self.game_manager.score), True, (0, 0, 0))
+
         textsurface3 = self.font2.render('HighScore: ' + str(maxscore), True, (0, 0, 0))
         self.surface.fill(self.res.BGCOLOR)
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
         self.surface.blit(textsurface3, (20, 150))
+
 
         for button in self.buttons:
             self.buttons[button].draw()
