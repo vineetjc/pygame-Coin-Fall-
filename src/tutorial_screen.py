@@ -14,7 +14,7 @@ class Tutorial_screen(Screen):
     def update(self, events):
         textsurface = self.font.render('Tutorial', True, (0, 0, 0))
         textsurface2 = self.font2.render('This is the tutorial text.', True, (0, 0, 0))
-        self.surface.fill(self.res.BGCOLOR)
+        self.surface.blit(self.res.EBG,(0,0))
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
               
