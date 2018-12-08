@@ -1,4 +1,4 @@
-from src.game_enums import Game_mode
+from src.misc.game_enums import Game_mode
 
 class Screen(object):
     def __init__(self, pygame, res, surface):

@@ -1,7 +1,7 @@
-from src.screen import Screen
-from src.game_enums import Game_mode
+from src.game_screens.screen import Screen
+from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
-from src.button import Button
+from src.ui.button import Button
 
 
 class Tutorial_screen(Screen):
