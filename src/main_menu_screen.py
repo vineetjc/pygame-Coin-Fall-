@@ -15,8 +15,8 @@ class Main_menu_screen(Screen):
         self.buttons['Exit'] =          Button(pygame, res, surface, [20, 360, 300, 50], "Exit")
 
     def update(self, events):
-        textsurface = self.font.render('Main Menu', True, (0, 0, 0))
-        textsurface2 = self.font2.render('This is the main menu.', True, (0, 0, 0))
+        textsurface = self.font.render('Main Menu', True, self.res.WHITE)
+        textsurface2 = self.font2.render('This is the main menu.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG,(0,0))
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
