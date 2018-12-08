@@ -5,20 +5,20 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 
-from src.resources import Resources
-from src.game_enums import Game_mode, Entity
-from src.game_manager import Game_manager
+from src.managers.resources import Resources
+from src.misc.game_enums import Game_mode, Entity
+from src.managers.game_manager import Game_manager
 
-from src.cart import Cart
-from src.coin import Coin
-from src.bluecoin import BlueCoin
-from src.bomb import Bomb
+from src.objects.cart import Cart
+from src.objects.coin import Coin
+from src.objects.bluecoin import BlueCoin
+from src.objects.bomb import Bomb
 
-from src.main_menu_screen import Main_menu_screen
-from src.game_screen import Game_screen
-from src.settings_screen import Settings_screen
-from src.game_over_screen import Game_over_screen
-from src.tutorial_screen import Tutorial_screen
+from src.game_screens.main_menu_screen import Main_menu_screen
+from src.game_screens.game_screen import Game_screen
+from src.game_screens.settings_screen import Settings_screen
+from src.game_screens.game_over_screen import Game_over_screen
+from src.game_screens.tutorial_screen import Tutorial_screen
 
 
 def game_loop():
