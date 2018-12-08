@@ -23,7 +23,7 @@ class Resources:
         self.cart_img = pygame.image.load('res/images/bg/bb.jpg').convert()
         self.coin_img = pygame.image.load('res/images/bg/coin.jpg').convert()
         self.bluecoin = pygame.image.load('res/images/bg/bluecoin.jpg').convert()
-        self.bomb = pygame.image.load('res/images/bg/bomb.png').convert()
+        self.bomb = pygame.image.load('res/images/objects/bomb.png').convert_alpha()
         self.R = random.randint(1, 4)
         self.BG = pygame.image.load('res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
         self.EBG = pygame.image.load('res/images/bg/endbg.png').convert()
