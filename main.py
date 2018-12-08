@@ -19,6 +19,7 @@ from src.game_screens.game_screen import Game_screen
 from src.game_screens.settings_screen import Settings_screen
 from src.game_screens.game_over_screen import Game_over_screen
 from src.game_screens.tutorial_screen import Tutorial_screen
+from src.game_screens.credits_screen import Credits_screen
 
 
 def game_loop():
@@ -41,6 +42,8 @@ def game_loop():
     settings_screen = Settings_screen(pygame, res, windowSurface)
     game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
+    credits_screen = Credits_screen(pygame, res, windowSurface)
+
 
     # game loop starts
     while True:
@@ -60,6 +63,9 @@ def game_loop():
 
         elif game_mode == Game_mode.TUTORIAL:
             game_mode = tutorial_screen.update(events)
+
+        elif game_mode == Game_mode.CREDITS:
+            game_mode = credits_screen.update(events)
 
         else:
             pygame.quit()

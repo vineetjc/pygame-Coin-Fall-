@@ -12,7 +12,8 @@ class Main_menu_screen(Screen):
         self.buttons['Start Game'] =    Button(pygame, res, surface, [20, 150, 300, 50], "Start Game")
         self.buttons['Tutorial'] =      Button(pygame, res, surface, [20, 220, 300, 50], "Tutorial")
         self.buttons['Settings'] =      Button(pygame, res, surface, [20, 290, 300, 50], "Settings")
-        self.buttons['Exit'] =          Button(pygame, res, surface, [20, 360, 300, 50], "Exit")
+        self.buttons['Credits'] =       Button(pygame, res, surface, [20, 360, 300, 50], "Credits")
+        self.buttons['Exit'] =          Button(pygame, res, surface, [20, 430, 300, 50], "Exit")
 
     def update(self, events):
         textsurface = self.font.render('Main Menu', True, self.res.WHITE)
@@ -35,6 +36,9 @@ class Main_menu_screen(Screen):
 
             if self.buttons['Settings'].check_click(mouseup_event.pos):
                 return Game_mode.SETTINGS
+
+            if self.buttons['Credits'].check_click(mouseup_event.pos):
+                return Game_mode.CREDITS
 
             if self.buttons['Exit'].check_click(mouseup_event.pos):
                 return Game_mode.QUIT
