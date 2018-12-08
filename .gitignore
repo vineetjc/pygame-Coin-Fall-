@@ -1,3 +1,4 @@
 *.pyc
 
 highscore.txt
+settings.config
