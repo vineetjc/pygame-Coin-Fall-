@@ -20,30 +20,30 @@ class Resources:
 
         # images
         # convert for easy blitting
-        self.cart_img = pygame.image.load('Images/bb.jpg').convert()
-        self.coin_img = pygame.image.load('Images/coin.jpg').convert()
-        self.bluecoin = pygame.image.load('Images/bluecoin.jpg').convert()
-        self.bomb = pygame.image.load('Images/bomb.png').convert()
+        self.cart_img = pygame.image.load('res/images/bg/bb.jpg').convert()
+        self.coin_img = pygame.image.load('res/images/bg/coin.jpg').convert()
+        self.bluecoin = pygame.image.load('res/images/bg/bluecoin.jpg').convert()
+        self.bomb = pygame.image.load('res/images/bg/bomb.png').convert()
         self.R = random.randint(1, 4)
-        self.BG = pygame.image.load('Images/coinfallbg'+str(self.R)+'.jpg').convert()
-        self.EBG = pygame.image.load('Images/endbg.png').convert()
+        self.BG = pygame.image.load('res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
+        self.EBG = pygame.image.load('res/images/bg/endbg.png').convert()
 
         # load images for animation
 
         self.gold_coin_images = [
-            pygame.image.load('Images/GoldCoinAnimation/coin1.png').convert_alpha(),
-            pygame.image.load('Images/GoldCoinAnimation/coin2.png').convert_alpha(),
-            pygame.image.load('Images/GoldCoinAnimation/coin3.png').convert_alpha(),
-            pygame.image.load('Images/GoldCoinAnimation/coin4.png').convert_alpha(),
-            pygame.image.load('Images/GoldCoinAnimation/coin5.png').convert_alpha(),
-            pygame.image.load('Images/GoldCoinAnimation/coin6.png').convert_alpha()
+            pygame.image.load('res/images/objects/GoldCoinAnimation/coin1.png').convert_alpha(),
+            pygame.image.load('res/images/objects/GoldCoinAnimation/coin2.png').convert_alpha(),
+            pygame.image.load('res/images/objects/GoldCoinAnimation/coin3.png').convert_alpha(),
+            pygame.image.load('res/images/objects/GoldCoinAnimation/coin4.png').convert_alpha(),
+            pygame.image.load('res/images/objects/GoldCoinAnimation/coin5.png').convert_alpha(),
+            pygame.image.load('res/images/objects/GoldCoinAnimation/coin6.png').convert_alpha()
         ]
 
         self.silver_coin_images = [
-            pygame.image.load('Images/SilverCoinAnimation/coin1.png').convert_alpha(),
-            pygame.image.load('Images/SilverCoinAnimation/coin2.png').convert_alpha(),
-            pygame.image.load('Images/SilverCoinAnimation/coin3.png').convert_alpha(),
-            pygame.image.load('Images/SilverCoinAnimation/coin4.png').convert_alpha(),
-            pygame.image.load('Images/SilverCoinAnimation/coin5.png').convert_alpha(),
-            pygame.image.load('Images/SilverCoinAnimation/coin6.png').convert_alpha()
+            pygame.image.load('res/images/objects/SilverCoinAnimation/coin1.png').convert_alpha(),
+            pygame.image.load('res/images/objects/SilverCoinAnimation/coin2.png').convert_alpha(),
+            pygame.image.load('res/images/objects/SilverCoinAnimation/coin3.png').convert_alpha(),
+            pygame.image.load('res/images/objects/SilverCoinAnimation/coin4.png').convert_alpha(),
+            pygame.image.load('res/images/objects/SilverCoinAnimation/coin5.png').convert_alpha(),
+            pygame.image.load('res/images/objects/SilverCoinAnimation/coin6.png').convert_alpha()
         ]

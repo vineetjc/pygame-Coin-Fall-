@@ -27,7 +27,7 @@ def game_loop():
     # setup the window display
     size = (1024, 768)
     windowSurface = pygame.display.set_mode(size, 0, 32)
-    pygame.display.set_caption('Super Mumbo Epicness')
+    pygame.display.set_caption('Coin Fall')
 
     # initialize resources and game mode
     res = Resources(pygame)
