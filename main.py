@@ -8,6 +8,7 @@ from pygame.locals import QUIT, KEYUP
 from src.managers.resources import Resources
 from src.misc.game_enums import Game_mode, Entity
 from src.managers.game_manager import Game_manager
+from src.managers.input_manager import Input_Manager
 
 from src.objects.cart import Cart
 from src.objects.coin import Coin
@@ -35,6 +36,7 @@ def game_loop():
     game_clock = pygame.time.Clock()
     game_mode = Game_mode.MAIN_MENU
     game_manager = Game_manager()
+    input_manager = Input_Manager()
 
     # set game logo
     pygame.display.set_icon(res.logo)
