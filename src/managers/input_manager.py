@@ -21,7 +21,7 @@ class Input_Manager():
 
     def __init__(self):
         self.input_list = self.get_input_list()
-        print self.input_list
+        print (self.input_list)
 
     def update(self, events):
         pass
