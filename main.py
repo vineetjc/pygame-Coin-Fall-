@@ -36,6 +36,9 @@ def game_loop():
     game_mode = Game_mode.MAIN_MENU
     game_manager = Game_manager()
 
+    # set game logo
+    pygame.display.set_icon(res.logo)
+    
     # initialize screens
     main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
     game_screen = Game_screen(pygame, res, windowSurface, size, game_clock, game_manager)
@@ -43,7 +46,7 @@ def game_loop():
     game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
     credits_screen = Credits_screen(pygame, res, windowSurface)
-
+    
 
     # game loop starts
     while True:
