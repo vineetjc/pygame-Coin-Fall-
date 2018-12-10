@@ -5,6 +5,8 @@ from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.button import Button
 
+LEFT = 1
+
 
 class Credits_screen(Screen):
     def __init__(self, pygame, res, surface):
@@ -17,7 +19,6 @@ class Credits_screen(Screen):
         self.buttons['Divyang'] =       Button(pygame, res, surface, [20, 360, 300, 50], "Divyang")
         self.buttons['Azmal'] =         Button(pygame, res, surface, [20, 430, 300, 50], "Azmal")
         self.buttons['Abhinandan'] =    Button(pygame, res, surface, [20, 500, 300, 50], "Abhinandan")
-        self.buttons['Gitter'] =        Button(pygame, res, surface, [20, 570, 300, 50], "Gitter")
         self.buttons['Back'] =          Button(pygame, res, surface, [20, 640, 300, 50], "Back")
 
     def update(self, events):
@@ -30,7 +31,7 @@ class Credits_screen(Screen):
         for button in self.buttons:
             self.buttons[button].draw()
 
-        mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP), None)
+        mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event != None:
             if self.buttons['Vineet'].check_click(mouseup_event.pos):
@@ -55,10 +56,6 @@ class Credits_screen(Screen):
 
             if self.buttons['Abhinandan'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/kainthcool')
-                return Game_mode.CREDITS
-
-            if self.buttons['Gitter'].check_click(mouseup_event.pos):
-                webbrowser.open_new_tab('https://github.com/gitter-badger')
                 return Game_mode.CREDITS
                         
             if self.buttons['Back'].check_click(mouseup_event.pos):

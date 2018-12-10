@@ -3,6 +3,8 @@ from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.button import Button
 
+LEFT = 1
+
 
 class Tutorial_screen(Screen):
     def __init__(self, pygame, res, surface):
@@ -21,7 +23,7 @@ class Tutorial_screen(Screen):
         for button in self.buttons:
             self.buttons[button].draw()
 
-        mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP), None)
+        mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event != None:
             if self.buttons['Back'].check_click(mouseup_event.pos):
