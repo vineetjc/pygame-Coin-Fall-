@@ -2,7 +2,7 @@
 # Coin class
 ################
 import random
-from src.game_enums import Entity
+from src.misc.game_enums import Entity
 
 
 class Coin():

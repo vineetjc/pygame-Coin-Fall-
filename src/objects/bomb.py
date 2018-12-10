@@ -1,8 +1,8 @@
 ################
 # Bomb
 ################
-from src.coin import Coin
-from src.game_enums import Entity
+from src.objects.coin import Coin
+from src.misc.game_enums import Entity
 
 
 class Bomb(Coin):

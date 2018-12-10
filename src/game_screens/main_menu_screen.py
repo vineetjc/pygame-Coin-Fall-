@@ -1,7 +1,7 @@
-from src.screen import Screen
-from src.game_enums import Game_mode
+from src.game_screens.screen import Screen
+from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
-from src.button import Button
+from src.ui.button import Button
 
 
 class Main_menu_screen(Screen):
@@ -12,11 +12,12 @@ class Main_menu_screen(Screen):
         self.buttons['Start Game'] =    Button(pygame, res, surface, [20, 150, 300, 50], "Start Game")
         self.buttons['Tutorial'] =      Button(pygame, res, surface, [20, 220, 300, 50], "Tutorial")
         self.buttons['Settings'] =      Button(pygame, res, surface, [20, 290, 300, 50], "Settings")
-        self.buttons['Exit'] =          Button(pygame, res, surface, [20, 360, 300, 50], "Exit")
+        self.buttons['Credits'] =       Button(pygame, res, surface, [20, 360, 300, 50], "Credits")
+        self.buttons['Exit'] =          Button(pygame, res, surface, [20, 430, 300, 50], "Exit")
 
     def update(self, events):
-        textsurface = self.font.render('Main Menu', True, (0, 0, 0))
-        textsurface2 = self.font2.render('This is the main menu.', True, (0, 0, 0))
+        textsurface = self.font.render('Main Menu', True, self.res.WHITE)
+        textsurface2 = self.font2.render('This is the main menu.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG,(0,0))
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
@@ -35,6 +36,9 @@ class Main_menu_screen(Screen):
 
             if self.buttons['Settings'].check_click(mouseup_event.pos):
                 return Game_mode.SETTINGS
+
+            if self.buttons['Credits'].check_click(mouseup_event.pos):
+                return Game_mode.CREDITS
 
             if self.buttons['Exit'].check_click(mouseup_event.pos):
                 return Game_mode.QUIT

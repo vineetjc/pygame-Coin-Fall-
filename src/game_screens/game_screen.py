@@ -2,13 +2,13 @@ import random
 import math
 
 from pygame.locals import QUIT, KEYUP
-from src.screen import Screen
-from src.game_enums import Game_mode
+from src.game_screens.screen import Screen
+from src.misc.game_enums import Game_mode
 
-from src.cart import Cart
-from src.coin import Coin
-from src.bluecoin import BlueCoin
-from src.bomb import Bomb
+from src.objects.cart import Cart
+from src.objects.coin import Coin
+from src.objects.bluecoin import BlueCoin
+from src.objects.bomb import Bomb
 
 
 class Game_screen(Screen):
@@ -53,7 +53,6 @@ class Game_screen(Screen):
 
         self.cart.handle_keys(self.pygame, self.size)
         self.surface.blit(self.pygame.transform.scale(self.res.BG, self.size), (0, 0))
-        self.cart.draw()
 
         c = self.get_random_entity(self.i, self.res, self.size, self.surface)
         self.coinlist.append(c)
@@ -66,6 +65,8 @@ class Game_screen(Screen):
             self.cart.collect_item(self.pygame, self.res, b)
 
         self.i += 1
+
+        self.cart.draw()
 
         # Update time
         seconds = self.gameclock.get_time() / 1000.0
