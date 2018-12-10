@@ -1,3 +1,5 @@
+import os
+
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
@@ -14,6 +16,9 @@ class Game_over_screen(Screen):
         self.buttons['Back'] =      Button(pygame, res, surface, [20, 360, 300, 50], "Back")
 
     def update(self, events):
+        if not os.path.isfile("highscore.txt"):
+            with open("highscore.txt", "w") as hiscore_file:
+                hiscore_file.write("0")
         hisc=open("highscore.txt","r")
         highscore=hisc.read()
         maxscore=max(int(highscore),int(self.game_manager.score))

@@ -21,7 +21,7 @@ class Resources:
         # images
         # convert for easy blitting
         self.logo = pygame.image.load('res/images/misc/logo.png').convert_alpha()
-        self.cart_img = pygame.image.load('res/images/bg/bb.jpg').convert()
+        self.cart_img = pygame.image.load('res/images/bg/cart.jpg').convert()
         self.coin_img = pygame.image.load('res/images/bg/coin.jpg').convert()
         self.bluecoin = pygame.image.load('res/images/bg/bluecoin.jpg').convert()
         self.bomb = pygame.image.load('res/images/objects/bomb.png').convert_alpha()
