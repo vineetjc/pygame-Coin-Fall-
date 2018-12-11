@@ -1,4 +1,4 @@
-##########################################
+###############################################################
 # Manages input
 # Will act as a wrapper around the pygame input functionality
 # and provide ease of use for common input tasks
@@ -6,7 +6,7 @@
 #   multiple keys for same action
 #   axis input (three possible input: -1, 0, 1)
 #   joystick input
-###########################################
+###############################################################
 
 from .input_button import Button
 from .input_axis import Axis
@@ -23,7 +23,14 @@ class Input_Manager():
         self.input_list = self.get_input_list()
 
     def update(self, events):
-        print(len(events))
+        for key in self.input_list:
+            self.input_list[key].reset_values()
+
+        for event in events:
+            if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                self.handle_keyboard_event(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
+                self.handle_mouse_event(event)
 
     def get_button(self, button_name):
         pass
@@ -46,3 +53,10 @@ class Input_Manager():
             'horizontal', {(pygame.K_a, pygame.K_d)})
 
         return input_list
+
+    def handle_keyboard_event(self, event):
+        for key in self.input_list:
+            self.input_list[key].set_value(event)
+
+    def handle_mouse_event(self, evnet):
+        pass

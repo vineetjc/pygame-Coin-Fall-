@@ -9,6 +9,7 @@
 ###################################################################################
 
 from .input_base import Input
+import pygame.key
 
 
 class Axis(Input):
