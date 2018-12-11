@@ -29,7 +29,7 @@ class Main_menu_screen(Screen):
 
         if mouseup_event != None:
             if self.buttons['Start Game'].check_click(mouseup_event.pos):
-                return Game_mode.GAME
+                return Game_mode.GAME_MODE
 
             if self.buttons['Tutorial'].check_click(mouseup_event.pos):
                 return Game_mode.TUTORIAL

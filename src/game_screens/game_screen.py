@@ -9,14 +9,14 @@ from src.objects.cart import Cart
 from src.objects.coin import Coin
 from src.objects.bluecoin import BlueCoin
 from src.objects.bomb import Bomb
-from src.game_screens.gameMode_screen import GameMode_screen       
+       
 
 
 ##game_manager=Game_manager()
 class Game_screen(Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):    
         Screen.__init__(self, pygame, res, surface)
-
+           
         # set up initial variables
         self.need_reset = False
         self.size = size
@@ -25,10 +25,9 @@ class Game_screen(Screen):
         self.coinlist = []
         self.gameclock = gameclock
         self.game_manager = game_manager
-	self.difficulty = self.game_manager.Mode["GameMode"]                             
-        self.timer = 0
+	self.timer = 0
         self.cart = Cart(res, self.size, surface)
-	self.gameMode_screen = GameMode_screen(self.pygame, self.res , self.surface)     
+	
         # set up texts
         self.time_text = res.basicFont.render('TIMER:', True, res.BLACK, res.WHITE)
         self.textbox = self.time_text.get_rect(center=(900, 170))
@@ -46,33 +45,21 @@ class Game_screen(Screen):
         self.coinlist = []
         self.timer = 0
         self.game_manager.reset()
-	self.difficulty = self.game_manager.Mode["GameMode"]                  
-        del self.cart
+	del self.cart
         self.cart = Cart(self.res, self.size, self.surface)
 
     def update(self, events):                          
 	# if we are restarting the game
         if self.need_reset:
             self.reset_before_restart()
-
-        
-	while self.difficulty == self.game_manager.Mode["GameMode"]:                                   
-	    events = self.pygame.event.get()
-	    self.difficulty = self.gameMode_screen.update(events)
-	    if self.difficulty == self.game_manager.Mode["Main_Menu"]:
-		return Game_mode.MAIN_MENU
-	    elif self.difficulty == self.game_manager.Mode["QUIT"]:
-		return Game_mode.QUIT
-		
-	    
-
+	     
         self.cart.handle_keys(self.pygame, self.size)
         self.surface.blit(self.pygame.transform.scale(self.res.BG, self.size), (0, 0))
 
         c = self.get_random_entity(self.i, self.res, self.size, self.surface)
         self.coinlist.append(c)
-        
-        for b in self.coinlist[0:self.i:self.difficulty]:                                   
+       
+        for b in self.coinlist[0:self.i:self.game_manager.difficulty.value]:                                   
             # (use 14 or 15) this is for the rate at which
             # objects fall, can change this
             b.draw()

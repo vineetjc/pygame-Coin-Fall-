@@ -46,7 +46,7 @@ class Game_over_screen(Screen):
 
         if mouseup_event != None:
             if self.buttons['Restart'].check_click(mouseup_event.pos):
-                return Game_mode.GAME
+                return Game_mode.GAME_MODE
 
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU
