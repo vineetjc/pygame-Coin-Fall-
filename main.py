@@ -22,7 +22,6 @@ from src.game_screens.game_over_screen import Game_over_screen
 from src.game_screens.tutorial_screen import Tutorial_screen
 from src.game_screens.credits_screen import Credits_screen
 
-
 def game_loop():
     pygame.init()
 
@@ -37,7 +36,7 @@ def game_loop():
     game_mode = Game_mode.MAIN_MENU
     game_manager = Game_manager()
     input_manager = Input_Manager()
-
+    
     # set game logo
     pygame.display.set_icon(res.logo)
     
@@ -48,8 +47,7 @@ def game_loop():
     game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
     tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
     credits_screen = Credits_screen(pygame, res, windowSurface)
-    
-
+   
     # game loop starts
     while True:
         events = pygame.event.get()
