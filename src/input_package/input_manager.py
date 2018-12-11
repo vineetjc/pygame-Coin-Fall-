@@ -8,8 +8,8 @@
 #   joystick input
 ###########################################
 
-from src.ui.input_button import Button
-from src.ui.input_axis import Axis
+from .input_button import Button
+from .input_axis import Axis
 import pygame.key
 
 
@@ -23,7 +23,7 @@ class Input_Manager():
         self.input_list = self.get_input_list()
 
     def update(self, events):
-        pass
+        print(len(events))
 
     def get_button(self, button_name):
         pass

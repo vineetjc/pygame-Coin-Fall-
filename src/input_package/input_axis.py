@@ -8,7 +8,7 @@
 #   pressing nothing,  output is 0 or don't move
 ###################################################################################
 
-from src.ui.input_base import Input
+from .input_base import Input
 
 
 class Axis(Input):

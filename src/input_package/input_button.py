@@ -6,7 +6,7 @@
 # or a key on the joystick
 #################################################
 
-from src.ui.input_base import Input
+from .input_base import Input
 
 
 class Button(Input):
