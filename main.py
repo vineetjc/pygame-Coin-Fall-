@@ -1,7 +1,4 @@
-import pygame
-import sys
-import random
-import math
+import pygame, sys, random, math
 
 from pygame.locals import QUIT, KEYUP
 
