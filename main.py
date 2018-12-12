@@ -1,7 +1,4 @@
-import pygame
-import sys
-import random
-import math
+import pygame, sys, random, math
 
 from pygame.locals import QUIT, KEYUP
 
@@ -9,11 +6,6 @@ from src.managers.resources import Resources
 from src.misc.game_enums import Game_mode, Entity
 from src.managers.game_manager import Game_manager
 from src.input_package import input_manager
-
-from src.objects.cart import Cart
-from src.objects.coin import Coin
-from src.objects.bluecoin import BlueCoin
-from src.objects.bomb import Bomb
 
 from src.game_screens.main_menu_screen import Main_menu_screen
 from src.game_screens.game_screen import Game_screen
