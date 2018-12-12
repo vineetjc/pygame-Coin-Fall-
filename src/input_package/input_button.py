@@ -22,9 +22,11 @@ class Button(Input):
             return
         else:
             if event.type == pygame.KEYUP:
-                self.value = 
+                self.value += -1
+                if self.value > 1: self.value = 1
             else
-                pass
+                self.value += 1
+                if self.value < 0: self.value = 0
 
     def get_value(self):
         pass
