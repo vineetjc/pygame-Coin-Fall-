@@ -13,7 +13,7 @@ import pygame.key
 class Button(Input):
 
     def __init__(self, action_name, pygame_key_list):
-        self.value = 0
+        self.value = False
         self.action_name = action_name
         self.pygame_key_list = pygame_key_list
 
@@ -23,10 +23,9 @@ class Button(Input):
         else:
             if event.type == pygame.KEYUP:
                 self.value += -1
-                if self.value > 1: self.value = 1
-            else
+                if self.value < 0:
+                    self.value = 0
+            else:
                 self.value += 1
-                if self.value < 0: self.value = 0
-
-    def get_value(self):
-        pass
+                if self.value > 1:
+                    self.value = 1

@@ -15,4 +15,4 @@ class Input():
         pass
 
     def get_value(self):
-        pass
+        return self.value

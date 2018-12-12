@@ -2,13 +2,15 @@ from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.button import Button
+import pygame.key
 
 LEFT = 1
 
 
 class Main_menu_screen(Screen):
-    def __init__(self, pygame, res, surface):
+    def __init__(self, pygame, res, surface, game_manager):
         Screen.__init__(self, pygame, res, surface)
+        self.game_manager = game_manager
         self.font = pygame.font.SysFont('cambria', 60)
         self.font2 = pygame.font.SysFont('cambria', 30)
         self.buttons['Start Game'] =    Button(pygame, res, surface, [20, 150, 300, 50], "Start Game")
@@ -18,6 +20,15 @@ class Main_menu_screen(Screen):
         self.buttons['Exit'] =          Button(pygame, res, surface, [20, 430, 300, 50], "Exit")
 
     def update(self, events):
+
+        input = self.game_manager.input
+
+        if input.get_button('reload'):
+            print('reload')
+
+        if input.get_button('map'):
+            print('map')
+         
         textsurface = self.font.render('Main Menu', True, self.res.WHITE)
         textsurface2 = self.font2.render('This is the main menu.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG,(0,0))

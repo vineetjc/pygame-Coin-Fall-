@@ -22,5 +22,3 @@ class Axis(Input):
     def set_value(self, events):
         pass
 
-    def get_value(self):
-        pass

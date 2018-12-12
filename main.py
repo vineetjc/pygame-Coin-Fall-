@@ -34,7 +34,7 @@ def game_loop():
     pygame.display.set_icon(res.logo)
     
     # initialize screens
-    main_menu_screen = Main_menu_screen(pygame, res, windowSurface)
+    main_menu_screen = Main_menu_screen(pygame, res, windowSurface, game_manager)
     game_screen = Game_screen(pygame, res, windowSurface, size, game_clock, game_manager)
     settings_screen = Settings_screen(pygame, res, windowSurface)
     game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
