@@ -51,7 +51,7 @@ class Game_screen(Screen):
         if self.need_reset:
             self.reset_before_restart()
 
-        self.cart.handle_keys(self.pygame, self.size)
+        self.cart.move(self.size, self.game_manager.input)
         self.surface.blit(self.pygame.transform.scale(self.res.BG, self.size), (0, 0))
 
         c = self.get_random_entity(self.i, self.res, self.size, self.surface)

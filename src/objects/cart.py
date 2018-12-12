@@ -1,6 +1,7 @@
 ##################
 # Cart Class
 ##################
+import math
 from src.misc.game_enums import Entity
 
 
@@ -13,17 +14,13 @@ class Cart(object):
         self.y = size[1] - 120
         self.points = 0  # Changed Points to points
         self.dead = False  # Add this for game end check
+        self.speed = 10
 
-    def handle_keys(self, pygame, size):
-        key = pygame.key.get_pressed()
-        dist = 10  # Change this value if necessary
-        if key[pygame.K_RIGHT]:
-            if self.x < size[0] - 140:
-                self.x += dist
-
-        elif key[pygame.K_LEFT]:
-            if self.x > -10:
-                self.x -= dist
+    def move(self, size, input):
+        movement = input.get_axis('horizontal') * self.speed
+        desired_movement = self.x + movement
+        final_movement = max(min(desired_movement, size[0] - 140), -10)
+        self.x = final_movement
 
     def draw(self):
         self.surface.blit(self.image, (self.x, self.y))
