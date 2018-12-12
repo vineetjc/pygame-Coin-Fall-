@@ -8,10 +8,10 @@ class Input():
     def __init__(self):
         pass
 
-    def reset_values(self):
+    def reset_value(self):
         self.value = 0
 
-    def set_value(self, event):
+    def set_value(self, key_event):
         pass
 
     def get_value(self):

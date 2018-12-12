@@ -17,15 +17,8 @@ class Button(Input):
         self.action_name = action_name
         self.pygame_key_list = pygame_key_list
 
-    def set_value(self, event):
-        if event.key not in self.pygame_key_list:
-            return
-        else:
-            if event.type == pygame.KEYUP:
-                self.value += -1
-                if self.value < 0:
-                    self.value = 0
-            else:
-                self.value += 1
-                if self.value > 1:
-                    self.value = 1
+    def set_value(self, key_state):
+        for key in self.pygame_key_list:
+            if key_state[key]:
+                self.value = 1
+                return

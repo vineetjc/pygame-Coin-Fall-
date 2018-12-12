@@ -27,30 +27,38 @@ class Input_Manager():
         self.input_list = get_input_list()
 
     def update(self, events):
-        # for key in self.input_list:
-        #   self.input_list[key].reset_values()
+        # read the keyboard for processing
+        key_state = pygame.key.get_pressed()
 
-        for event in events:
-            if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                self.handle_keyboard_event(event)
-            elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
-                self.handle_mouse_event(event)
+        # reset all the values from last frame
+        for dict_key in self.input_list:
+            self.input_list[dict_key].reset_value()
+
+        # handle the key state
+        self.handle_keyboard(key_state)
 
     def get_button(self, button_name):
         ''' 
         Gets the state of a user defined button
-        :param button_name: the button name as defined in input_manager
+        :param button_name: the button name as defined in input_scheme
         :return True if button is pressed down state, False otherwise
         '''
 
         return self.input_list[button_name].get_value()
 
     def get_axis(self, axis_name):
-        pass
+        '''
+        Get the value of a user defined axis
+        :param axis_name: the axis name as defined in input_scheme
+        :return -1 if negative key is pressed
+                 0 if nothing is pressed
+                 1 if positive key is pressed
+        '''
+        return self.input_list[axis_name].get_value()
 
-    def handle_keyboard_event(self, event):
+    def handle_keyboard(self, key_state):
         for key in self.input_list:
-            self.input_list[key].set_value(event)
+            self.input_list[key].set_value(key_state)
 
     def handle_mouse_event(self, evnet):
         pass

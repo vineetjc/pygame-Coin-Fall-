@@ -19,6 +19,15 @@ class Axis(Input):
         self.action_name = action_name
         self.pygame_key_pair_list = pygame_key_pair_list
 
-    def set_value(self, events):
-        pass
+    def set_value(self, key_state):
+        for key_pair in self.pygame_key_pair_list:
+            negative_key, positive_key = key_pair
+            if key_state[negative_key]:
+                self.value += -1
+                if self.value < -1:
+                    self.value = -1
 
+            if key_state[positive_key]:
+                self.value += 1
+                if self.value > 1:
+                    self.value = 1
