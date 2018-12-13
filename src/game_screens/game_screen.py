@@ -25,7 +25,7 @@ class Game_screen(Screen):
         self.coinlist = []
         self.gameclock = gameclock
         self.game_manager = game_manager
-	self.timer = 0
+        self.timer = 0
         self.cart = Cart(res, self.size, surface)
 	
         # set up texts
