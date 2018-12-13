@@ -23,7 +23,7 @@ class Entity(Enum):
 
 class Difficulty(Enum):
     ''' Enum to provide difficulty level. '''
-    EASY = {"DENSITY":25,"SCORE_MULTIPLIER":1}
-    MEDIUM = {"DENSITY":15,"SCORE_MULTIPLIER":3}
-    HARD = {"DENSITY":5,"SCORE_MULTIPLIER":5} 
+    EASY = 25
+    MEDIUM = 15
+    HARD = 5
 
