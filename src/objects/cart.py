@@ -5,7 +5,7 @@ from src.misc.game_enums import Entity
 
 
 class Cart(object):
-    def __init__(self, res, size, surface):
+    def __init__(self, res, size, surface, game_manager):
         self.type = Entity.CART
         self.surface = surface
         self.image = res.cart_img
@@ -13,6 +13,7 @@ class Cart(object):
         self.y = size[1] - 120
         self.points = 0  # Changed Points to points
         self.dead = False  # Add this for game end check
+        self.game_manager = game_manager
 
     def handle_keys(self, pygame, size):
         key = pygame.key.get_pressed()
@@ -35,12 +36,12 @@ class Cart(object):
                 try:
                     if not coin.collected:
                         if coin.type == Entity.BLUE_COIN:
-                            self.points += 3
+                            self.points += 3*self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
                         elif coin.type == Entity.BOMB:
                             pygame.time.delay(500)
                             self.dead = True  # Replace quit with death
                         else:
-                            self.points += 1
+                            self.points += 1*self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
 
                         coin.collect()
                 except AttributeError:

@@ -26,7 +26,7 @@ class Game_screen(Screen):
         self.gameclock = gameclock
         self.game_manager = game_manager
         self.timer = 0
-        self.cart = Cart(res, self.size, surface)
+        self.cart = Cart(res, self.size, surface, self.game_manager)
 	
         # set up texts
         self.time_text = res.basicFont.render('TIMER:', True, res.BLACK, res.WHITE)
@@ -46,7 +46,7 @@ class Game_screen(Screen):
         self.timer = 0
         self.game_manager.reset()
         del self.cart
-        self.cart = Cart(self.res, self.size, self.surface)
+        self.cart = Cart(self.res, self.size, self.surface, self.game_manager)
 
     def update(self, events):                          
         # if we are restarting the game
@@ -59,7 +59,7 @@ class Game_screen(Screen):
         c = self.get_random_entity(self.i, self.res, self.size, self.surface)
         self.coinlist.append(c)
 
-        for b in self.coinlist[0:self.i:self.game_manager.difficulty.value]:                                   
+        for b in self.coinlist[0:self.i:self.game_manager.difficulty.value["DENSITY"]]:                                   
             # (use 14 or 15) this is for the rate at which
             # objects fall, can change this
             b.draw()
