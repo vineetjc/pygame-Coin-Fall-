@@ -74,8 +74,8 @@ def game_loop():
         elif game_mode == Game_mode.CREDITS:
             game_mode = credits_screen.update(events)
 
-	elif game_mode == Game_mode.GAME_MODE:
-	    game_mode = game_mode_screen.update(events)
+        elif game_mode == Game_mode.GAME_MODE:
+            game_mode = game_mode_screen.update(events)
 
         else:
             pygame.quit()

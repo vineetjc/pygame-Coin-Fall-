@@ -35,7 +35,7 @@ class Cart(object):
                 try:
                     if not coin.collected:
                         if coin.type == Entity.BLUE_COIN:
-                            self.points += 3  # Bonus coin
+                            self.points += 3
                         elif coin.type == Entity.BOMB:
                             pygame.time.delay(500)
                             self.dead = True  # Replace quit with death

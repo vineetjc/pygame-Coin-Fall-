@@ -20,8 +20,8 @@ class Game_screen(Screen):
         # set up initial variables
         self.need_reset = False
         self.size = size
-	self.result = 0
-	self.i = 1
+        self.result = 0
+        self.i = 1
         self.coinlist = []
         self.gameclock = gameclock
         self.game_manager = game_manager
@@ -45,11 +45,11 @@ class Game_screen(Screen):
         self.coinlist = []
         self.timer = 0
         self.game_manager.reset()
-	del self.cart
+        del self.cart
         self.cart = Cart(self.res, self.size, self.surface)
 
     def update(self, events):                          
-	# if we are restarting the game
+        # if we are restarting the game
         if self.need_reset:
             self.reset_before_restart()
 	     
@@ -58,8 +58,8 @@ class Game_screen(Screen):
 
         c = self.get_random_entity(self.i, self.res, self.size, self.surface)
         self.coinlist.append(c)
-       
-        for b in self.coinlist[0:self.i:self.game_manager.difficulty.value]:                                   
+
+        for b in self.coinlist[0:self.i:self.game_manager.difficulty.value["DENSITY"]]:                                   
             # (use 14 or 15) this is for the rate at which
             # objects fall, can change this
             b.draw()
