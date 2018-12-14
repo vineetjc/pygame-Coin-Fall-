@@ -42,7 +42,7 @@ class Credits_screen(Screen):
         mouseup_event = next(
             (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
-        if mouseup_event != None:
+        if mouseup_event is not None:
             if self.buttons['Vineet'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/vineetjc')
                 return Game_mode.CREDITS

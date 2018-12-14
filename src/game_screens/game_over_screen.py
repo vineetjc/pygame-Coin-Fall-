@@ -49,7 +49,7 @@ class Game_over_screen(Screen):
         mouseup_event = next(
             (x for x in events if x.type == MOUSEBUTTONUP), None)
 
-        if mouseup_event != None:
+        if mouseup_event is not None:
             if self.buttons['Restart'].check_click(mouseup_event.pos):
                 return Game_mode.GAME_MODE
 

@@ -30,7 +30,7 @@ class Game_Mode_Screen(Screen):
         mouseup_event = next(
             (x for x in events if x.type == MOUSEBUTTONUP), None)
 
-        if mouseup_event != None:
+        if mouseup_event is not None:
             if self.buttons['Easy'].check_click(mouseup_event.pos):
                 self.game_manager.difficulty = Difficulty.EASY
                 return Game_mode.GAME

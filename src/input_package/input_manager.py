@@ -17,7 +17,7 @@ import pygame.key
 
 
 class Input_Manager():
-    ''' 
+    '''
     Will have the states of all the buttons and axis defined by the game.
     These states can be retrieved from here with simple functions
     Will get these states at the start of the frame
@@ -38,7 +38,7 @@ class Input_Manager():
         self.handle_keyboard(key_state)
 
     def get_button(self, button_name):
-        ''' 
+        '''
         Gets the state of a user defined button
         :param button_name: the button name as defined in input_scheme
         :return True if button is pressed down state, False otherwise

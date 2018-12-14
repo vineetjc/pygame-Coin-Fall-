@@ -1,4 +1,4 @@
-##################################################################################
+##############################################################################
 # An input that is controlled by two keys and can have 3 values, -1, 0, 1
 #
 # Example: in a FPS game, keys W and S control forward and backward movement
@@ -6,7 +6,7 @@
 #   pressing W,        output is +1 or move forward
 #   pressing S,        output is -1 or move backward
 #   pressing nothing,  output is 0 or don't move
-###################################################################################
+##############################################################################
 
 from .input_base import Input
 import pygame.key

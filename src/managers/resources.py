@@ -22,8 +22,10 @@ class Resources:
         # convert for easy blitting
         self.logo = pygame.image.load(
             'res/images/misc/logo.png').convert_alpha()
-        self.cart_img = pygame.image.load('res/images/bg/cart.jpg').convert()
-        self.coin_img = pygame.image.load('res/images/bg/coin.jpg').convert()
+        self.cart_img = pygame.image.load(
+            'res/images/bg/cart.jpg').convert()
+        self.coin_img = pygame.image.load(
+            'res/images/bg/coin.jpg').convert()
         self.bluecoin = pygame.image.load(
             'res/images/bg/bluecoin.jpg').convert()
         self.bomb = pygame.image.load(
@@ -31,7 +33,8 @@ class Resources:
         self.R = random.randint(1, 4)
         self.BG = pygame.image.load(
             'res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
-        self.EBG = pygame.image.load('res/images/bg/endbg2.png').convert()
+        self.EBG = pygame.image.load(
+            'res/images/bg/endbg2.png').convert()
 
         # load images for animation
 
