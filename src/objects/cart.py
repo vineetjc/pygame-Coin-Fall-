@@ -8,8 +8,10 @@ from src.misc.game_enums import Entity
 class Cart(object):
     def __init__(self, res, size, surface, game_manager):
         self.type = Entity.CART
+        self.size = size
         self.surface = surface
         self.game_manager = game_manager
+        self.input = game_manager.input
         self.image = res.cart_img
         self.x = (size[0] / 2) - 80
         self.y = size[1] - 120
@@ -17,16 +19,16 @@ class Cart(object):
         self.dead = False  # Add this for game end check
         self.speed = 10
 
-    def move(self, size, input):
-        movement = input.get_axis('horizontal') * self.speed
+    def move(self):
+        movement = self.input.get_axis('horizontal') * self.speed
         desired_movement = self.x + movement
-        final_movement = max(min(desired_movement, size[0] - 140), -10)
+        final_movement = max(min(desired_movement, self.size[0] - 140), -10)
         self.x = final_movement
 
     def draw(self):
         self.surface.blit(self.image, (self.x, self.y))
 
-    def collect_item(self, pygame, res, coin):
+    def collect_item(self, coin):
         if 645 > coin.y > 633:
             if ((self.x < coin.x + (55.0 / 2) < self.x + 160) and
                     (self.x < coin.x) and (self.x + 160 > coin.x + 55)):

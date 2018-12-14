@@ -53,7 +53,7 @@ class Game_screen(Screen):
 		if self.need_reset:
 			self.reset_before_restart()
 
-		self.cart.move(self.size, self.game_manager.input)
+		self.cart.move()
 		self.surface.blit(self.pygame.transform.scale(self.res.BG, self.size), (0, 0))
 
 		c = self.get_random_entity(self.arbit_var, self.res, self.size, self.surface)
@@ -64,7 +64,7 @@ class Game_screen(Screen):
 			# objects fall, can change this
 			b.draw()
 			b.fall()
-			self.cart.collect_item(self.pygame, self.res, b)
+			self.cart.collect_item(b)
 
 		self.arbit_var += 1
 
