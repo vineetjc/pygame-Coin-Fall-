@@ -14,10 +14,10 @@ import pygame.key
 
 class Axis(Input):
 
-	def __init__(self, action_name, pygame_key_pair_list):
-		self.value = 0
-		self.action_name = action_name
-		self.pygame_key_pair_list = pygame_key_pair_list
+    def __init__(self, action_name, pygame_key_pair_list):
+        self.value = 0
+        self.action_name = action_name
+        self.pygame_key_pair_list = pygame_key_pair_list
 
     def set_value(self, key_state):
         for key_pair in self.pygame_key_pair_list:

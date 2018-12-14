@@ -1,20 +1,9 @@
 import pygame, sys, random, math
-
 from pygame.locals import QUIT, KEYUP
-
-from src.managers.resources import Resources
 from src.misc.game_enums import Game_mode, Entity
-from src.managers.game_manager import Game_manager
+from src.managers import *
+from src.game_screens import *
 from src.input_package import input_manager
-
-from src.game_screens.main_menu_screen import Main_menu_screen
-from src.game_screens.game_screen import Game_screen
-from src.game_screens.settings_screen import Settings_screen
-from src.game_screens.game_over_screen import Game_over_screen
-from src.game_screens.tutorial_screen import Tutorial_screen
-from src.game_screens.credits_screen import Credits_screen
-from src.game_screens.game_mode_screen import Game_Mode_Screen
-
 
 def game_loop():
 	pygame.init()
@@ -29,7 +18,7 @@ def game_loop():
 	game_clock = pygame.time.Clock()
 	game_mode = Game_mode.MAIN_MENU
 	game_manager = Game_manager()
-	input_manager = Input_Manager()
+	game_manager.set_input(input_manager.Input_Manager())
 
 	# set game logo
 	pygame.display.set_icon(res.logo)
@@ -47,6 +36,7 @@ def game_loop():
 	# game loop starts
 	while True:
 		events = pygame.event.get()
+		game_manager.input.update(events)
 
 		if game_mode == Game_mode.MAIN_MENU:
 			game_mode = main_menu_screen.update(events)
