@@ -1,4 +1,5 @@
-import pygame, sys, random, math
+import pygame 
+import sys
 from pygame.locals import QUIT, KEYUP
 from src.misc.game_enums import Game_mode, Entity
 from src.managers import *
