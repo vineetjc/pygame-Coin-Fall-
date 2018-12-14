@@ -30,7 +30,7 @@ class Game_Mode_Screen(Screen):
 				return Game_mode.GAME
 
 			if self.buttons['Medium'].check_click(mouseup_event.pos):
-			self.game_manager.difficulty = Difficulty.MEDIUM
+				self.game_manager.difficulty = Difficulty.MEDIUM
 				return Game_mode.GAME
 
 			if self.buttons['Hard'].check_click(mouseup_event.pos):
