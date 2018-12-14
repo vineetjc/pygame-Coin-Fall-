@@ -6,7 +6,6 @@ from src.misc.game_enums import Entity
 
 
 class Cart(object):
-<<<<<<< HEAD
     def __init__(self, res, size, surface):
         self.type = Entity.CART
         self.surface = surface
@@ -22,28 +21,6 @@ class Cart(object):
         desired_movement = self.x + movement
         final_movement = max(min(desired_movement, size[0] - 140), -10)
         self.x = final_movement
-=======
-	def __init__(self, res, size, surface, game_manager):
-		self.type = Entity.CART
-		self.surface = surface
-		self.image = res.cart_img
-		self.x = (size[0] / 2) - 80
-		self.y = size[1] - 120
-		self.points = 0  # Changed Points to points
-		self.dead = False  # Add this for game end check
-		self.game_manager = game_manager
-
-	def handle_keys(self, pygame, size):
-		key = pygame.key.get_pressed()
-		dist = 10  # Change this value if necessary
-		if key[pygame.K_RIGHT]:
-			if self.x < size[0] - 140:
-				self.x += dist
-
-		elif key[pygame.K_LEFT]:
-			if self.x > -10:
-				self.x -= dist
->>>>>>> master
 
 	def draw(self):
 		self.surface.blit(self.image, (self.x, self.y))

@@ -24,31 +24,6 @@ def game_loop():
 	windowSurface = pygame.display.set_mode(size, 0, 32)
 	pygame.display.set_caption('Coin Fall')
 
-<<<<<<< HEAD
-    # initialize resources and game mode
-    res = Resources(pygame)
-    game_clock = pygame.time.Clock()
-    game_mode = Game_mode.MAIN_MENU
-    game_manager = Game_manager()
-    game_manager.set_input(input_manager.Input_Manager())
-
-    # set game logo
-    pygame.display.set_icon(res.logo)
-    
-    # initialize screens
-    main_menu_screen = Main_menu_screen(pygame, res, windowSurface, game_manager)
-    game_screen = Game_screen(pygame, res, windowSurface, size, game_clock, game_manager)
-    settings_screen = Settings_screen(pygame, res, windowSurface)
-    game_over_screen = Game_over_screen(pygame, res, windowSurface, game_manager)
-    tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
-    credits_screen = Credits_screen(pygame, res, windowSurface)
-    
-
-    # game loop starts
-    while True:
-        events = pygame.event.get()
-        game_manager.input.update(events)
-=======
 	# initialize resources and game mode
 	res = Resources(pygame)
 	game_clock = pygame.time.Clock()
@@ -67,7 +42,6 @@ def game_loop():
 	tutorial_screen = Tutorial_screen(pygame, res, windowSurface)
 	credits_screen = Credits_screen(pygame, res, windowSurface)
 	game_mode_screen = Game_Mode_Screen(pygame , res , windowSurface , game_manager)
->>>>>>> master
 
 
 	# game loop starts

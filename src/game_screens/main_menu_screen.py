@@ -8,18 +8,6 @@ LEFT = 1
 
 
 class Main_menu_screen(Screen):
-<<<<<<< HEAD
-    def __init__(self, pygame, res, surface, game_manager):
-        Screen.__init__(self, pygame, res, surface)
-        self.game_manager = game_manager
-        self.font = pygame.font.SysFont('cambria', 60)
-        self.font2 = pygame.font.SysFont('cambria', 30)
-        self.buttons['Start Game'] =    Button(pygame, res, surface, [20, 150, 300, 50], "Start Game")
-        self.buttons['Tutorial'] =      Button(pygame, res, surface, [20, 220, 300, 50], "Tutorial")
-        self.buttons['Settings'] =      Button(pygame, res, surface, [20, 290, 300, 50], "Settings")
-        self.buttons['Credits'] =       Button(pygame, res, surface, [20, 360, 300, 50], "Credits")
-        self.buttons['Exit'] =          Button(pygame, res, surface, [20, 430, 300, 50], "Exit")
-=======
 	def __init__(self, pygame, res, surface):
 		Screen.__init__(self, pygame, res, surface)
 		self.font = pygame.font.SysFont('cambria', 60)
@@ -29,7 +17,6 @@ class Main_menu_screen(Screen):
 		self.buttons['Settings'] =      Button(pygame, res, surface, [20, 290, 300, 50], "Settings")
 		self.buttons['Credits'] =       Button(pygame, res, surface, [20, 360, 300, 50], "Credits")
 		self.buttons['Exit'] =          Button(pygame, res, surface, [20, 430, 300, 50], "Exit")
->>>>>>> master
 
 	def update(self, events):
 		textsurface = self.font.render('Main Menu', True, self.res.WHITE)
@@ -41,11 +28,7 @@ class Main_menu_screen(Screen):
 		for button in self.buttons:
 			self.buttons[button].draw()
 
-<<<<<<< HEAD
-        mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
-=======
 		mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP), None)
->>>>>>> master
 
 		if mouseup_event != None:
 			if self.buttons['Start Game'].check_click(mouseup_event.pos):

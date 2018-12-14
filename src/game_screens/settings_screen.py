@@ -23,11 +23,7 @@ class Settings_screen(Screen):
 		for button in self.buttons:
 			self.buttons[button].draw()
 
-<<<<<<< HEAD
         mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
-=======
-		mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP), None)
->>>>>>> master
 
 		if mouseup_event != None:
 			if self.buttons['Back'].check_click(mouseup_event.pos):
