@@ -13,13 +13,13 @@ from src.ui.input_base import Input
 
 class Axis(Input):
 
-    def __init__(self, action_name, pygame_key_pair_list):
-        self.value = 0
-        self.action_name = action_name
-        self.pygame_key_pair_list = pygame_key_pair_list
+	def __init__(self, action_name, pygame_key_pair_list):
+		self.value = 0
+		self.action_name = action_name
+		self.pygame_key_pair_list = pygame_key_pair_list
 
-    def set_value(self, events):
-        pass
+	def set_value(self, events):
+		pass
 
-    def get_value(self):
-        pass
+	def get_value(self):
+		pass
