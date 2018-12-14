@@ -14,11 +14,12 @@ import pygame.key
 
 class Axis(Input):
 
-    def __init__(self, action_name, pygame_key_pair_list):
-        self.value = 0
-        self.action_name = action_name
-        self.pygame_key_pair_list = pygame_key_pair_list
+	def __init__(self, action_name, pygame_key_pair_list):
+		self.value = 0
+		self.action_name = action_name
+		self.pygame_key_pair_list = pygame_key_pair_list
 
+<<<<<<< HEAD:src/input_package/input_axis.py
     def set_value(self, key_state):
         for key_pair in self.pygame_key_pair_list:
             negative_key, positive_key = key_pair
@@ -31,3 +32,10 @@ class Axis(Input):
                 self.value += 1
                 if self.value > 1:
                     self.value = 1
+=======
+	def set_value(self, events):
+		pass
+
+	def get_value(self):
+		pass
+>>>>>>> master:src/ui/input_axis.py
