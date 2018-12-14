@@ -23,7 +23,7 @@
 A game made using Python and Pygame, in which the players have to collect coins falling from the sky.
 
 ### Requirements:
-- `Python 2.x`
+- `Python (2 or 3)`
 - `pygame`
 
 ### How it works?
@@ -59,4 +59,4 @@ A game made using Python and Pygame, in which the players have to collect coins 
 ---
 The code in this project is licensed under the MIT License 2017 - Vineet Jiji Cherian.
 
-[(Back to top)](#table-of-content)
+[(Back to top)](#table-of-contents)
