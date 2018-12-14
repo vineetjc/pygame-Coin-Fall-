@@ -9,6 +9,8 @@ from src.managers.resources import Resources
 from src.misc.game_enums import Game_mode, Entity
 from src.managers.game_manager import Game_manager
 from src.managers.input_manager import Input_Manager
+from src.managers.sound_manager import Play_sound
+
 
 from src.objects.cart import Cart
 from src.objects.coin import Coin
@@ -38,6 +40,11 @@ def game_loop():
 	game_mode = Game_mode.MAIN_MENU
 	game_manager = Game_manager()
 	input_manager = Input_Manager()
+	sound_manager = Play_sound
+
+	#play sound
+	sound_manager.init(pygame,'background_music','coin_pickup')
+	sound_manager.play_music(pygame,'background_music')
 
 	# set game logo
 	pygame.display.set_icon(res.logo)
