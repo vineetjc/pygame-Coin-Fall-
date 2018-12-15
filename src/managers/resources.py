@@ -39,7 +39,7 @@ class Resources:
         self.BG = pygame.image.load(
             'res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
         self.EBG = pygame.image.load(
-            'res/images/bg/endbg2.png').convert()
+            'res/images/bg/endbg3.png').convert()
 
         # load images for animation
 

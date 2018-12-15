@@ -35,7 +35,7 @@ class Game_over_screen(Screen):
             'Score: ' + str(self.game_manager.score), True, self.res.WHITE)
 
         textsurface3 = self.res.body_font.render(
-            'HighScore: ' + str(maxscore), True, self.res.WHITE)
+            'Highscore: ' + str(maxscore), True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
         self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
