@@ -8,21 +8,18 @@ class Game_Mode_Screen(Screen):
     def __init__(self, pygame, res, surface, game_manager):
         Screen.__init__(self, pygame, res, surface)
         self.game_manager = game_manager
-        self.font = pygame.font.SysFont('cambria', 60)
-        self.buttons['Easy'] = Button(
-            pygame, res, surface, [362, 150, 300, 50], "Easy")
-        self.buttons['Medium'] = Button(
-            pygame, res, surface, [362, 220, 300, 50], "Medium")
-        self.buttons['Hard'] = Button(
-            pygame, res, surface, [362, 290, 300, 50], "Hard")
-        self.buttons['Back'] = Button(
-            pygame, res, surface, [362, 360, 300, 50], "Back")
+        self.font = res.heading_font
+        
+        self.buttons['Easy'] =      Button(pygame, res, surface, [20, 290, 150, 50], "Easy")
+        self.buttons['Medium'] =    Button(pygame, res, surface, [170, 290, 150, 50], "Medium")
+        self.buttons['Hard'] =      Button(pygame, res, surface, [340, 290, 150, 50], "Hard")
+
+        self.buttons['Back'] =      Button(pygame, res, surface, [20, 540, 300, 50], "Back")
 
     def update(self, events):
-        textsurface = self.font.render(
-            'Select Difficulty:', True, self.res.WHITE)
+        textsurface = self.font.render('Select Difficulty:', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface, (362, 0))
+        self.surface.blit(textsurface, (20, 220))
 
         for button in self.buttons:
             self.buttons[button].draw()
