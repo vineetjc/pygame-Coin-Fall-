@@ -12,7 +12,7 @@ from src.misc.game_enums import Game_mode
 import sys
 
 
-class Screen_Manager:
+class Screens_Manager:
     def __init__(self, pygame, res, surface, size, game_clock, game_manager):
         self.pygame = pygame
         self.init_screens(pygame, res, surface, size, game_clock, game_manager)
