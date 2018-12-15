@@ -12,8 +12,6 @@ class Game_over_screen(Screen):
     def __init__(self, pygame, res, surface, game_manager):
         Screen.__init__(self, pygame, res, surface)
         self.game_manager = game_manager
-        self.font = pygame.font.SysFont('cambria', 60)
-        self.font2 = pygame.font.SysFont('cambria', 30)
         self.buttons['Restart'] = Button(
             pygame, res, surface, [20, 290, 300, 50], "Restart")
         self.buttons['Back'] = Button(
@@ -32,11 +30,11 @@ class Game_over_screen(Screen):
             hisc.write(str(self.game_manager.score))
         hisc.close()
 
-        textsurface = self.font.render('Game Over', True, self.res.WHITE)
-        textsurface2 = self.font2.render(
+        textsurface = self.res.heading1_font.render('Game Over', True, self.res.WHITE)
+        textsurface2 = self.res.body_font.render(
             'Score: ' + str(self.game_manager.score), True, self.res.WHITE)
 
-        textsurface3 = self.font2.render(
+        textsurface3 = self.res.body_font.render(
             'HighScore: ' + str(maxscore), True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
         self.surface.blit(textsurface, (20, 0))

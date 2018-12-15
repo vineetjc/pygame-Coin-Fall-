@@ -10,8 +10,6 @@ LEFT = 1
 class Main_menu_screen(Screen):
     def __init__(self, pygame, res, surface):
         Screen.__init__(self, pygame, res, surface)
-        self.font = pygame.font.SysFont('cambria', 60)
-        self.font2 = pygame.font.SysFont('cambria', 30)
         self.buttons['Start Game'] = Button(
             pygame, res, surface, [20, 150, 300, 50], "Start Game")
         self.buttons['Tutorial'] = Button(
@@ -24,8 +22,8 @@ class Main_menu_screen(Screen):
             pygame, res, surface, [20, 430, 300, 50], "Exit")
 
     def update(self, events):
-        textsurface = self.font.render('Main Menu', True, self.res.WHITE)
-        textsurface2 = self.font2.render(
+        textsurface = self.res.heading1_font.render('Main Menu', True, self.res.WHITE)
+        textsurface2 = self.res.body_font.render(
             'This is the main menu.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
         self.surface.blit(textsurface, (20, 0))

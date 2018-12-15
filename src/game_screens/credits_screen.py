@@ -11,8 +11,6 @@ LEFT = 1
 class Credits_screen(Screen):
     def __init__(self, pygame, res, surface):
         Screen.__init__(self, pygame, res, surface)
-        self.font = pygame.font.SysFont('cambria', 60)
-        self.font2 = pygame.font.SysFont('cambria', 30)
         self.buttons['Vineet'] = Button(
             pygame, res, surface, [20, 150, 300, 50], "Vineet")
         self.buttons['Amrit'] = Button(
@@ -29,8 +27,8 @@ class Credits_screen(Screen):
             pygame, res, surface, [20, 640, 300, 50], "Back")
 
     def update(self, events):
-        textsurface = self.font.render('Credits', True, self.res.WHITE)
-        textsurface2 = self.font2.render(
+        textsurface = self.res.heading1_font.render('Credits', True, self.res.WHITE)
+        textsurface2 = self.res.body_font.render(
             'People who have contributed to this project.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
         self.surface.blit(textsurface, (20, 0))

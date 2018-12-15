@@ -11,8 +11,11 @@ class Resources:
         # set up fonts
         # None is for default system font
         self.basicFont = pygame.font.SysFont(None, 48)
-        self.heading_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 60)
-        self.button_font = pygame.font.Font('res/fonts/Weston Free.otf', 36)
+        self.heading1_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 60)
+        self.heading2_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 48)
+        self.heading3_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 36)
+        self.body_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 28)
+        self.button_font = pygame.font.Font('res/fonts/Weston Free.otf', 32)
 
         # set colors R, G, B code
         self.BLACK = (0, 0, 0)

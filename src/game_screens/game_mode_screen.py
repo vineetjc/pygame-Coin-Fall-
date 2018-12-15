@@ -8,7 +8,7 @@ class Game_Mode_Screen(Screen):
     def __init__(self, pygame, res, surface, game_manager):
         Screen.__init__(self, pygame, res, surface)
         self.game_manager = game_manager
-        self.font = res.heading_font
+        self.font = res.heading3_font
         
         self.buttons['Easy'] =      Button(pygame, res, surface, [20, 290, 150, 50], "Easy")
         self.buttons['Medium'] =    Button(pygame, res, surface, [170, 290, 150, 50], "Medium")
