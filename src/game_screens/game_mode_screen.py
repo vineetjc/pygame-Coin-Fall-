@@ -4,6 +4,8 @@ from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
 
+LEFT = 1
+
 
 class Game_Mode_Screen(Screen):
     def __init__(self, pygame, res, surface, size, game_manager):
@@ -49,7 +51,7 @@ class Game_Mode_Screen(Screen):
             self.buttons[button].draw()
 
         mouseup_event = next(
-            (x for x in events if x.type == MOUSEBUTTONUP), None)
+            (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
             if self.buttons['Easy'].check_click(mouseup_event.pos):

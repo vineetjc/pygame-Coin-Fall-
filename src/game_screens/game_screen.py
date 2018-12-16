@@ -4,6 +4,8 @@ import math
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
+from src.ui.image import Image
+from src.ui.text import Text
 
 from src.objects.cart import Cart
 from src.objects.coin import Coin
@@ -16,6 +18,18 @@ class Game_screen(Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
 
+        score_x, score_y = res.score_bg_image_size
+        
+        self.images['ScoreBG'] = Image(pygame, res, surface, (0, 0), res.score_bg_image)
+        self.images['TimeBG'] = Image(pygame, res, surface, (self.center_x * 2 - score_x, 0), res.score_bg_image)
+
+        self.texts['Score'] = Text(
+            pygame, res, surface, (45, score_y/ 2), 'Score: 30', res.score_font, res.score_text_color, alignment='left')
+        
+        self.texts['Time'] = Text(
+            pygame, res, surface, (self.center_x * 2 - score_x / 2 - 65, score_y/ 2), 'Time: 50', res.score_font, res.score_text_color, alignment='left')
+        
+
         # set up initial variables
         self.need_reset = False
         self.size = size
@@ -26,20 +40,6 @@ class Game_screen(Screen):
         self.game_manager = game_manager
         self.timer = 0
         self.cart = Cart(res, self.size, surface, self.game_manager)
-
-        # set up texts
-        self.time_text = res.basicFont.render(
-            'TIMER:', True, res.BLACK, res.WHITE)
-        self.textbox = self.time_text.get_rect(center=(900, 170))
-        self.point_text = res.basicFont.render(
-            'POINTS:', True, res.BLACK, res.WHITE)
-        self.pointbox = self.point_text.get_rect(center=(100, 170))
-        self.display_time = res.basicFont.render(
-            '0', True, res.BLACK, res.WHITE)
-        self.timebox = self.display_time.get_rect(center=(900, 200))
-        self.score = res.basicFont.render(
-            str(self.cart.points), True, res.BLACK, res.WHITE)
-        self.scorebox = self.score.get_rect(center=(100, 200))
 
     def reset_before_restart(self):
         self.need_reset = False
@@ -57,8 +57,13 @@ class Game_screen(Screen):
             self.reset_before_restart()
 
         self.cart.move()
-        self.surface.blit(self.pygame.transform.scale(
-            self.res.BG, self.size), (0, 0))
+        self.surface.blit(self.pygame.transform.scale(self.res.BG, self.size), (0, 0))
+
+        for image in self.images:
+            self.images[image].draw()
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         c = self.get_random_entity(
             self.arbit_var, self.res, self.size, self.surface)
@@ -81,14 +86,8 @@ class Game_screen(Screen):
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.display_time = self.res.basicFont.render(
-            str(int_timer), True, self.res.BLACK, self.res.WHITE)
-        self.surface.blit(self.time_text, self.textbox)
-        self.surface.blit(self.display_time, self.timebox)
-        self.surface.blit(self.point_text, self.pointbox)
-        self.score = self.res.basicFont.render(
-            str(self.cart.points), True, self.res.BLACK, self.res.WHITE)
-        self.surface.blit(self.score, self.scorebox)
+        self.texts['Score'].change_text('Score: ' + str(self.cart.points))
+        self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         self.pygame.display.flip()
 

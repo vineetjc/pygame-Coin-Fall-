@@ -54,7 +54,7 @@ class Main_menu_screen(Screen):
             self.buttons[button].draw()
 
         mouseup_event = next(
-            (x for x in events if x.type == MOUSEBUTTONUP), None)
+            (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
             if self.buttons['Start'].check_click(mouseup_event.pos):

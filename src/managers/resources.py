@@ -18,6 +18,7 @@ class Resources:
         self.body_font = pygame.font.Font('res/fonts/gasalt.black.ttf', 28)
         self.button_font = pygame.font.Font('res/fonts/Weston Free.otf', 32)
         self.button_font2 = pygame.font.Font('res/fonts/alba.regular.ttf', 40)
+        self.score_font = pygame.font.Font('res/fonts/alba.regular.ttf', 36)
 
         # set colors R, G, B code
         self.BLACK =                    (0, 0, 0)
@@ -30,6 +31,7 @@ class Resources:
         self.heading2_text_color =      (255, 255, 255)
         self.heading3_text_color =      (255, 255, 255)
         self.body_text_color =          (255, 255, 255)
+        self.score_text_color =         (61, 24, 0)
 
         # images
         # convert for easy blitting
@@ -51,6 +53,9 @@ class Resources:
         self.button_image_size = (227, 62)
         self.button_image = pygame.image.load(
             'res/images/ui/Lumber_no_text.png').convert_alpha()
+        self.score_bg_image_size = (236, 69)
+        self.score_bg_image = pygame.image.load(
+            'res/images/ui/Connect_less_no_text.png').convert_alpha()
 
         # load images for animation
 
