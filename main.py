@@ -5,6 +5,7 @@ from src.misc.game_enums import Game_mode, Entity
 from src.managers import *
 from src.game_screens.screens_manager import Screens_Manager
 from src.input_package.input_manager import Input_Manager
+from src.managers.sound_manager import Play_sound
 
 
 def game_loop():
@@ -19,6 +20,9 @@ def game_loop():
     game_manager = Game_manager()
     game_manager.set_input(Input_Manager())
     screens_manager = Screens_Manager(pygame, res, windowSurface, size, game_clock, game_manager)
+    play_music = Play_sound('background_music')
+    play_music.play_background_music()
+
 
     while True:
         events = pygame.event.get()
