@@ -10,16 +10,24 @@ LEFT = 1
 class Tutorial_screen(Screen):
     def __init__(self, pygame, res, surface, size):
         Screen.__init__(self, pygame, res, surface, size)
+
+        self.texts['Heading1'] = Text(
+            pygame, res, surface, (self.center_x + 3, 70 + 3), 'Tutorial', res.heading1_font, res.BLACK)
+
+        self.texts['Heading2'] = Text(
+            pygame, res, surface, (self.center_x, 70), 'Tutorial', res.heading1_font, res.game_title_text_color)
+        
+        self.texts['Body'] = Text(
+            pygame, res, surface, (self.center_x, 130), 'This is the tutorial text', res.body_font, res.body_text_color)
+
         self.buttons['Back'] = Button(
             pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
-        textsurface = self.res.heading1_font.render('Tutorial', True, self.res.WHITE)
-        textsurface2 = self.res.body_font.render(
-            'This is the tutorial text.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface, (20, 0))
-        self.surface.blit(textsurface2, (20, 100))
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()

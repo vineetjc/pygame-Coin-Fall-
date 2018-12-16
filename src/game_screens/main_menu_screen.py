@@ -28,7 +28,7 @@ class Main_menu_screen(Screen):
         self.texts['Body1'] = Text(pygame, res, surface, (self.center_x, 190), 'Open source coin collection game', 
             res.body_font, res.body_text_color)
 
-        self.texts['Body2'] = Text(pygame, res, surface, (self.center_x, 220), 'Made with python and pygame', 
+        self.texts['Body2'] = Text(pygame, res, surface, (self.center_x, 220), 'Made with Python and Pygame', 
             res.body_font, res.body_text_color)
 
         self.buttons['Start'] = Button(

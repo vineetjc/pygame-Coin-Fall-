@@ -9,25 +9,41 @@ class Game_Mode_Screen(Screen):
     def __init__(self, pygame, res, surface, size, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
-        
-        self.buttons['Classic'] =   Button(pygame, res, surface, (self.center_x, 170), "Classic")
-        self.buttons['Infinite'] =  Button(pygame, res, surface, (self.center_x, 240), "Infinite")
-        self.buttons['1v1'] =       Button(pygame, res, surface, (self.center_x, 310), "1 vs 1")
 
-        self.buttons['Easy'] =      Button(pygame, res, surface, (20, 520), "Easy")
-        self.buttons['Medium'] =    Button(pygame, res, surface, (240, 520), "Medium")
-        self.buttons['Hard'] =      Button(pygame, res, surface, (460, 520), "Hard")
+        self.texts['Heading1'] = Text(
+            pygame, res, surface, (self.center_x + 3, 70 + 3), 'Select Game Mode', res.heading1_font, res.BLACK)
+
+        self.texts['Heading2'] = Text(
+            pygame, res, surface, (self.center_x, 70), 'Select Game Mode', res.heading1_font, res.game_title_text_color)
+        
+        self.texts['Body'] = Text(
+            pygame, res, surface, (self.center_x, 130), 'Choose you game mode', res.body_font, res.body_text_color)
+
+        self.texts['Game Mode'] = Text(
+            pygame, res, surface, (self.center_x, 240), 'Game mode', res.heading3_font, res.heading3_text_color)
+
+        self.texts['Difficulty'] = Text(
+            pygame, res, surface, (self.center_x, 520), 'Difficulty', res.heading3_font, res.heading3_text_color)
+        
+        self.buttons['Classic'] =   Button(pygame, res, surface, (self.center_x - 250, 320), "Classic")
+        self.buttons['Infinite'] =  Button(pygame, res, surface, (self.center_x + 000, 320), "Infinite")
+        self.buttons['1v1'] =       Button(pygame, res, surface, (self.center_x + 250, 320), "1 vs 1")
+
+        self.buttons['Chill'] =     Button(pygame, res, surface, (self.center_x - 250, 400), "Chill")
+        self.buttons['Hardcore'] =  Button(pygame, res, surface, (self.center_x + 000, 400), "Hardcore")
+        self.buttons['Heist'] =     Button(pygame, res, surface, (self.center_x + 250, 400), "Heist")
+
+        self.buttons['Easy'] =      Button(pygame, res, surface, (self.center_x - 250, 600), "Easy")
+        self.buttons['Medium'] =    Button(pygame, res, surface, (self.center_x + 000, 600), "Medium")
+        self.buttons['Hard'] =      Button(pygame, res, surface, (self.center_x + 250, 600), "Hard")
 
         self.buttons['Back'] =      Button(pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
-        textsurface = self.res.heading1_font.render('Select Game Mode:', True, self.res.WHITE)
-        textsurface2 = self.res.heading3_font.render('Select Mode:', True, self.res.WHITE)
-        textsurface3 = self.res.heading3_font.render('Select Difficulty:', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface, (20, 0))
-        self.surface.blit(textsurface2, (20, 100))
-        self.surface.blit(textsurface3, (20, 450))
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()
