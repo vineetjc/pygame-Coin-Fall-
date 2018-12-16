@@ -5,19 +5,19 @@ from src.ui.button import Button
 
 
 class Game_Mode_Screen(Screen):
-    def __init__(self, pygame, res, surface, game_manager):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size, game_manager):
+        Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
         
-        self.buttons['Classic'] =   Button(pygame, res, surface, [20, 170, 210, 50], "Classic")
-        self.buttons['Infinite'] =  Button(pygame, res, surface, [20, 240, 210, 50], "Infinite")
-        self.buttons['1v1'] =       Button(pygame, res, surface, [20, 310, 210, 50], "1 vs 1")
+        self.buttons['Classic'] =   Button(pygame, res, surface, (self.center_x, 170), "Classic")
+        self.buttons['Infinite'] =  Button(pygame, res, surface, (self.center_x, 240), "Infinite")
+        self.buttons['1v1'] =       Button(pygame, res, surface, (self.center_x, 310), "1 vs 1")
 
-        self.buttons['Easy'] =      Button(pygame, res, surface, [20, 520, 180, 50], "Easy")
-        self.buttons['Medium'] =    Button(pygame, res, surface, [240, 520, 180, 50], "Medium")
-        self.buttons['Hard'] =      Button(pygame, res, surface, [460, 520, 180, 50], "Hard")
+        self.buttons['Easy'] =      Button(pygame, res, surface, (20, 520), "Easy")
+        self.buttons['Medium'] =    Button(pygame, res, surface, (240, 520), "Medium")
+        self.buttons['Hard'] =      Button(pygame, res, surface, (460, 520), "Hard")
 
-        self.buttons['Back'] =      Button(pygame, res, surface, [20, 680, 300, 50], "Back")
+        self.buttons['Back'] =      Button(pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
         textsurface = self.res.heading1_font.render('Select Game Mode:', True, self.res.WHITE)

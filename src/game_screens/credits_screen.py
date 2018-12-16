@@ -9,22 +9,22 @@ LEFT = 1
 
 
 class Credits_screen(Screen):
-    def __init__(self, pygame, res, surface):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size):
+        Screen.__init__(self, pygame, res, surface, size)
         self.buttons['Vineet'] = Button(
-            pygame, res, surface, [20, 150, 300, 50], "Vineet")
+            pygame, res, surface, (self.center_x, 150), "Vineet")
         self.buttons['Amrit'] = Button(
-            pygame, res, surface, [20, 220, 300, 50], "Amrit")
+            pygame, res, surface, (self.center_x, 220), "Amrit")
         self.buttons['Venturillo'] = Button(
-            pygame, res, surface, [20, 290, 300, 50], "Venturillo")
+            pygame, res, surface, (self.center_x, 290), "Venturillo")
         self.buttons['Divyang'] = Button(
-            pygame, res, surface, [20, 360, 300, 50], "Divyang")
+            pygame, res, surface, (self.center_x, 360), "Divyang")
         self.buttons['Azmal'] = Button(
-            pygame, res, surface, [20, 430, 300, 50], "Azmal")
+            pygame, res, surface, (self.center_x, 430), "Azmal")
         self.buttons['Abhinandan'] = Button(
-            pygame, res, surface, [20, 500, 300, 50], "Abhinandan")
+            pygame, res, surface, (self.center_x, 500), "Abhinandan")
         self.buttons['Back'] = Button(
-            pygame, res, surface, [20, 640, 300, 50], "Back")
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
         textsurface = self.res.heading1_font.render('Credits', True, self.res.WHITE)

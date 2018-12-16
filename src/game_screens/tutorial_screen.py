@@ -7,10 +7,10 @@ LEFT = 1
 
 
 class Tutorial_screen(Screen):
-    def __init__(self, pygame, res, surface):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size):
+        Screen.__init__(self, pygame, res, surface, size)
         self.buttons['Back'] = Button(
-            pygame, res, surface, [20, 360, 300, 50], "Back")
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
         textsurface = self.res.heading1_font.render('Tutorial', True, self.res.WHITE)

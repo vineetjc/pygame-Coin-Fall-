@@ -1,19 +1,22 @@
 
 
 class Button():
-    def __init__(self, pygame, res, surface, rect, text):
+    def __init__(self, pygame, res, surface, pos, text):
         self.pygame = pygame
         self.res = res
         self.surface = surface
-        self.rect = self.pygame.Rect(rect)
-        self.text_rect = self.pygame.Rect((rect[0] + 8, rect[1] + 12, rect[2], rect[3]))
+        temp_rect = self.pygame.Rect(pos, self.res.button_image_size)
+        temp_rect.center = pos
+        self.rect = temp_rect
         self.text = text
-        self.font = res.button_font
+        self.font = res.button_font2
+        self.text_render = self.font.render(text, True, res.BUTTON_TEXT_COLOR)
+        self.text_rect = self.text_render.get_rect(center=self.rect.center)
 
     def draw(self):
-        self.pygame.draw.rect(self.surface, self.res.BUTTONCOLOR, self.rect)
-        textsurface = self.font.render(self.text, True, self.res.WHITE)
-        self.surface.blit(textsurface, self.text_rect)
+        #self.pygame.draw.rect(self.surface, self.res.BUTTONCOLOR, self.rect)
+        self.surface.blit(self.res.button_image, self.rect.topleft)
+        self.surface.blit(self.text_render, self.text_rect)
 
     def check_click(self, pos):
         return self.rect.collidepoint(pos)

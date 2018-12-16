@@ -16,12 +16,14 @@ class Resources:
         self.heading3_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 36)
         self.body_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 28)
         self.button_font = pygame.font.Font('res/fonts/Weston Free.otf', 32)
+        self.button_font2 = pygame.font.Font('res/fonts/alba.regular.ttf', 40)
 
         # set colors R, G, B code
         self.BLACK = (0, 0, 0)
         self.WHITE = (255, 255, 255)
         self.BGCOLOR = (4, 145, 145)
         self.BUTTONCOLOR = (202, 84, 36)
+        self.BUTTON_TEXT_COLOR = (43, 17, 0)
 
         # images
         # convert for easy blitting
@@ -40,6 +42,9 @@ class Resources:
             'res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
         self.EBG = pygame.image.load(
             'res/images/bg/endbg3.png').convert()
+        self.button_image_size = (227, 62)
+        self.button_image = pygame.image.load(
+            'res/images/ui/Lumber_no_text.png').convert_alpha()
 
         # load images for animation
 

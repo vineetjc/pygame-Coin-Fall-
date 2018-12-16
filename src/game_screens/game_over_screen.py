@@ -9,13 +9,13 @@ LEFT = 1
 
 
 class Game_over_screen(Screen):
-    def __init__(self, pygame, res, surface, game_manager):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size, game_manager):
+        Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
         self.buttons['Restart'] = Button(
-            pygame, res, surface, [20, 290, 300, 50], "Restart")
+            pygame, res, surface, (self.center_x, 290), "Restart")
         self.buttons['Back'] = Button(
-            pygame, res, surface, [20, 360, 300, 50], "Back")
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
         if not os.path.isfile("highscore.txt"):
