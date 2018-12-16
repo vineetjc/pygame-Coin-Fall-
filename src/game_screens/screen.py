@@ -7,6 +7,7 @@ class Screen(object):
         self.res = res
         self.surface = surface
         self.size = size
+        self.texts = {}
         self.buttons = {}
         self.center_x = size[0] / 2
         self.center_y = size[1] / 2

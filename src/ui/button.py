@@ -10,11 +10,10 @@ class Button():
         self.rect = temp_rect
         self.text = text
         self.font = res.button_font2
-        self.text_render = self.font.render(text, True, res.BUTTON_TEXT_COLOR)
+        self.text_render = self.font.render(text, True, res.button_text_color)
         self.text_rect = self.text_render.get_rect(center=self.rect.center)
 
     def draw(self):
-        #self.pygame.draw.rect(self.surface, self.res.BUTTONCOLOR, self.rect)
         self.surface.blit(self.res.button_image, self.rect.topleft)
         self.surface.blit(self.text_render, self.text_rect)
 

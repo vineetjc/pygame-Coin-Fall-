@@ -11,19 +11,25 @@ class Resources:
         # set up fonts
         # None is for default system font
         self.basicFont = pygame.font.SysFont(None, 48)
-        self.heading1_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 60)
+        self.game_title_font = pygame.font.Font('res/fonts/have-nothing-to-do-with.regular.ttf', 130)
+        self.heading1_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 64)
         self.heading2_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 48)
         self.heading3_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 36)
-        self.body_font = pygame.font.Font('res/fonts/RussoOne-Regular.ttf', 28)
+        self.body_font = pygame.font.Font('res/fonts/gasalt.black.ttf', 28)
         self.button_font = pygame.font.Font('res/fonts/Weston Free.otf', 32)
         self.button_font2 = pygame.font.Font('res/fonts/alba.regular.ttf', 40)
 
         # set colors R, G, B code
-        self.BLACK = (0, 0, 0)
-        self.WHITE = (255, 255, 255)
-        self.BGCOLOR = (4, 145, 145)
-        self.BUTTONCOLOR = (202, 84, 36)
-        self.BUTTON_TEXT_COLOR = (43, 17, 0)
+        self.BLACK =                    (0, 0, 0)
+        self.WHITE =                    (255, 255, 255)
+        self.BGCOLOR =                  (4, 145, 145)
+        self.button_color =             (202, 84, 36)
+        self.button_text_color =        (43, 17, 0)
+        self.game_title_text_color =    (255, 204, 0)
+        self.heading1_text_color =      (255, 255, 255)
+        self.heading2_text_color =      (255, 255, 255)
+        self.heading3_text_color =      (255, 255, 255)
+        self.body_text_color =          (255, 255, 255)
 
         # images
         # convert for easy blitting

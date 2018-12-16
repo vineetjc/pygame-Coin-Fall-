@@ -3,6 +3,7 @@ import webbrowser
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
+from src.ui.text import Text
 from src.ui.button import Button
 
 LEFT = 1
