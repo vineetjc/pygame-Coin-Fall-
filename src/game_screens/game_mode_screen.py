@@ -19,7 +19,7 @@ class Game_Mode_Screen(Screen):
             pygame, res, surface, (self.center_x, 70), 'Select Game Mode', res.heading1_font, res.game_title_text_color)
         
         self.texts['Body'] = Text(
-            pygame, res, surface, (self.center_x, 130), 'Choose you game mode', res.body_font, res.body_text_color)
+            pygame, res, surface, (self.center_x, 130), 'Choose your game mode', res.body_font, res.body_text_color)
 
         self.texts['Game Mode'] = Text(
             pygame, res, surface, (self.center_x, 240), 'Game mode', res.heading3_font, res.heading3_text_color)

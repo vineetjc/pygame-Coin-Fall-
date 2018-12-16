@@ -22,6 +22,8 @@ class Credits_screen(Screen):
         self.texts['Body'] = Text(
             pygame, res, surface, (self.center_x, 130), 'People who have contributed to this project', res.body_font, res.body_text_color)
 
+        self.buttons['Contribute'] = Button(
+            pygame, res, surface, (self.center_x, 200), "Contribute")
         self.buttons['Vineet'] = Button(
             pygame, res, surface, (self.center_x - 150, 300), "Vineet")
         self.buttons['Amrit'] = Button(
@@ -54,6 +56,10 @@ class Credits_screen(Screen):
             (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
+            if self.buttons['Contribute'].check_click(mouseup_event.pos):
+                webbrowser.open_new_tab('https://github.com/vineetjc/pygame-Coin-Fall-')
+                return Game_mode.CREDITS
+
             if self.buttons['Vineet'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/vineetjc')
                 return Game_mode.CREDITS

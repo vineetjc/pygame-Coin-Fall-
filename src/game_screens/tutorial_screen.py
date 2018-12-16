@@ -18,7 +18,7 @@ class Tutorial_screen(Screen):
             pygame, res, surface, (self.center_x, 70), 'Tutorial', res.heading1_font, res.game_title_text_color)
         
         self.texts['Body'] = Text(
-            pygame, res, surface, (self.center_x, 130), 'This is the tutorial text', res.body_font, res.body_text_color)
+            pygame, res, surface, (self.center_x, 130), 'How to play the game', res.body_font, res.body_text_color)
 
         self.buttons['Back'] = Button(
             pygame, res, surface, (self.center_x, 700), "Back")

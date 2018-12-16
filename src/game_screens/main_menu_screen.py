@@ -25,22 +25,20 @@ class Main_menu_screen(Screen):
         self.texts['GameTitle'] = Text(
             pygame, res, surface, (self.center_x, 100), 'Coin Fall', res.game_title_font, res.game_title_text_color)
 
-        self.texts['Body1'] = Text(pygame, res, surface, (self.center_x, 190), 'Open source coin collection game', 
+        self.texts['Body1'] = Text(pygame, res, surface, (self.center_x, 190), 'Open-source coin collection game', 
             res.body_font, res.body_text_color)
 
         self.texts['Body2'] = Text(pygame, res, surface, (self.center_x, 220), 'Made with Python and Pygame', 
             res.body_font, res.body_text_color)
 
         self.buttons['Start'] = Button(
-            pygame, res, surface, (self.center_x, 300), "Start")
+            pygame, res, surface, (self.center_x, 380), "Start")
         self.buttons['Tutorial'] = Button(
-            pygame, res, surface, (self.center_x, 380), "Tutorial")
+            pygame, res, surface, (self.center_x, 460), "Tutorial")
         self.buttons['Settings'] = Button(
-            pygame, res, surface, (self.center_x, 460), "Settings")
+            pygame, res, surface, (self.center_x, 540), "Settings")
         self.buttons['Credits'] = Button(
-            pygame, res, surface, (self.center_x, 540), "Credits")
-        self.buttons['Contribute'] = Button(
-            pygame, res, surface, (self.center_x, 620), "Contribute")
+            pygame, res, surface, (self.center_x, 620), "Credits")
         self.buttons['Exit'] = Button(
             pygame, res, surface, (self.center_x, 700), "Exit")
 
@@ -68,11 +66,6 @@ class Main_menu_screen(Screen):
 
             if self.buttons['Credits'].check_click(mouseup_event.pos):
                 return Game_mode.CREDITS
-
-            if self.buttons['Contribute'].check_click(mouseup_event.pos):
-                webbrowser.open_new_tab(
-                    'https://github.com/vineetjc/pygame-Coin-Fall-')
-                return Game_mode.MAIN_MENU
 
             if self.buttons['Exit'].check_click(mouseup_event.pos):
                 return Game_mode.QUIT
