@@ -3,19 +3,31 @@ import os
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
+from src.ui.text import Text
 from src.ui.button import Button
 
 LEFT = 1
 
 
 class Game_over_screen(Screen):
-    def __init__(self, pygame, res, surface, game_manager):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size, game_manager):
+        Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
+
+        self.texts['Heading1'] = Text(
+            pygame, res, surface, (self.center_x + 3, 70 + 3), 'Game Over', res.heading1_font, res.BLACK)
+
+        self.texts['Heading2'] = Text(
+            pygame, res, surface, (self.center_x, 70), 'Game Over', res.heading1_font, res.game_title_text_color)
+        
+        self.texts['Body'] = Text(
+            pygame, res, surface, (self.center_x, 130), 'Game score and performance', res.body_font, res.body_text_color)
+
+
         self.buttons['Restart'] = Button(
-            pygame, res, surface, [20, 290, 300, 50], "Restart")
+            pygame, res, surface, (self.center_x, 290), "Restart")
         self.buttons['Back'] = Button(
-            pygame, res, surface, [20, 360, 300, 50], "Back")
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
         if not os.path.isfile("highscore.txt"):
@@ -30,22 +42,23 @@ class Game_over_screen(Screen):
             hisc.write(str(self.game_manager.score))
         hisc.close()
 
-        textsurface = self.res.heading1_font.render('Game Over', True, self.res.WHITE)
         textsurface2 = self.res.body_font.render(
             'Score: ' + str(self.game_manager.score), True, self.res.WHITE)
 
         textsurface3 = self.res.body_font.render(
             'Highscore: ' + str(maxscore), True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface, (20, 0))
         self.surface.blit(textsurface2, (20, 100))
         self.surface.blit(textsurface3, (20, 150))
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()
 
         mouseup_event = next(
-            (x for x in events if x.type == MOUSEBUTTONUP), None)
+            (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
             if self.buttons['Restart'].check_click(mouseup_event.pos):

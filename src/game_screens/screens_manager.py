@@ -19,13 +19,13 @@ class Screens_Manager:
 
     def init_screens(self, pygame, res, surface, size, game_clock, game_manager):
         ''' Init all the screen, based on params provided by main.py. '''
-        self.main_menu_screen = Main_menu_screen(pygame, res, surface)
+        self.main_menu_screen = Main_menu_screen(pygame, res, surface, size)
         self.game_screen = Game_screen(pygame, res, surface, size, game_clock, game_manager)
-        self.settings_screen = Settings_screen(pygame, res, surface)
-        self.game_over_screen = Game_over_screen(pygame, res, surface, game_manager)
-        self.tutorial_screen = Tutorial_screen(pygame, res, surface)
-        self.credits_screen = Credits_screen(pygame, res, surface)
-        self.game_mode_screen = Game_Mode_Screen(pygame, res, surface, game_manager)
+        self.settings_screen = Settings_screen(pygame, res, surface, size)
+        self.game_over_screen = Game_over_screen(pygame, res, surface, size, game_manager)
+        self.tutorial_screen = Tutorial_screen(pygame, res, surface, size)
+        self.credits_screen = Credits_screen(pygame, res, surface, size)
+        self.game_mode_screen = Game_Mode_Screen(pygame, res, surface, size, game_manager)
 
     def show(self, game_mode, events):
         ''' Show a screen based on game mode and will return the next game mode. '''

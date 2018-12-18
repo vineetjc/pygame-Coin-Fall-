@@ -3,36 +3,51 @@ import webbrowser
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
+from src.ui.text import Text
 from src.ui.button import Button
 
 LEFT = 1
 
 
 class Credits_screen(Screen):
-    def __init__(self, pygame, res, surface):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size):
+        Screen.__init__(self, pygame, res, surface, size)
+
+        self.texts['Heading1'] = Text(
+            pygame, res, surface, (self.center_x + 3, 70 + 3), 'Credits', res.heading1_font, res.BLACK)
+
+        self.texts['Heading2'] = Text(
+            pygame, res, surface, (self.center_x, 70), 'Credits', res.heading1_font, res.game_title_text_color)
+
+        self.texts['Body'] = Text(
+            pygame, res, surface, (self.center_x, 130), 'People who have contributed to this project', res.body_font, res.body_text_color)
+
+        self.buttons['Contribute'] = Button(
+            pygame, res, surface, (self.center_x, 200), "Contribute")
         self.buttons['Vineet'] = Button(
-            pygame, res, surface, [20, 150, 300, 50], "Vineet")
+            pygame, res, surface, (self.center_x - 150, 300), "Vineet")
         self.buttons['Amrit'] = Button(
-            pygame, res, surface, [20, 220, 300, 50], "Amrit")
+            pygame, res, surface, (self.center_x + 150, 300), "Amrit")
+        self.buttons['Kartik'] = Button(
+            pygame, res, surface, (self.center_x - 150, 380), "Kartik")
         self.buttons['Venturillo'] = Button(
-            pygame, res, surface, [20, 290, 300, 50], "Venturillo")
+            pygame, res, surface, (self.center_x + 150, 380), "Venturillo")
+        self.buttons['Shikhar'] = Button(
+            pygame, res, surface, (self.center_x - 150, 460), "Shikhar")
         self.buttons['Divyang'] = Button(
-            pygame, res, surface, [20, 360, 300, 50], "Divyang")
+            pygame, res, surface, (self.center_x + 150, 460), "Divyang")
         self.buttons['Azmal'] = Button(
-            pygame, res, surface, [20, 430, 300, 50], "Azmal")
+            pygame, res, surface, (self.center_x - 150, 540), "Azmal")
         self.buttons['Abhinandan'] = Button(
-            pygame, res, surface, [20, 500, 300, 50], "Abhinandan")
+            pygame, res, surface, (self.center_x + 150, 540), "Abhinandan")
         self.buttons['Back'] = Button(
-            pygame, res, surface, [20, 640, 300, 50], "Back")
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
-        textsurface = self.res.heading1_font.render('Credits', True, self.res.WHITE)
-        textsurface2 = self.res.body_font.render(
-            'People who have contributed to this project.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface, (20, 0))
-        self.surface.blit(textsurface2, (20, 100))
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()
@@ -41,6 +56,10 @@ class Credits_screen(Screen):
             (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
+            if self.buttons['Contribute'].check_click(mouseup_event.pos):
+                webbrowser.open_new_tab('https://github.com/vineetjc/pygame-Coin-Fall-')
+                return Game_mode.CREDITS
+
             if self.buttons['Vineet'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/vineetjc')
                 return Game_mode.CREDITS
@@ -49,8 +68,16 @@ class Credits_screen(Screen):
                 webbrowser.open_new_tab('https://github.com/amrit-choudhary')
                 return Game_mode.CREDITS
 
+            if self.buttons['Kartik'].check_click(mouseup_event.pos):
+                webbrowser.open_new_tab('https://github.com/kartikct25')
+                return Game_mode.CREDITS
+
             if self.buttons['Venturillo'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/SeraphWedd')
+                return Game_mode.CREDITS
+
+            if self.buttons['Shikhar'].check_click(mouseup_event.pos):
+                webbrowser.open_new_tab('https://github.com/johri002')
                 return Game_mode.CREDITS
 
             if self.buttons['Divyang'].check_click(mouseup_event.pos):
@@ -60,11 +87,11 @@ class Credits_screen(Screen):
             if self.buttons['Azmal'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/MD-AZMAL')
                 return Game_mode.CREDITS
-
+            
             if self.buttons['Abhinandan'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/kainthcool')
                 return Game_mode.CREDITS
-
+            
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU
 

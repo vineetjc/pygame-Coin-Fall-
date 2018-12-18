@@ -1,24 +1,33 @@
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
+from src.ui.text import Text
 from src.ui.button import Button
 
 LEFT = 1
 
 
 class Settings_screen(Screen):
-    def __init__(self, pygame, res, surface):
-        Screen.__init__(self, pygame, res, surface)
+    def __init__(self, pygame, res, surface, size):
+        Screen.__init__(self, pygame, res, surface, size)
+
+        self.texts['Heading1'] = Text(
+            pygame, res, surface, (self.center_x + 3, 70 + 3), 'Settings', res.heading1_font, res.BLACK)
+
+        self.texts['Heading2'] = Text(
+            pygame, res, surface, (self.center_x, 70), 'Settings', res.heading1_font, res.game_title_text_color)
+        
+        self.texts['Body'] = Text(
+            pygame, res, surface, (self.center_x, 130), 'Edit game settings here', res.body_font, res.body_text_color)
+
         self.buttons['Back'] = Button(
-            pygame, res, surface, [20, 360, 300, 50], "Back")
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
-        textsurface = self.res.heading1_font.render('Settings', True, self.res.WHITE)
-        textsurface2 = self.res.body_font.render(
-            'This is the settings menu.', True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface, (20, 0))
-        self.surface.blit(textsurface2, (20, 100))
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()
