@@ -19,7 +19,7 @@ class Resources:
         self.button_font = pygame.font.Font('res/fonts/Weston Free.otf', 32)
         self.button_font2 = pygame.font.Font('res/fonts/Economica-Bold.ttf', 38)
         self.button_font3 = pygame.font.Font('res/fonts/alba.regular.ttf', 40)
-        self.score_font = pygame.font.Font('res/fonts/alba.regular.ttf', 36)
+        self.score_font = pygame.font.Font('res/fonts/Economica-Bold.ttf', 36)
 
         # set colors R, G, B code
         self.BLACK =                    (0, 0, 0)
