@@ -31,7 +31,7 @@ class Game_Mode_Screen(Screen):
         self.buttons['Infinite'] =  Button(pygame, res, surface, (self.center_x + 000, 320), "Infinite")
         self.buttons['1v1'] =       Button(pygame, res, surface, (self.center_x + 250, 320), "1 vs 1")
 
-        self.buttons['Chill'] =     Button(pygame, res, surface, (self.center_x - 250, 400), "Chill")
+        self.buttons['AI'] =     Button(pygame, res, surface, (self.center_x - 250, 400), "AI")
         self.buttons['Hardcore'] =  Button(pygame, res, surface, (self.center_x + 000, 400), "Hardcore")
         self.buttons['Heist'] =     Button(pygame, res, surface, (self.center_x + 250, 400), "Heist")
 
