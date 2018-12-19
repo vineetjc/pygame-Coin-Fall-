@@ -54,8 +54,7 @@ A game made using Python and Pygame, in which the players have to collect coins 
 
 ## pygame running
 
-
-<a href="https://imgflip.com/gif/2pby6n"><img src="https://i.imgflip.com/2pby6n.gif" title="made at imgflip.com" width = "1000" height="800"/></a>
+![](https://media.giphy.com/media/1wrh15f6gRoHQ3XjRf/giphy.gif)
 
 
 
