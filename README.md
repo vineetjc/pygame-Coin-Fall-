@@ -12,7 +12,8 @@
   - [Requirements](#requirements)
   - [Working](#how-it-works)
 - [Installation guide](#installation-guide)
-- [Screenshot](#screenshot)
+- [Screenshot](#screenshots)
+-[Pygame-running](#pygame-running)
 - [License](#license)
 
 
@@ -45,11 +46,17 @@ A game made using Python and Pygame, in which the players have to collect coins 
 ## Running instructions : 
 - To run, type `python main.py`. (Ensure python is in your PATH)
 
-## Some screenshots from the main screen of the game
+## Screenshots 
 ![startscreen](https://user-images.githubusercontent.com/6888341/50054019-41de7980-0163-11e9-95b3-14edc7f1f4de.PNG)
 
 
 ![coinfall](https://user-images.githubusercontent.com/6888341/50054021-42771000-0163-11e9-8216-af9851c64490.PNG)
+
+## pygame running
+
+
+<a href="https://imgflip.com/gif/2pby6n"><img src="https://i.imgflip.com/2pby6n.gif" title="made at imgflip.com" width = "1000" height="800"/></a>
+
 
 
 
