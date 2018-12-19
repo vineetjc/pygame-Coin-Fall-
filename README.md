@@ -13,7 +13,7 @@
   - [Working](#how-it-works)
 - [Installation guide](#installation-guide)
 - [Screenshot](#screenshots)
--[Pygame-running](#pygame-running)
+- [Pygame-running](#pygame-running)
 - [License](#license)
 
 
