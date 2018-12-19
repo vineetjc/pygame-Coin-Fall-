@@ -35,7 +35,7 @@ class Game_over_screen(Screen):
     def update(self, events):
         if not self.exploded:
             expl = pygame.image.load('res/images/misc/explosion.png')
-            self.surface.blit(expl , (100,500))
+            self.surface.blit(expl , (40,30))
             self.pygame.display.update()
             time.sleep(2)
             self.exploded = True
