@@ -1,4 +1,6 @@
 import os
+import pygame
+import time
 
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
@@ -13,6 +15,7 @@ class Game_over_screen(Screen):
     def __init__(self, pygame, res, surface, size, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
+        self.exploded = False
 
         self.texts['Heading1'] = Text(
             pygame, res, surface, (self.center_x + 3, 70 + 3), 'Game Over', res.heading1_font, res.BLACK)
@@ -30,6 +33,12 @@ class Game_over_screen(Screen):
             pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
+        if not self.exploded:
+            expl = pygame.image.load('res/images/misc/explosion.png')
+            self.surface.blit(expl , (100,500))
+            self.pygame.display.update()
+            time.sleep(2)
+            self.exploded = True
         if not os.path.isfile("highscore.txt"):
             with open("highscore.txt", "w") as hiscore_file:
                 hiscore_file.write("0")
