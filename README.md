@@ -32,9 +32,6 @@ A game made using Python and Pygame, in which the players have to collect coins 
 2. Blue coins are worth thrice the normal coins.
 3. Avoid the bombs.
 
-#### pygame-Coin-Fall game running :
-
-![coinfall](https://user-images.githubusercontent.com/30645315/49618512-ebdd3980-f9de-11e8-9691-132b1d119dbb.gif)
 
 ## Installation guide
 ---
@@ -48,9 +45,12 @@ A game made using Python and Pygame, in which the players have to collect coins 
 ## Running instructions : 
 - To run, type `python main.py`. (Ensure python is in your PATH)
 
-## Screenshot
----
-![alt text](https://github.com/vineetjc/pygame-Coin-Fall-/blob/master/screenshot.png)
+## Some screenshots from the main screen of the game
+![startscreen](https://user-images.githubusercontent.com/6888341/50054019-41de7980-0163-11e9-95b3-14edc7f1f4de.PNG)
+
+
+![coinfall](https://user-images.githubusercontent.com/6888341/50054021-42771000-0163-11e9-8216-af9851c64490.PNG)
+
 
 
 ## License
