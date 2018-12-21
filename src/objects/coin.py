@@ -4,6 +4,7 @@
 import random
 from src.misc.game_enums import Entity
 from src.animation_package import Animation
+import pygame
 
 
 class Coin():
@@ -18,6 +19,7 @@ class Coin():
         self.anim_counter = 0
         self.anim_tick_length = 4
         self.collected = False
+        self.collision_size = res.silver_coin_anim_size
 
     def fall(self):
         self.y += 7  # Change the value if necessary
@@ -40,3 +42,8 @@ class Coin():
 
     def collect(self):
         self.collected = True
+
+    def collision_rect(self):
+        rect = pygame.Rect(0, 0, self.collision_size, self.collision_size)
+        rect.center = (self.x, self.y)
+        return rect

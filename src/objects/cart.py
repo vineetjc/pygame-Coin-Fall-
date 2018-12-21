@@ -3,6 +3,7 @@
 ##################
 import math
 from src.misc.game_enums import Entity
+import pygame
 
 
 class Cart(object):
@@ -30,24 +31,27 @@ class Cart(object):
     def draw(self):
         self.surface.blit(self.image, (self.x, self.y))
 
+    def collision_rect(self):
+        return pygame.Rect(self.x, self.y, 160, 50)
+
     def collect_item(self, coin):
-        if 645 > coin.y > 633:
-            if ((self.x < coin.x + (55.0 / 2) < self.x + 160) and
-                    (self.x < coin.x) and (self.x + 160 > coin.x + 55)):
-                if not coin.collected:
-                    if coin.type == Entity.BLUE_COIN:
-                        self.points += 3 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
-                    elif coin.type == Entity.COIN:
-                        self.points += 1 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
-                    else:
-                        self.dead = True
-                        self.animation_manager.create_new_effect(
-                            self.res.blast_anim1, self.res.blast_anim1_size, 4, False, (coin.x, coin.y))
-                        
-                    coin.collect()
-                    if coin.type is Entity.COIN:
-                        self.animation_manager.create_new_effect(
-                            self.res.blast_anim2, self.res.blast_anim2_size, 4, False, (coin.x, coin.y))
-                    elif coin.type is Entity.BLUE_COIN:
-                        self.animation_manager.create_new_effect(
-                            self.res.blast_anim3, self.res.blast_anim3_size, 4, False, (coin.x, coin.y))
+        if self.collision_rect().colliderect(coin.collision_rect()):
+            if coin.collected:
+                return
+
+            if coin.type == Entity.BLUE_COIN:
+                self.points += 3 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
+                self.animation_manager.create_new_effect(
+                    self.res.blast_anim3, self.res.blast_anim3_size, 4, False, coin.collision_rect().midbottom)
+
+            elif coin.type == Entity.COIN:
+                self.points += 1 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
+                self.animation_manager.create_new_effect(
+                    self.res.blast_anim2, self.res.blast_anim2_size, 4, False, coin.collision_rect().midbottom)
+
+            else:
+                self.dead = True
+                self.animation_manager.create_new_effect(
+                    self.res.blast_anim1, self.res.blast_anim1_size, 4, False, coin.collision_rect().midbottom)
+
+            coin.collect()
