@@ -7,10 +7,11 @@ from src.misc.game_enums import Difficulty
 
 
 class Game_manager(object):
-    def __init__(self):
+    def __init__(self, animation_manager):
         self.score = 0
         self.time = 0
         self.difficulty = Difficulty.MEDIUM
+        self.animation_manager = animation_manager
 
     def set_input(self, input):
         self.input = input
