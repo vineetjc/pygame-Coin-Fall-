@@ -64,39 +64,33 @@ class Resources:
         self.score_bg_image = pygame.image.load(
             'res/images/ui/Connect_less_no_text.png').convert_alpha()
 
-        # load images for animation
-
-        self.gold_coin_images = [
-            pygame.image.load(
-                'res/images/objects/GoldCoinAnimation/coin1.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/GoldCoinAnimation/coin2.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/GoldCoinAnimation/coin3.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/GoldCoinAnimation/coin4.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/GoldCoinAnimation/coin5.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/GoldCoinAnimation/coin6.png').convert_alpha()
-        ]
-
-        self.silver_coin_images = [
-            pygame.image.load(
-                'res/images/objects/SilverCoinAnimation/coin1.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/SilverCoinAnimation/coin2.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/SilverCoinAnimation/coin3.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/SilverCoinAnimation/coin4.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/SilverCoinAnimation/coin5.png').convert_alpha(),
-            pygame.image.load(
-                'res/images/objects/SilverCoinAnimation/coin6.png').convert_alpha()
-        ]
-
         # animation sprites
+        self.silver_coin_anim_size = 64
+        self.silver_coin_anim = []
+        for i in range(1, 7):
+            frame = pygame.image.load(
+                'res/images/objects/SilverCoinAnimation/coin' + str(i) + '.png').convert_alpha()
+            frame = pygame.transform.scale(
+                frame, (self.silver_coin_anim_size, self.silver_coin_anim_size))
+            self.silver_coin_anim.append(frame)
+
+        self.gold_coin_anim_size = 64
+        self.gold_coin_anim = []
+        for i in range(1, 7):
+            frame = pygame.image.load(
+                'res/images/objects/GoldCoinAnimation/coin' + str(i) + '.png').convert_alpha()
+            frame = pygame.transform.scale(
+                frame, (self.gold_coin_anim_size, self.gold_coin_anim_size))
+            self.gold_coin_anim.append(frame)
+
+        self.bomb_anim_size = 64
+        self.bomb_anim = []
+        frame = pygame.image.load(
+            'res/images/objects/bomb.png').convert_alpha()
+        frame = pygame.transform.scale(
+            frame, (self.bomb_anim_size, self.bomb_anim_size))
+        self.bomb_anim.append(frame)
+
         self.blast_anim1_size = 240
         self.blast_anim1 = []
         for i in range(0, 15):

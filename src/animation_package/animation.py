@@ -19,7 +19,7 @@ class Animation:
         self.surface = surface
         self.frames = frames
         self.frame_size = frame_size
-        self.frame_length = 10
+        self.frame_length = frame_length
         self.looping = looping
         self.frame_index = 0
         self.frame_counter = 0
@@ -60,5 +60,4 @@ class Animation:
         :param position: old position in top left coordinate system
         :return: new position in center coordinate system
         '''
-        return position
-        #return (position[0] - (self.frame_size / 2), position[1] - (self.frame_size / 2))
+        return (position[0] - (self.frame_size / 2), position[1] - (self.frame_size / 2))

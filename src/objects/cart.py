@@ -34,22 +34,20 @@ class Cart(object):
         if 645 > coin.y > 633:
             if ((self.x < coin.x + (55.0 / 2) < self.x + 160) and
                     (self.x < coin.x) and (self.x + 160 > coin.x + 55)):
-                try:
-                    if not coin.collected:
-                        if coin.type == Entity.BLUE_COIN:
-                            self.points += 3 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
-                        elif coin.type == Entity.BOMB:
-                            self.dead = True  # Replace quit with death
-                        else:
-                            self.points += 1 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
-
-                        coin.collect()
-                        if coin.type is Entity.COIN:
-                            self.animation_manager.create_new_effect(
-                                self.res.blast_anim2, self.res.blast_anim2_size, 0, False, (coin.x, coin.y))
-                        elif coin.type is Entity.BLUE_COIN:
-                            self.animation_manager.create_new_effect(
-                                self.res.blast_anim3, self.res.blast_anim3_size, 0, False, (coin.x, coin.y))
-
-                except AttributeError:
-                    pass
+                if not coin.collected:
+                    if coin.type == Entity.BLUE_COIN:
+                        self.points += 3 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
+                    elif coin.type == Entity.COIN:
+                        self.points += 1 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
+                    else:
+                        self.dead = True
+                        self.animation_manager.create_new_effect(
+                            self.res.blast_anim1, self.res.blast_anim1_size, 4, False, (coin.x, coin.y))
+                        
+                    coin.collect()
+                    if coin.type is Entity.COIN:
+                        self.animation_manager.create_new_effect(
+                            self.res.blast_anim2, self.res.blast_anim2_size, 4, False, (coin.x, coin.y))
+                    elif coin.type is Entity.BLUE_COIN:
+                        self.animation_manager.create_new_effect(
+                            self.res.blast_anim3, self.res.blast_anim3_size, 4, False, (coin.x, coin.y))

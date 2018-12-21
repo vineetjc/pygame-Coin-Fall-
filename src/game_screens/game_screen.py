@@ -44,7 +44,7 @@ class Game_screen(Screen):
         self.animation_manager = game_manager.animation_manager
         self.waiting_death_explosion = False
         self.wait_death_timer = 0
-        self.wait_death_time = 200
+        self.wait_death_time = 100
 
     def reset_before_restart(self):
         self.need_reset = False
@@ -118,8 +118,6 @@ class Game_screen(Screen):
 
         if self.timer > 30 or self.cart.dead:
             self.game_manager.score = self.cart.points
-            self.animation_manager.create_new_effect(
-                self.res.blast_anim1, self.res.blast_anim1_size, 0, False, (self.cart.x - 55, self.cart.y - 90))
             self.waiting_death_explosion = True
 
         for event in events:
