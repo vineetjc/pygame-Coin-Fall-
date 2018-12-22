@@ -32,20 +32,23 @@ class Cart(object):
         self.surface.blit(self.image, (self.x, self.y))
 
     def collision_rect(self):
-        return pygame.Rect(self.x, self.y, 160, 50)
+        temp_rect = pygame.Rect(0, 0, 100, 50)
+        cart_image_rect = pygame.Rect(self.x, self.y, 160, 134)
+        temp_rect.midtop = cart_image_rect.midtop
+        return temp_rect
 
-    def collect_item(self, coin):
+    def collect_item(self, coin, params):
         if self.collision_rect().colliderect(coin.collision_rect()):
             if coin.collected:
                 return
 
             if coin.type == Entity.BLUE_COIN:
-                self.points += 3 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
+                self.points += 3 * params['score_multiplier']
                 self.animation_manager.create_new_effect(
                     self.res.blast_anim3, self.res.blast_anim3_size, 4, False, coin.collision_rect().midbottom)
 
             elif coin.type == Entity.COIN:
-                self.points += 1 * self.game_manager.difficulty.value["SCORE_MULTIPLIER"]
+                self.points += 1 * params['score_multiplier']
                 self.animation_manager.create_new_effect(
                     self.res.blast_anim2, self.res.blast_anim2_size, 4, False, coin.collision_rect().midbottom)
 

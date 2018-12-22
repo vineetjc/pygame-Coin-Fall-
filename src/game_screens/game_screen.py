@@ -7,10 +7,7 @@ from src.misc.game_enums import Game_mode
 from src.ui.image import Image
 from src.ui.text import Text
 
-from src.objects.cart import Cart
-from src.objects.coin import Coin
-from src.objects.bluecoin import BlueCoin
-from src.objects.bomb import Bomb
+from src.objects import *
 
 
 # game_manager=Game_manager()
@@ -45,6 +42,7 @@ class Game_screen(Screen):
         self.wait_death_timer = 0
         self.wait_death_time = 100
         self.random_pos_x = self.size[0] / 2
+        self.death_zone = Death_Zone(self.size)
 
     def reset_before_restart(self):
         self.need_reset = False
@@ -94,10 +92,16 @@ class Game_screen(Screen):
         if c is not None:
             self.coinlist.append(c)
 
+        # checking if any coin has reached the bottom, then destroying them
+        for c in self.coinlist:
+            if self.death_zone.check_collision(c):
+                self.coinlist.remove(c)
+                del c
+
         for c in self.coinlist:
             c.draw()
             c.fall()
-            self.cart.collect_item(c)
+            self.cart.collect_item(c, self.params)
 
         self.cart.draw()
 
@@ -109,7 +113,7 @@ class Game_screen(Screen):
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.texts['Score'].change_text('Score: ' + str(self.cart.points))
+        self.texts['Score'].change_text('Score: ' + str(int(self.cart.points)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         self.pygame.display.flip()
@@ -143,10 +147,9 @@ class Game_screen(Screen):
 
     def new_random_x(self):
         new_rand = random.randint(50, self.size[0] - 50)
-        
+
         # to prevent overlaping spawn
         if abs(new_rand - self.random_pos_x) < 100:
             self.new_random_x()
         else:
             self.random_pos_x = new_rand
-

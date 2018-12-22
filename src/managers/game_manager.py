@@ -3,14 +3,11 @@
 # will have global game variables like score and settings
 ##########################################################
 
-from src.misc.game_enums import Difficulty
-
 
 class Game_manager(object):
     def __init__(self, animation_manager):
         self.score = 0
         self.time = 0
-        self.difficulty = Difficulty.MEDIUM
         self.params = None
         self.animation_manager = animation_manager
 

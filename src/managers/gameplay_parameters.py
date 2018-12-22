@@ -11,6 +11,7 @@ class Gameplay_Parameters:
 
         # Classic mode parameters
         #
+        # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
         # gold_chance: see above
@@ -18,6 +19,7 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['classic_easy'] = {
+            'score_multiplier': 1.0,
             'spawn_chance':     0.030,
             'silver_chance':    0.60,
             'gold_chance':      0.30,
@@ -25,6 +27,7 @@ class Gameplay_Parameters:
         }
 
         self.params_list['classic_medium'] = {
+            'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
             'gold_chance':      0.25,
@@ -32,6 +35,7 @@ class Gameplay_Parameters:
         }
 
         self.params_list['classic_hard'] = {
+            'score_multiplier': 5.0,
             'spawn_chance':     0.120,
             'silver_chance':    0.45,
             'gold_chance':      0.15,
