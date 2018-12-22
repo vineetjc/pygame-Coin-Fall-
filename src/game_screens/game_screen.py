@@ -35,7 +35,6 @@ class Game_screen(Screen):
         self.need_reset = False
         self.size = size
         self.result = 0
-        self.arbit_var = 1
         self.coinlist = []
         self.gameclock = gameclock
         self.game_manager = game_manager
@@ -45,11 +44,11 @@ class Game_screen(Screen):
         self.waiting_death_explosion = False
         self.wait_death_timer = 0
         self.wait_death_time = 100
+        self.random_pos_x = self.size[0] / 2
 
     def reset_before_restart(self):
         self.need_reset = False
         self.result = 0
-        self.arbit_var = 1
         self.coinlist = []
         self.timer = 0
         self.game_manager.reset()
@@ -64,6 +63,7 @@ class Game_screen(Screen):
         if self.need_reset:
             self.reset_before_restart()
 
+        # if watiting after death for explosion animation to get over
         if self.waiting_death_explosion:
             self.surface.blit(self.pygame.transform.scale(
                 self.res.BG, self.size), (0, 0))
@@ -78,6 +78,8 @@ class Game_screen(Screen):
             else:
                 return Game_mode.GAME
 
+        self.params = self.game_manager.params
+
         self.cart.move()
         self.surface.blit(self.pygame.transform.scale(
             self.res.BG, self.size), (0, 0))
@@ -88,18 +90,14 @@ class Game_screen(Screen):
         for text in self.texts:
             self.texts[text].draw()
 
-        c = self.get_random_entity(
-            self.arbit_var, self.res, self.size, self.surface)
-        self.coinlist.append(c)
+        c = self.get_random_entity()
+        if c is not None:
+            self.coinlist.append(c)
 
-        for b in self.coinlist[0:self.arbit_var:self.game_manager.difficulty.value["DENSITY"]]:
-            # (use 14 or 15) this is for the rate at which
-            # objects fall, can change this
-            b.draw()
-            b.fall()
-            self.cart.collect_item(b)
-
-        self.arbit_var += 1
+        for c in self.coinlist:
+            c.draw()
+            c.fall()
+            self.cart.collect_item(c)
 
         self.cart.draw()
 
@@ -126,17 +124,29 @@ class Game_screen(Screen):
 
         return Game_mode.GAME
 
-    def get_random_entity(self, arbit_var, res, size, surface):
-        # randomizing bonus coin/bomb/coin fall frequency, can change this
-        if not arbit_var % 3 or not arbit_var % 4:
-            select = random.randint(1, 2)
-            if select == 1:
-                c = BlueCoin(res, size, surface)
-            else:  # select = 2
-                c = Bomb(res, size, surface)
-        elif not arbit_var % 5 or not arbit_var % 7 or not arbit_var % 11:
-            c = Bomb(res, size, surface)
-        else:
-            c = Coin(res, size, surface)
+    def get_random_entity(self):
 
-        return c
+        if random.random() < self.params['spawn_chance']:
+
+            coin_select_random = random.random()
+            self.new_random_x()
+
+            if coin_select_random < self.params['silver_chance']:
+                return Coin(self.res, self.size, self.surface, self.random_pos_x, -50)
+            elif coin_select_random < (self.params['silver_chance'] + self.params['gold_chance']):
+                return BlueCoin(self.res, self.size, self.surface, self.random_pos_x, -50)
+            else:
+                return Bomb(self.res, self.size, self.surface, self.random_pos_x, -50)
+
+        else:
+            return None
+
+    def new_random_x(self):
+        new_rand = random.randint(50, self.size[0] - 50)
+        
+        # to prevent overlaping spawn
+        if abs(new_rand - self.random_pos_x) < 100:
+            self.new_random_x()
+        else:
+            self.random_pos_x = new_rand
+

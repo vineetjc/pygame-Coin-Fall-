@@ -8,13 +8,13 @@ import pygame
 
 
 class Coin():
-    def __init__(self, res, size, surface):
+    def __init__(self, res, size, surface, spawn_x, spawn_y):
         self.type = Entity.COIN
         self.surface = surface
         self.animation = Animation(
             None, surface, res.silver_coin_anim, res.silver_coin_anim_size, 3, True)
-        self.x = random.randint(50, size[0] - 50)
-        self.y = -50
+        self.x = spawn_x
+        self.y = spawn_y
         self.anim_index = 0
         self.anim_counter = 0
         self.anim_tick_length = 4

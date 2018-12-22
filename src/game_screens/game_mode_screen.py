@@ -3,6 +3,7 @@ from src.misc.game_enums import Game_mode, Difficulty
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
+from src.managers.gameplay_parameters import Gameplay_Parameters
 
 LEFT = 1
 
@@ -11,6 +12,7 @@ class Game_Mode_Screen(Screen):
     def __init__(self, pygame, res, surface, size, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
+        self.params_list = Gameplay_Parameters().params_list
 
         self.texts['Heading1'] = Text(
             pygame, res, surface, (self.center_x + 3, 70 + 3), 'Select Game Mode', res.heading1_font, res.BLACK)
@@ -56,14 +58,17 @@ class Game_Mode_Screen(Screen):
         if mouseup_event is not None:
             if self.buttons['Easy'].check_click(mouseup_event.pos):
                 self.game_manager.difficulty = Difficulty.EASY
+                self.game_manager.params = self.params_list['classic_easy']
                 return Game_mode.GAME
 
             if self.buttons['Medium'].check_click(mouseup_event.pos):
                 self.game_manager.difficulty = Difficulty.MEDIUM
+                self.game_manager.params = self.params_list['classic_medium']
                 return Game_mode.GAME
 
             if self.buttons['Hard'].check_click(mouseup_event.pos):
                 self.game_manager.difficulty = Difficulty.HARD
+                self.game_manager.params = self.params_list['classic_hard']
                 return Game_mode.GAME
 
             if self.buttons['Back'].check_click(mouseup_event.pos):

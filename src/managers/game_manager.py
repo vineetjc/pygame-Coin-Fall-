@@ -11,6 +11,7 @@ class Game_manager(object):
         self.score = 0
         self.time = 0
         self.difficulty = Difficulty.MEDIUM
+        self.params = None
         self.animation_manager = animation_manager
 
     def set_input(self, input):
