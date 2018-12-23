@@ -26,9 +26,6 @@ class Game_Mode_Screen(Screen):
         self.texts['Game Mode'] = Text(
             pygame, res, surface, (self.center_x, 240), 'Game mode', res.heading3_font, res.heading3_text_color)
 
-        self.texts['Difficulty'] = Text(
-            pygame, res, surface, (self.center_x, 520), 'Difficulty', res.heading3_font, res.heading3_text_color)
-
         self.buttons['Classic'] = Button(
             pygame, res, surface, (self.center_x - 250, 320), "Classic")
         self.buttons['Infinite'] = Button(
@@ -42,13 +39,6 @@ class Game_Mode_Screen(Screen):
             pygame, res, surface, (self.center_x + 000, 400), "Hardcore")
         self.buttons['Heist'] = Button(
             pygame, res, surface, (self.center_x + 250, 400), "Heist")
-
-        self.buttons['Easy'] = Button(
-            pygame, res, surface, (self.center_x - 250, 600), "Easy")
-        self.buttons['Medium'] = Button(
-            pygame, res, surface, (self.center_x + 000, 600), "Medium")
-        self.buttons['Hard'] = Button(
-            pygame, res, surface, (self.center_x + 250, 600), "Hard")
 
         self.buttons['Back'] = Button(
             pygame, res, surface, (self.center_x, 700), "Back")
@@ -89,18 +79,6 @@ class Game_Mode_Screen(Screen):
             if self.buttons['Heist'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['heist']
                 return Game_mode.INTRODUCTION
-
-            if self.buttons['Easy'].check_click(mouseup_event.pos):
-                self.game_manager.params = self.params_list['classic_easy']
-                return Game_mode.GAME
-
-            if self.buttons['Medium'].check_click(mouseup_event.pos):
-                self.game_manager.params = self.params_list['classic_medium']
-                return Game_mode.GAME
-
-            if self.buttons['Hard'].check_click(mouseup_event.pos):
-                self.game_manager.params = self.params_list['classic_hard']
-                return Game_mode.GAME
 
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU

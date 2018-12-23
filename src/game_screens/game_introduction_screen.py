@@ -3,6 +3,7 @@ from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
+from src.managers.gameplay_parameters import Gameplay_Parameters
 
 LEFT = 1
 
@@ -12,6 +13,7 @@ class Game_Introduction_Screen(Screen):
         Screen.__init__(self, pygame, res, surface, size)
 
         self.game_manager = game_manager
+        self.params_list = Gameplay_Parameters().params_list
 
         self.texts['Heading1'] = Text(
             pygame, res, surface, (self.center_x + 3, 70 + 3), 'Introduction', res.heading1_font, res.BLACK)
@@ -22,10 +24,25 @@ class Game_Introduction_Screen(Screen):
         self.texts['Body'] = Text(
             pygame, res, surface, (self.center_x, 130), 'How to play this game mode', res.body_font, res.body_text_color)
 
-        self.buttons['Start'] = Button(
+        self.buttons_classic = {}
+        self.buttons_others = {}
+
+        self.buttons_classic['Easy'] = Button(
+            pygame, res, surface, (self.center_x - 250, 620), "Easy")
+
+        self.buttons_classic['Medium'] = Button(
+            pygame, res, surface, (self.center_x + 000, 620), "Medium")
+
+        self.buttons_classic['Hard'] = Button(
+            pygame, res, surface, (self.center_x + 250, 620), "Hard")
+
+        self.buttons_others['Start'] = Button(
             pygame, res, surface, (self.center_x, 620), "Start")
 
-        self.buttons['Back'] = Button(
+        self.buttons_classic['Back'] = Button(
+            pygame, res, surface, (self.center_x, 700), "Back")
+
+        self.buttons_others['Back'] = Button(
             pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
@@ -41,18 +58,41 @@ class Game_Introduction_Screen(Screen):
         for text in self.texts:
             self.texts[text].draw()
 
-        for button in self.buttons:
-            self.buttons[button].draw()
+        if self.game_manager.params['display_name'] is self.params_list['classic_medium']['display_name']:
+            for button in self.buttons_classic:
+                self.buttons_classic[button].draw()
+        else:
+            for button in self.buttons_others:
+                self.buttons_others[button].draw()
 
         mouseup_event = next(
             (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
-            if self.buttons['Start'].check_click(mouseup_event.pos):
-                return Game_mode.GAME
 
-            if self.buttons['Back'].check_click(mouseup_event.pos):
-                return Game_mode.GAME_MODE
+            if self.game_manager.params['display_name'] is self.params_list['classic_medium']['display_name']:
+
+                if self.buttons_classic['Easy'].check_click(mouseup_event.pos):
+                    self.game_manager.params = self.params_list['classic_easy']
+                    return Game_mode.GAME
+
+                if self.buttons_classic['Medium'].check_click(mouseup_event.pos):
+                    self.game_manager.params = self.params_list['classic_medium']
+                    return Game_mode.GAME
+
+                if self.buttons_classic['Hard'].check_click(mouseup_event.pos):
+                    self.game_manager.params = self.params_list['classic_hard']
+                    return Game_mode.GAME
+
+                if self.buttons_classic['Back'].check_click(mouseup_event.pos):
+                    return Game_mode.GAME_MODE
+
+            else:
+                if self.buttons_others['Start'].check_click(mouseup_event.pos):
+                    return Game_mode.GAME
+
+                if self.buttons_others['Back'].check_click(mouseup_event.pos):
+                    return Game_mode.GAME_MODE
 
         self.pygame.display.flip()
 
