@@ -2,6 +2,7 @@
 # Gameplay defining parameters
 # Paramerters depend on game mode and difficulty
 ##################################################
+from src.misc.game_enums import Game_mode
 
 
 class Gameplay_Parameters:
@@ -16,6 +17,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
+        # game_mode: Enum for game mode
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -28,6 +30,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
+            'game_mode':        Game_mode.GAME,
             'score_multiplier': 1.0,
             'spawn_chance':     0.030,
             'silver_chance':    0.60,
@@ -40,6 +43,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
+            'game_mode':        Game_mode.GAME,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -52,6 +56,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
+            'game_mode':        Game_mode.GAME,
             'score_multiplier': 5.0,
             'spawn_chance':     0.120,
             'silver_chance':    0.45,
@@ -66,6 +71,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
+        # game_mode: Enum for game mode        
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -79,6 +85,7 @@ class Gameplay_Parameters:
                                  'collect as many coins as possible without '
                                  'the time limit.'
                                  ),
+            'game_mode':        Game_mode.INFINITE,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -93,6 +100,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
+        # game_mode: Enum for game mode
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -105,6 +113,7 @@ class Gameplay_Parameters:
             'introduction':     ('The 1 v 1 game mode, compete against your '
                                  'friend to score more points in a time limit.'
                                  ),
+            'game_mode':        Game_mode.ONE_V_ONE,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -119,6 +128,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
+        # game_mode: Enum for game mode
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -131,6 +141,7 @@ class Gameplay_Parameters:
             'introduction':     ('The AI game mode, design you own AI to '
                                  'compete for AI highscore.'
                                  ),
+            'game_mode':        Game_mode.AI,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -145,6 +156,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
+        # game_mode: Enum for game mode
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -157,6 +169,7 @@ class Gameplay_Parameters:
             'introduction':     ('The hardcore game mode, try to survive '
                                  'long as you can in a rain on bombs.'
                                  ),
+            'game_mode':        Game_mode.HARDCORE,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -171,6 +184,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
+        # game_mode: Enum for game mode
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -184,6 +198,7 @@ class Gameplay_Parameters:
                                  'coins as you can but don\'t miss too '
                                  'many in a row.'
                                  ),
+            'game_mode':        Game_mode.HEIST,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,

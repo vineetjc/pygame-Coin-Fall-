@@ -9,6 +9,7 @@ from .tutorial_screen import Tutorial_screen
 from .credits_screen import Credits_screen
 from .game_mode_screen import Game_Mode_Screen
 from .game_introduction_screen import Game_Introduction_Screen
+from .infinite_game_screen import Infinite_Game_Screen
 from src.misc.game_enums import Game_mode
 import sys
 
@@ -44,6 +45,9 @@ class Screens_Manager:
         self.game_introduction_screen = Game_Introduction_Screen(
             pygame, res, surface, size, game_manager)
 
+        self.infinite_game_screen = Infinite_Game_Screen(
+            pygame, res, surface, size, game_clock, game_manager)
+
     def show(self, game_mode, events):
         ''' Show a screen based on game mode and will return the next game mode. '''
         return self.game_mode_to_screen(game_mode).update(events)
@@ -72,6 +76,9 @@ class Screens_Manager:
 
         elif game_mode == Game_mode.INTRODUCTION:
             return self.game_introduction_screen
+
+        elif game_mode == Game_mode.INFINITE:
+            return self.infinite_game_screen
 
         else:
             self.pygame.quit()

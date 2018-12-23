@@ -10,7 +10,6 @@ from src.ui.text import Text
 from src.objects import *
 
 
-# game_manager=Game_manager()
 class Game_screen(Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
         Screen.__init__(self, pygame, res, surface, size)

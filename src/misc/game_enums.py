@@ -11,7 +11,12 @@ class Game_mode(Enum):
     CREDITS = 6
     GAME_MODE = 7
     INTRODUCTION = 8
-    QUIT = 9
+    INFINITE = 9
+    ONE_V_ONE = 10
+    AI = 11
+    HARDCORE = 12
+    HEIST = 13
+    QUIT = 14
 
 
 class Entity(Enum):

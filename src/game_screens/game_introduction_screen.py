@@ -74,22 +74,22 @@ class Game_Introduction_Screen(Screen):
 
                 if self.buttons_classic['Easy'].check_click(mouseup_event.pos):
                     self.game_manager.params = self.params_list['classic_easy']
-                    return Game_mode.GAME
+                    return self.game_manager.params['game_mode']
 
                 if self.buttons_classic['Medium'].check_click(mouseup_event.pos):
                     self.game_manager.params = self.params_list['classic_medium']
-                    return Game_mode.GAME
+                    return self.game_manager.params['game_mode']
 
                 if self.buttons_classic['Hard'].check_click(mouseup_event.pos):
                     self.game_manager.params = self.params_list['classic_hard']
-                    return Game_mode.GAME
+                    return self.game_manager.params['game_mode']
 
                 if self.buttons_classic['Back'].check_click(mouseup_event.pos):
                     return Game_mode.GAME_MODE
 
             else:
                 if self.buttons_others['Start'].check_click(mouseup_event.pos):
-                    return Game_mode.GAME
+                    return self.game_manager.params['game_mode']
 
                 if self.buttons_others['Back'].check_click(mouseup_event.pos):
                     return Game_mode.GAME_MODE
