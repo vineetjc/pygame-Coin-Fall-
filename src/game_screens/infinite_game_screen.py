@@ -48,20 +48,21 @@ class Infinite_Game_Screen(Game_screen):
         for text in self.texts:
             self.texts[text].draw()
 
-        c = self.get_random_entity()
-        if c is not None:
-            self.coinlist.append(c)
+        coin = self.get_random_entity()
+        if coin is not None:
+            self.coinlist.append(coin)
 
-        # checking if any coin has reached the bottom, then destroying them
-        for c in self.coinlist:
-            if self.death_zone.check_collision(c):
-                self.coinlist.remove(c)
-                del c
+        # drawing coins and checking coin collisions
+        for coin in self.coinlist:
+            coin.draw()
+            coin.fall()
 
-        for c in self.coinlist:
-            c.draw()
-            c.fall()
-            self.cart.collect_item(c, self.params)
+            if self.cart.check_collision(coin):
+                self.scoring_function(coin)
+
+            if self.death_zone.check_collision(coin):
+                self.coinlist.remove(coin)
+                del coin
 
         self.cart.draw()
 
@@ -73,13 +74,13 @@ class Infinite_Game_Screen(Game_screen):
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.texts['Score'].change_text('Score: ' + str(int(self.cart.points)))
+        self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         self.pygame.display.flip()
 
         if self.cart.dead:
-            self.game_manager.score = int(self.cart.points)
+            self.game_manager.score = int(self.game_manager.score)
             self.waiting_death_explosion = True
 
         for event in events:

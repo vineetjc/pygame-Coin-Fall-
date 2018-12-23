@@ -22,7 +22,7 @@ class Coin():
         self.collision_size = res.silver_coin_anim_size
 
     def fall(self):
-        self.y += 7  # Change the value if necessary
+        self.y += 7
 
     def draw(self):
         if self.collected:

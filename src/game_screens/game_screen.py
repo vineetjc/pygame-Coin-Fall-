@@ -3,7 +3,7 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_mode, Entity
 from src.ui.image import Image
 from src.ui.text import Text
 
@@ -34,6 +34,7 @@ class Game_screen(Screen):
         self.coinlist = []
         self.gameclock = gameclock
         self.game_manager = game_manager
+        self.game_manager.score = 0
         self.timer = 0
         self.cart = Cart(res, self.size, surface, self.game_manager)
         self.animation_manager = game_manager.animation_manager
@@ -47,6 +48,7 @@ class Game_screen(Screen):
         self.need_reset = False
         self.result = 0
         self.coinlist = []
+        self.game_manager.score = 0
         self.timer = 0
         self.game_manager.reset()
         del self.cart
@@ -77,7 +79,6 @@ class Game_screen(Screen):
 
         self.params = self.game_manager.params
 
-        self.cart.move()
         self.surface.blit(self.pygame.transform.scale(
             self.res.BG, self.size), (0, 0))
 
@@ -87,21 +88,23 @@ class Game_screen(Screen):
         for text in self.texts:
             self.texts[text].draw()
 
-        c = self.get_random_entity()
-        if c is not None:
-            self.coinlist.append(c)
+        coin = self.get_random_entity()
+        if coin is not None:
+            self.coinlist.append(coin)
 
-        # checking if any coin has reached the bottom, then destroying them
-        for c in self.coinlist:
-            if self.death_zone.check_collision(c):
-                self.coinlist.remove(c)
-                del c
+        # drawing coins and checking coin collisions
+        for coin in self.coinlist:
+            coin.draw()
+            coin.fall()
 
-        for c in self.coinlist:
-            c.draw()
-            c.fall()
-            self.cart.collect_item(c, self.params)
+            if self.cart.check_collision(coin):
+                self.scoring_function(coin)
 
+            if self.death_zone.check_collision(coin):
+                self.coinlist.remove(coin)
+                del coin
+
+        self.cart.move()
         self.cart.draw()
 
         self.animation_manager.draw_animations()
@@ -112,13 +115,13 @@ class Game_screen(Screen):
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.texts['Score'].change_text('Score: ' + str(int(self.cart.points)))
+        self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         self.pygame.display.flip()
 
         if self.timer > 30 or self.cart.dead:
-            self.game_manager.score = int(self.cart.points)
+            self.game_manager.score = int(self.game_manager.score)
             self.waiting_death_explosion = True
 
         for event in events:
@@ -148,7 +151,28 @@ class Game_screen(Screen):
         new_rand = random.randint(50, self.size[0] - 50)
 
         # to prevent overlaping spawn
-        if abs(new_rand - self.random_pos_x) < 100:
+        if abs(new_rand - self.random_pos_x) < 50:
             self.new_random_x()
         else:
             self.random_pos_x = new_rand
+
+    def scoring_function(self, coin):
+        if coin.collected:
+            return
+
+        if coin.type == Entity.BLUE_COIN:
+            self.game_manager.score += 3 * self.params['score_multiplier']
+            self.animation_manager.create_new_effect(
+                self.res.blast_anim3, self.res.blast_anim3_size, 4, False, coin.collision_rect().midbottom)
+
+        elif coin.type == Entity.COIN:
+            self.game_manager.score += 1 * self.params['score_multiplier']
+            self.animation_manager.create_new_effect(
+                self.res.blast_anim2, self.res.blast_anim2_size, 4, False, coin.collision_rect().midbottom)
+
+        else:
+            self.cart.dead = True
+            self.animation_manager.create_new_effect(
+                self.res.blast_anim1, self.res.blast_anim1_size, 4, False, coin.collision_rect().midbottom)
+
+        coin.collect()
