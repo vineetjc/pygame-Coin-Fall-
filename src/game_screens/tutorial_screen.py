@@ -16,7 +16,7 @@ class Tutorial_screen(Screen):
 
         self.texts['Heading2'] = Text(
             pygame, res, surface, (self.center_x, 70), 'Tutorial', res.heading1_font, res.game_title_text_color)
-        
+
         self.texts['Body'] = Text(
             pygame, res, surface, (self.center_x, 130), 'How to play the game', res.body_font, res.body_text_color)
 
@@ -38,8 +38,6 @@ class Tutorial_screen(Screen):
         if mouseup_event is not None:
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU
-
-        self.pygame.display.flip()
 
         for event in events:
             if event.type == QUIT:

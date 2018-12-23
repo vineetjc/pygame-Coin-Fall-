@@ -71,7 +71,7 @@ class Gameplay_Parameters:
         #
         # display_name: display name is game introduction screen
         # introduction: intoduction text in the game introduction screen
-        # game_mode: Enum for game mode        
+        # game_mode: Enum for game mode
         # score_multiplier: -
         # spawn_chance: chance of spawing anything every frame
         # silver_chance: if we have to spawn, chances of silver coin spawning
@@ -82,7 +82,7 @@ class Gameplay_Parameters:
         self.params_list['infinite'] = {
             'display_name':     'Infinite Mode',
             'introduction':     ('The infinite game mode, avoid bombs and '
-                                 'collect as many coins as possible without '
+                                 'collect as many coins as possible without.'
                                  'the time limit.'
                                  ),
             'game_mode':        Game_mode.INFINITE,
@@ -110,8 +110,9 @@ class Gameplay_Parameters:
 
         self.params_list['1v1'] = {
             'display_name':     '1 v 1 Mode',
-            'introduction':     ('The 1 v 1 game mode, compete against your '
-                                 'friend to score more points in a time limit.'
+            'introduction':     ('The 1 v 1 game mode, '
+                                 'Player 1 (Blue) controls by WASD, '
+                                 'Player 2 (Red) controls by Arrow Keys.'
                                  ),
             'game_mode':        Game_mode.ONE_V_ONE,
             'score_multiplier': 3.0,

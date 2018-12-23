@@ -70,8 +70,6 @@ class Main_menu_screen(Screen):
             if self.buttons['Exit'].check_click(mouseup_event.pos):
                 return Game_mode.QUIT
 
-        self.pygame.display.flip()
-
         for event in events:
             if event.type == QUIT:
                 return Game_mode.QUIT

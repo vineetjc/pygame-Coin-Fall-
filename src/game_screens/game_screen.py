@@ -43,6 +43,7 @@ class Game_screen(Screen):
         self.wait_death_time = 100
         self.random_pos_x = self.size[0] / 2
         self.death_zone = Death_Zone(self.size)
+        self.res.set_random_bg(self.pygame, self.size)
 
     def reset_before_restart(self):
         self.need_reset = False
@@ -51,11 +52,11 @@ class Game_screen(Screen):
         self.game_manager.score = 0
         self.timer = 0
         self.game_manager.reset()
-        del self.cart
         self.cart = Cart(self.res, self.size, self.surface, self.game_manager)
         self.animation_manager.remove_all_animations()
         self.waiting_death_explosion = False
         self.wait_death_timer = 0
+        self.res.set_random_bg(self.pygame, self.size)
 
     def update(self, events):
         # if we are restarting the game
@@ -64,11 +65,9 @@ class Game_screen(Screen):
 
         # if watiting after death for explosion animation to get over
         if self.waiting_death_explosion:
-            self.surface.blit(self.pygame.transform.scale(
-                self.res.BG, self.size), (0, 0))
+            self.surface.blit(self.res.BG, (0, 0))
             self.cart.draw()
             self.animation_manager.draw_animations()
-            self.pygame.display.flip()
             self.wait_death_timer += 1
 
             if self.wait_death_timer > self.wait_death_time:
@@ -79,8 +78,7 @@ class Game_screen(Screen):
 
         self.params = self.game_manager.params
 
-        self.surface.blit(self.pygame.transform.scale(
-            self.res.BG, self.size), (0, 0))
+        self.surface.blit(self.res.BG, (0, 0))
 
         for image in self.images:
             self.images[image].draw()
@@ -117,8 +115,6 @@ class Game_screen(Screen):
         int_timer = math.trunc(self.timer)
         self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
-
-        self.pygame.display.flip()
 
         if self.timer > 30 or self.cart.dead:
             self.game_manager.score = int(self.game_manager.score)

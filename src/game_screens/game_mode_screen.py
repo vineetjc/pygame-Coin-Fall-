@@ -83,8 +83,6 @@ class Game_Mode_Screen(Screen):
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU
 
-        self.pygame.display.flip()
-
         for event in events:
             if event.type == QUIT:
                 return Game_mode.QUIT

@@ -27,7 +27,6 @@ class Infinite_Game_Screen(Game_screen):
                 self.res.BG, self.size), (0, 0))
             self.cart.draw()
             self.animation_manager.draw_animations()
-            self.pygame.display.flip()
             self.wait_death_timer += 1
 
             if self.wait_death_timer > self.wait_death_time:
@@ -76,8 +75,6 @@ class Infinite_Game_Screen(Game_screen):
         int_timer = math.trunc(self.timer)
         self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
-
-        self.pygame.display.flip()
 
         if self.cart.dead:
             self.game_manager.score = int(self.game_manager.score)

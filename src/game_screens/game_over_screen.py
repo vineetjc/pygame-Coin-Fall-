@@ -19,13 +19,12 @@ class Game_over_screen(Screen):
 
         self.texts['Heading2'] = Text(
             pygame, res, surface, (self.center_x, 70), 'Game Over', res.heading1_font, res.game_title_text_color)
-        
+
         self.texts['Body'] = Text(
             pygame, res, surface, (self.center_x, 130), 'Game score and performance', res.body_font, res.body_text_color)
 
-
         self.buttons['Restart'] = Button(
-            pygame, res, surface, (self.center_x, 290), "Restart")
+            pygame, res, surface, (self.center_x, 620), "Restart")
         self.buttons['Back'] = Button(
             pygame, res, surface, (self.center_x, 700), "Back")
 
@@ -62,12 +61,10 @@ class Game_over_screen(Screen):
 
         if mouseup_event is not None:
             if self.buttons['Restart'].check_click(mouseup_event.pos):
-                return Game_mode.GAME_MODE
+                return self.game_manager.params['game_mode']
 
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU
-
-        self.pygame.display.flip()
 
         for event in events:
             if event.type == QUIT:

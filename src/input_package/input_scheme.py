@@ -45,6 +45,12 @@ def get_input_list():
         'horizontal', {(pygame.K_a, pygame.K_d),
                        (pygame.K_LEFT, pygame.K_RIGHT)})
 
+    input_list['horizontal_player1'] = Axis(
+        'horizontal', {(pygame.K_a, pygame.K_d)})
+
+    input_list['horizontal_player2'] = Axis(
+        'horizontal', {(pygame.K_LEFT, pygame.K_RIGHT)})
+
     # vertical
     input_list['vertical'] = Axis(
         'vertical', {(pygame.K_s, pygame.K_w), (pygame.K_DOWN, pygame.K_UP)})

@@ -6,7 +6,7 @@ import random
 
 class Resources:
 
-    def __init__(self, pygame):
+    def __init__(self, pygame, size):
 
         # set up fonts
         # None is for default system font
@@ -46,15 +46,19 @@ class Resources:
             'res/images/misc/logo.png').convert_alpha()
         self.cart_img = pygame.image.load(
             'res/images/bg/cart.png').convert_alpha()
+        self.cart_player1_img = pygame.image.load(
+            'res/images/bg/cart_player1.png').convert_alpha()
+        self.cart_player2_img = pygame.image.load(
+            'res/images/bg/cart_player2.png').convert_alpha()
         self.coin_img = pygame.image.load(
             'res/images/bg/coin.jpg').convert()
         self.bluecoin = pygame.image.load(
             'res/images/bg/bluecoin.jpg').convert()
         self.bomb = pygame.image.load(
             'res/images/objects/bomb.png').convert_alpha()
-        self.R = random.randint(1, 4)
-        self.BG = pygame.image.load(
-            'res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
+
+        self.set_random_bg(pygame, size)
+
         self.EBG = pygame.image.load(
             'res/images/bg/endbg3.png').convert()
         self.button_image_size = (227, 62)
@@ -117,3 +121,9 @@ class Resources:
             frame = pygame.transform.scale(
                 frame, (self.blast_anim3_size, self.blast_anim3_size))
             self.blast_anim3.append(frame)
+
+    def set_random_bg(self, pygame, size):
+        self.R = random.randint(1, 4)
+        self.BG = pygame.image.load(
+            'res/images/bg/coinfallbg'+str(self.R)+'.jpg').convert()
+        self.BG = pygame.transform.scale(self.BG, size)

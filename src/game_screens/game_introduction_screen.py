@@ -94,8 +94,6 @@ class Game_Introduction_Screen(Screen):
                 if self.buttons_others['Back'].check_click(mouseup_event.pos):
                     return Game_mode.GAME_MODE
 
-        self.pygame.display.flip()
-
         for event in events:
             if event.type == QUIT:
                 return Game_mode.QUIT
