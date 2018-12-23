@@ -10,7 +10,8 @@ class Game_mode(Enum):
     TUTORIAL = 5
     CREDITS = 6
     GAME_MODE = 7
-    QUIT = 8
+    INTRODUCTION = 8
+    QUIT = 9
 
 
 class Entity(Enum):

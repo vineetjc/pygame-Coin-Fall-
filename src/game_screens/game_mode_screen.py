@@ -19,7 +19,7 @@ class Game_Mode_Screen(Screen):
 
         self.texts['Heading2'] = Text(
             pygame, res, surface, (self.center_x, 70), 'Select Game Mode', res.heading1_font, res.game_title_text_color)
-        
+
         self.texts['Body'] = Text(
             pygame, res, surface, (self.center_x, 130), 'Choose your game mode', res.body_font, res.body_text_color)
 
@@ -28,20 +28,30 @@ class Game_Mode_Screen(Screen):
 
         self.texts['Difficulty'] = Text(
             pygame, res, surface, (self.center_x, 520), 'Difficulty', res.heading3_font, res.heading3_text_color)
-        
-        self.buttons['Classic'] =   Button(pygame, res, surface, (self.center_x - 250, 320), "Classic")
-        self.buttons['Infinite'] =  Button(pygame, res, surface, (self.center_x + 000, 320), "Infinite")
-        self.buttons['1v1'] =       Button(pygame, res, surface, (self.center_x + 250, 320), "1 vs 1")
 
-        self.buttons['AI'] =     Button(pygame, res, surface, (self.center_x - 250, 400), "AI")
-        self.buttons['Hardcore'] =  Button(pygame, res, surface, (self.center_x + 000, 400), "Hardcore")
-        self.buttons['Heist'] =     Button(pygame, res, surface, (self.center_x + 250, 400), "Heist")
+        self.buttons['Classic'] = Button(
+            pygame, res, surface, (self.center_x - 250, 320), "Classic")
+        self.buttons['Infinite'] = Button(
+            pygame, res, surface, (self.center_x + 000, 320), "Infinite")
+        self.buttons['1v1'] = Button(
+            pygame, res, surface, (self.center_x + 250, 320), "1 vs 1")
 
-        self.buttons['Easy'] =      Button(pygame, res, surface, (self.center_x - 250, 600), "Easy")
-        self.buttons['Medium'] =    Button(pygame, res, surface, (self.center_x + 000, 600), "Medium")
-        self.buttons['Hard'] =      Button(pygame, res, surface, (self.center_x + 250, 600), "Hard")
+        self.buttons['AI'] = Button(
+            pygame, res, surface, (self.center_x - 250, 400), "AI")
+        self.buttons['Hardcore'] = Button(
+            pygame, res, surface, (self.center_x + 000, 400), "Hardcore")
+        self.buttons['Heist'] = Button(
+            pygame, res, surface, (self.center_x + 250, 400), "Heist")
 
-        self.buttons['Back'] =      Button(pygame, res, surface, (self.center_x, 700), "Back")
+        self.buttons['Easy'] = Button(
+            pygame, res, surface, (self.center_x - 250, 600), "Easy")
+        self.buttons['Medium'] = Button(
+            pygame, res, surface, (self.center_x + 000, 600), "Medium")
+        self.buttons['Hard'] = Button(
+            pygame, res, surface, (self.center_x + 250, 600), "Hard")
+
+        self.buttons['Back'] = Button(
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
         self.surface.blit(self.res.EBG, (0, 0))
@@ -56,6 +66,30 @@ class Game_Mode_Screen(Screen):
             (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
         if mouseup_event is not None:
+            if self.buttons['Classic'].check_click(mouseup_event.pos):
+                self.game_manager.params = self.params_list['classic_medium']
+                return Game_mode.INTRODUCTION
+
+            if self.buttons['Infinite'].check_click(mouseup_event.pos):
+                self.game_manager.params = self.params_list['infinite']
+                return Game_mode.INTRODUCTION
+
+            if self.buttons['1v1'].check_click(mouseup_event.pos):
+                self.game_manager.params = self.params_list['1v1']
+                return Game_mode.INTRODUCTION
+
+            if self.buttons['AI'].check_click(mouseup_event.pos):
+                self.game_manager.params = self.params_list['ai']
+                return Game_mode.INTRODUCTION
+
+            if self.buttons['Hardcore'].check_click(mouseup_event.pos):
+                self.game_manager.params = self.params_list['hardcore']
+                return Game_mode.INTRODUCTION
+
+            if self.buttons['Heist'].check_click(mouseup_event.pos):
+                self.game_manager.params = self.params_list['heist']
+                return Game_mode.INTRODUCTION
+
             if self.buttons['Easy'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['classic_easy']
                 return Game_mode.GAME

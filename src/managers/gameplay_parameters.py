@@ -24,11 +24,10 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['classic_easy'] = {
-            'display_name':     'Classic',
-            'introduction':     """
-                                The classic game mode, avoid bombs and 
-                                collect as many coins as possible in 30 seconds.
-                                """,
+            'display_name':     'Classic Mode',
+            'introduction':     ('The classic game mode, avoid bombs and '
+                                 'collect as many coins as possible in 30 seconds.'
+                                 ),
             'score_multiplier': 1.0,
             'spawn_chance':     0.030,
             'silver_chance':    0.60,
@@ -37,11 +36,10 @@ class Gameplay_Parameters:
         }
 
         self.params_list['classic_medium'] = {
-            'display_name':     'Classic',
-            'introduction':     """
-                                The classic game mode, avoid bombs and 
-                                collect as many coins as possible in 30 seconds.
-                                """,
+            'display_name':     'Classic Mode',
+            'introduction':     ('The classic game mode, avoid bombs and '
+                                 'collect as many coins as possible in 30 seconds.'
+                                 ),
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -50,11 +48,10 @@ class Gameplay_Parameters:
         }
 
         self.params_list['classic_hard'] = {
-            'display_name':     'Classic',
-            'introduction':     """
-                                The classic game mode, avoid bombs and 
-                                collect as many coins as possible in 30 seconds.
-                                """,
+            'display_name':     'Classic Mode',
+            'introduction':     ('The classic game mode, avoid bombs and '
+                                 'collect as many coins as possible in 30 seconds.'
+                                 ),
             'score_multiplier': 5.0,
             'spawn_chance':     0.120,
             'silver_chance':    0.45,
@@ -77,12 +74,11 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['infinite'] = {
-            'display_name':     'Infinite',
-            'introduction':     """
-                                The infinite game mode, avoid bombs and 
-                                collect as many coins as possible without 
-                                the time limit.
-                                """,
+            'display_name':     'Infinite Mode',
+            'introduction':     ('The infinite game mode, avoid bombs and '
+                                 'collect as many coins as possible without '
+                                 'the time limit.'
+                                 ),
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -105,11 +101,10 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['1v1'] = {
-            'display_name':     '1 v 1',
-            'introduction':     """
-                                The 1 v 1 game mode, compete against your 
-                                friend to score more points in a time limit.
-                                """,
+            'display_name':     '1 v 1 Mode',
+            'introduction':     ('The 1 v 1 game mode, compete against your '
+                                 'friend to score more points in a time limit.'
+                                 ),
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -132,11 +127,10 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['ai'] = {
-            'display_name':     'AI',
-            'introduction':     """
-                                The AI game mode, design you own AI to 
-                                compete for AI highscore.
-                                """,
+            'display_name':     'AI Mode',
+            'introduction':     ('The AI game mode, design you own AI to '
+                                 'compete for AI highscore.'
+                                 ),
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -159,11 +153,10 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['hardcore'] = {
-            'display_name':     'Hardcore',
-            'introduction':     """
-                                The hardcore game mode, try to survive 
-                                long as you can in a rain on bombs.
-                                """,
+            'display_name':     'Hardcore Mode',
+            'introduction':     ('The hardcore game mode, try to survive '
+                                 'long as you can in a rain on bombs.'
+                                 ),
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -186,12 +179,11 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['heist'] = {
-            'display_name':     'Heist',
-            'introduction':     """
-                                The Heist game mode, collect as many 
-                                coins as you can in a rain of coins but 
-                                don't miss too many coins in a row.
-                                """,
+            'display_name':     'Heist Mode',
+            'introduction':     ('The Heist game mode, collect as many '
+                                 'coins as you can but don\'t miss too '
+                                 'many in a row.'
+                                 ),
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
