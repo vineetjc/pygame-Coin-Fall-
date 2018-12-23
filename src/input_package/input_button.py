@@ -6,18 +6,19 @@
 # or a key on the joystick
 #################################################
 
-from src.ui.input_base import Input
+from .input_base import Input
+import pygame.key
 
 
 class Button(Input):
 
     def __init__(self, action_name, pygame_key_list):
-        self.value = 0
+        self.value = False
         self.action_name = action_name
         self.pygame_key_list = pygame_key_list
 
-    def set_value(self, events):
-        pass
-
-    def get_value(self):
-        pass
+    def set_value(self, key_state):
+        for key in self.pygame_key_list:
+            if key_state[key]:
+                self.value = 1
+                return

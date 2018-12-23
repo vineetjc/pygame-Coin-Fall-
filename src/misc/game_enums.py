@@ -9,7 +9,8 @@ class Game_mode(Enum):
     GAME_OVER = 4
     TUTORIAL = 5
     CREDITS = 6
-    QUIT = 7
+    GAME_MODE = 7
+    QUIT = 8
 
 
 class Entity(Enum):
@@ -18,3 +19,10 @@ class Entity(Enum):
     BLUE_COIN = 2
     BOMB = 3
     CART = 4
+
+
+class Difficulty(Enum):
+    ''' Enum to provide difficulty level. '''
+    EASY = {"DENSITY": 25, "SCORE_MULTIPLIER": 1}
+    MEDIUM = {"DENSITY": 15, "SCORE_MULTIPLIER": 3}
+    HARD = {"DENSITY": 5, "SCORE_MULTIPLIER": 5}

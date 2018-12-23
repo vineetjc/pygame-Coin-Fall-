@@ -29,7 +29,8 @@ class Coin():
             if len(self.images) == 0:
                 self.surface.blit(self.image, (self.x, self.y))
             else:
-                self.surface.blit(self.images[self.anim_index], (self.x, self.y))
+                self.surface.blit(
+                    self.images[self.anim_index], (self.x, self.y))
                 self.advance_animation()
         except AttributeError:
             pass
@@ -46,4 +47,3 @@ class Coin():
 
     def collect(self):
         self.collected = True
-

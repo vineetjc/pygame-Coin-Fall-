@@ -37,4 +37,3 @@ class Settings_Manager():
         settings_file = open('../settings.config', 'w')
         json.dump(self.settings_data, settings_file, indent=4)
         settings_file.close()
-

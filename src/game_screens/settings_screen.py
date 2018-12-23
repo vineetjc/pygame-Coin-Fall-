@@ -1,29 +1,41 @@
 from src.game_screens.screen import Screen
 from src.misc.game_enums import Game_mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
+from src.ui.text import Text
 from src.ui.button import Button
+
+LEFT = 1
 
 
 class Settings_screen(Screen):
-    def __init__(self, pygame, res, surface):
-        Screen.__init__(self, pygame, res, surface)
-        self.font = pygame.font.SysFont('cambria', 60)
-        self.font2 = pygame.font.SysFont('cambria', 30)
-        self.buttons['Back'] =  Button(pygame, res, surface, [20, 360, 300, 50], "Back")
+    def __init__(self, pygame, res, surface, size):
+        Screen.__init__(self, pygame, res, surface, size)
+
+        self.texts['Heading1'] = Text(
+            pygame, res, surface, (self.center_x + 3, 70 + 3), 'Settings', res.heading1_font, res.BLACK)
+
+        self.texts['Heading2'] = Text(
+            pygame, res, surface, (self.center_x, 70), 'Settings', res.heading1_font, res.game_title_text_color)
+        
+        self.texts['Body'] = Text(
+            pygame, res, surface, (self.center_x, 130), 'Edit game settings here', res.body_font, res.body_text_color)
+
+        self.buttons['Back'] = Button(
+            pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
-        textsurface = self.font.render('Settings', True, self.res.WHITE)
-        textsurface2 = self.font2.render('This is the settings menu.', True, self.res.WHITE)
-        self.surface.blit(self.res.EBG,(0,0))
-        self.surface.blit(textsurface, (20, 0))
-        self.surface.blit(textsurface2, (20, 100))
+        self.surface.blit(self.res.EBG, (0, 0))
+
+        for text in self.texts:
+            self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()
 
-        mouseup_event = next((x for x in events if x.type == MOUSEBUTTONUP), None)
+        mouseup_event = next(
+            (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)
 
-        if mouseup_event != None:
+        if mouseup_event is not None:
             if self.buttons['Back'].check_click(mouseup_event.pos):
                 return Game_mode.MAIN_MENU
 
