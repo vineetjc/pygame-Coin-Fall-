@@ -32,9 +32,9 @@ class Cart(object):
         self.surface.blit(self.image, (self.x, self.y))
 
     def collision_rect(self):
-        temp_rect = pygame.Rect(0, 0, 100, 50)
+        temp_rect = pygame.Rect(0, 0, 100, 30)
         cart_image_rect = pygame.Rect(self.x, self.y, 160, 134)
-        temp_rect.midtop = cart_image_rect.midtop
+        temp_rect.midtop = (cart_image_rect.midtop[0], cart_image_rect.midtop[1] + 20)
         return temp_rect
 
     def collect_item(self, coin, params):

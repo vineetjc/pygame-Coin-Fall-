@@ -118,7 +118,7 @@ class Game_screen(Screen):
         self.pygame.display.flip()
 
         if self.timer > 30 or self.cart.dead:
-            self.game_manager.score = self.cart.points
+            self.game_manager.score = int(self.cart.points)
             self.waiting_death_explosion = True
 
         for event in events:

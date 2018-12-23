@@ -170,11 +170,11 @@ class Gameplay_Parameters:
                                  'long as you can in a rain on bombs.'
                                  ),
             'game_mode':        Game_mode.HARDCORE,
-            'score_multiplier': 3.0,
+            'score_multiplier': 5.0,
             'spawn_chance':     0.075,
-            'silver_chance':    0.55,
-            'gold_chance':      0.25,
-            'bomb_chance':      0.20
+            'silver_chance':    0.00,
+            'gold_chance':      0.00,
+            'bomb_chance':      1.00
         }
 
         #
@@ -200,8 +200,8 @@ class Gameplay_Parameters:
                                  ),
             'game_mode':        Game_mode.HEIST,
             'score_multiplier': 3.0,
-            'spawn_chance':     0.075,
-            'silver_chance':    0.55,
-            'gold_chance':      0.25,
-            'bomb_chance':      0.20
+            'spawn_chance':     0.030,
+            'silver_chance':    0.00,
+            'gold_chance':      1.00,
+            'bomb_chance':      0.00
         }

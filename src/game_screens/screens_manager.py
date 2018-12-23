@@ -10,6 +10,10 @@ from .credits_screen import Credits_screen
 from .game_mode_screen import Game_Mode_Screen
 from .game_introduction_screen import Game_Introduction_Screen
 from .infinite_game_screen import Infinite_Game_Screen
+from .one_v_one_game_screen import One_V_One_Game_Screen
+from .ai_game_screen import AI_Game_Screen
+from .hardcore_game_screen import Hardcore_Game_Screen
+from .heist_game_screen import Heist_Game_Screen
 from src.misc.game_enums import Game_mode
 import sys
 
@@ -48,6 +52,18 @@ class Screens_Manager:
         self.infinite_game_screen = Infinite_Game_Screen(
             pygame, res, surface, size, game_clock, game_manager)
 
+        self.one_v_one_game_screen = One_V_One_Game_Screen(
+            pygame, res, surface, size, game_clock, game_manager)
+
+        self.ai_game_screen = AI_Game_Screen(
+            pygame, res, surface, size, game_clock, game_manager)
+
+        self.hardcore_game_screen = Hardcore_Game_Screen(
+            pygame, res, surface, size, game_clock, game_manager)
+
+        self.heist_game_screen = Heist_Game_Screen(
+            pygame, res, surface, size, game_clock, game_manager)
+
     def show(self, game_mode, events):
         ''' Show a screen based on game mode and will return the next game mode. '''
         return self.game_mode_to_screen(game_mode).update(events)
@@ -79,6 +95,18 @@ class Screens_Manager:
 
         elif game_mode == Game_mode.INFINITE:
             return self.infinite_game_screen
+
+        elif game_mode == Game_mode.ONE_V_ONE:
+            return self.one_v_one_game_screen
+
+        elif game_mode == Game_mode.AI:
+            return self.ai_game_screen
+
+        elif game_mode == Game_mode.HARDCORE:
+            return self.hardcore_game_screen
+
+        elif game_mode == Game_mode.HEIST:
+            return self.heist_game_screen
 
         else:
             self.pygame.quit()
