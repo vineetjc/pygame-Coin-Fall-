@@ -50,6 +50,8 @@ class Resources:
             'res/images/bg/cart_player1.png').convert_alpha()
         self.cart_player2_img = pygame.image.load(
             'res/images/bg/cart_player2.png').convert_alpha()
+        self.cart_ai_img = pygame.image.load(
+            'res/images/bg/cart_ai.png').convert_alpha()
         self.coin_img = pygame.image.load(
             'res/images/bg/coin.jpg').convert()
         self.bluecoin = pygame.image.load(

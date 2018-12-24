@@ -6,6 +6,7 @@ from src.managers import *
 from src.game_screens.screens_manager import Screens_Manager
 from src.input_package.input_manager import Input_Manager
 from src.managers.highscore_manager import Highscore_Manager
+from src.ai_package.ai_manager import AI_Manager
 from src.animation_package import *
 
 
@@ -24,6 +25,7 @@ def game_loop():
     game_manager = Game_manager(animation_manager)
     game_manager.set_input(Input_Manager())
     game_manager.set_highscore(Highscore_Manager())
+    game_manager.set_ai(AI_Manager())
     screens_manager = Screens_Manager(
         pygame, res, windowSurface, size, game_clock, game_manager)
     play_music = Play_sound('background_music')
