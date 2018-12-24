@@ -4,7 +4,6 @@
 ####################################
 import math
 from .ai_base import AI_Base
-from src.simplex_noise_package.noise import PerlinNoise, normalize
 from src.misc.game_enums import Entity
 
 

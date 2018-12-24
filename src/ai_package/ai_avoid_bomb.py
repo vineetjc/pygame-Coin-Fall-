@@ -4,7 +4,6 @@
 ####################################
 import math
 from .ai_base import AI_Base
-from src.simplex_noise_package.noise import PerlinNoise, normalize
 from src.misc.game_enums import Entity
 
 
@@ -19,7 +18,7 @@ class AI_Avoid_Bomb(AI_Base):
     def update(self, entity_list, cart):
         cart_x = cart.get_center()[0]
         entity_list_copy = entity_list.copy()
-        bombs_list = [x for x in entity_list_copy if (x.type is Entity.BOMB) and (x.y > 200)]
+        bombs_list = [x for x in entity_list_copy if (x.type is Entity.BOMB) and (x.y < 600)]
 
         if len(bombs_list) > 0:
             lowest_bomb_x = bombs_list[0].x
