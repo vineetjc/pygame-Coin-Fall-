@@ -3,7 +3,7 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.infinite_game_screen import Infinite_Game_Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from src.ui.image import Image
 from src.ui.text import Text
 

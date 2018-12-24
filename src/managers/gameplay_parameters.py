@@ -2,7 +2,7 @@
 # Gameplay defining parameters
 # Paramerters depend on game mode and difficulty
 ##################################################
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 
 
 class Gameplay_Parameters:
@@ -32,7 +32,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
-            'game_mode':        Game_mode.CLASSIC,
+            'game_mode':        Game_Mode.CLASSIC,
             'score_multiplier': 1.0,
             'spawn_chance':     0.030,
             'silver_chance':    0.60,
@@ -47,7 +47,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
-            'game_mode':        Game_mode.CLASSIC,
+            'game_mode':        Game_Mode.CLASSIC,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -62,7 +62,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
-            'game_mode':        Game_mode.CLASSIC,
+            'game_mode':        Game_Mode.CLASSIC,
             'score_multiplier': 5.0,
             'spawn_chance':     0.120,
             'silver_chance':    0.45,
@@ -93,7 +93,7 @@ class Gameplay_Parameters:
                                  'collect as many coins as possible without.'
                                  'the time limit.'
                                  ),
-            'game_mode':        Game_mode.INFINITE,
+            'game_mode':        Game_Mode.INFINITE,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -124,7 +124,7 @@ class Gameplay_Parameters:
                                  'Player 1 (Blue) controls by WASD, '
                                  'Player 2 (Red) controls by Arrow Keys.'
                                  ),
-            'game_mode':        Game_mode.ONE_V_ONE,
+            'game_mode':        Game_Mode.ONE_V_ONE,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -154,7 +154,7 @@ class Gameplay_Parameters:
             'introduction':     ('The AI game mode, design you own AI to '
                                  'compete for AI highscore.'
                                  ),
-            'game_mode':        Game_mode.AI,
+            'game_mode':        Game_Mode.AI,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -184,7 +184,7 @@ class Gameplay_Parameters:
             'introduction':     ('The hardcore game mode, try to survive '
                                  'long as you can in a rain on bombs.'
                                  ),
-            'game_mode':        Game_mode.HARDCORE,
+            'game_mode':        Game_Mode.HARDCORE,
             'score_multiplier': 5.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.00,
@@ -215,7 +215,7 @@ class Gameplay_Parameters:
                                  'coins as you can but don\'t miss too '
                                  'many in a row.'
                                  ),
-            'game_mode':        Game_mode.HEIST,
+            'game_mode':        Game_Mode.HEIST,
             'score_multiplier': 3.0,
             'spawn_chance':     0.030,
             'silver_chance':    0.00,

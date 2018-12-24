@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Game_mode(Enum):
+class Game_Mode(Enum):
     ''' Enum used to decide which screen to show in the main game loop. '''
     MAIN_MENU = 1
     CLASSIC = 2

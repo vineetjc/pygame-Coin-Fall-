@@ -1,7 +1,7 @@
 import webbrowser
 
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
@@ -9,7 +9,7 @@ from src.ui.button import Button
 LEFT = 1
 
 
-class Credits_screen(Screen):
+class Credits_Screen(Screen):
     def __init__(self, pygame, res, surface, size):
         Screen.__init__(self, pygame, res, surface, size)
 
@@ -58,45 +58,45 @@ class Credits_screen(Screen):
         if mouseup_event is not None:
             if self.buttons['Contribute'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/vineetjc/pygame-Coin-Fall-')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Vineet'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/vineetjc')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Amrit'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/amrit-choudhary')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Kartik'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/kartikct25')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Venturillo'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/SeraphWedd')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Shikhar'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/johri002')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Divyang'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/divyang-mittal')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
 
             if self.buttons['Azmal'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/MD-AZMAL')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
             
             if self.buttons['Abhinandan'].check_click(mouseup_event.pos):
                 webbrowser.open_new_tab('https://github.com/kainthcool')
-                return Game_mode.CREDITS
+                return Game_Mode.CREDITS
             
             if self.buttons['Back'].check_click(mouseup_event.pos):
-                return Game_mode.MAIN_MENU
+                return Game_Mode.MAIN_MENU
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.CREDITS
+        return Game_Mode.CREDITS

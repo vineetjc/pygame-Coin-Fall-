@@ -4,7 +4,7 @@
 ##########################################################
 
 
-class Game_manager(object):
+class Game_Manager(object):
     def __init__(self, animation_manager):
         self.score = 0
         self.time = 0

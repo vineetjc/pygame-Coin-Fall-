@@ -1,5 +1,5 @@
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
@@ -58,33 +58,33 @@ class Game_Mode_Screen(Screen):
         if mouseup_event is not None:
             if self.buttons['Classic'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['classic_medium']
-                return Game_mode.INTRODUCTION
+                return Game_Mode.INTRODUCTION
 
             if self.buttons['Infinite'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['infinite']
-                return Game_mode.INTRODUCTION
+                return Game_Mode.INTRODUCTION
 
             if self.buttons['1v1'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['1v1']
-                return Game_mode.INTRODUCTION
+                return Game_Mode.INTRODUCTION
 
             if self.buttons['AI'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['ai']
-                return Game_mode.INTRODUCTION
+                return Game_Mode.INTRODUCTION
 
             if self.buttons['Hardcore'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['hardcore']
-                return Game_mode.INTRODUCTION
+                return Game_Mode.INTRODUCTION
 
             if self.buttons['Heist'].check_click(mouseup_event.pos):
                 self.game_manager.params = self.params_list['heist']
-                return Game_mode.INTRODUCTION
+                return Game_Mode.INTRODUCTION
 
             if self.buttons['Back'].check_click(mouseup_event.pos):
-                return Game_mode.MAIN_MENU
+                return Game_Mode.MAIN_MENU
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.GAME_MODE
+        return Game_Mode.GAME_MODE

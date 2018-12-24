@@ -4,7 +4,7 @@ import math
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
 from src.game_screens.classic_game_screen import Classic_Game_Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from src.ui.image import Image
 from src.ui.text import Text
 
@@ -39,9 +39,9 @@ class AI_Game_Screen(Classic_Game_Screen):
 
             if self.wait_death_timer > self.wait_death_time:
                 self.need_reset = True
-                return Game_mode.GAME_OVER
+                return Game_Mode.GAME_OVER
             else:
-                return Game_mode.AI
+                return Game_Mode.AI
 
         self.params = self.game_manager.params
 
@@ -93,6 +93,6 @@ class AI_Game_Screen(Classic_Game_Screen):
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.AI
+        return Game_Mode.AI

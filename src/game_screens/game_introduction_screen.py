@@ -1,5 +1,5 @@
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
@@ -85,17 +85,17 @@ class Game_Introduction_Screen(Screen):
                     return self.game_manager.params['game_mode']
 
                 if self.buttons_classic['Back'].check_click(mouseup_event.pos):
-                    return Game_mode.GAME_MODE
+                    return Game_Mode.GAME_MODE
 
             else:
                 if self.buttons_others['Start'].check_click(mouseup_event.pos):
                     return self.game_manager.params['game_mode']
 
                 if self.buttons_others['Back'].check_click(mouseup_event.pos):
-                    return Game_mode.GAME_MODE
+                    return Game_Mode.GAME_MODE
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.INTRODUCTION
+        return Game_Mode.INTRODUCTION

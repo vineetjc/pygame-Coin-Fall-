@@ -4,7 +4,7 @@ import math
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
 from src.game_screens.classic_game_screen import Classic_Game_Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from src.ui.image import Image
 from src.ui.text import Text
 

@@ -1,12 +1,12 @@
 #########################################
 # Manages all the screens
 #########################################
-from .main_menu_screen import Main_menu_screen
+from .main_menu_screen import Main_Menu_Screen
 from .classic_game_screen import Classic_Game_Screen
-from .settings_screen import Settings_screen
-from .game_over_screen import Game_over_screen
-from .tutorial_screen import Tutorial_screen
-from .credits_screen import Credits_screen
+from .settings_screen import Settings_Screen
+from .game_over_screen import Game_Over_Screen
+from .tutorial_screen import Tutorial_Screen
+from .credits_screen import Credits_Screen
 from .game_mode_screen import Game_Mode_Screen
 from .game_introduction_screen import Game_Introduction_Screen
 from .infinite_game_screen import Infinite_Game_Screen
@@ -14,7 +14,7 @@ from .one_v_one_game_screen import One_V_One_Game_Screen
 from .ai_game_screen import AI_Game_Screen
 from .hardcore_game_screen import Hardcore_Game_Screen
 from .heist_game_screen import Heist_Game_Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 import sys
 
 
@@ -25,22 +25,22 @@ class Screens_Manager:
 
     def init_screens(self, pygame, res, surface, size, game_clock, game_manager):
         ''' Init all the screen, based on params provided by main.py. '''
-        self.main_menu_screen = Main_menu_screen(
+        self.main_menu_screen = Main_Menu_Screen(
             pygame, res, surface, size)
 
         self.classic_game_screen = Classic_Game_Screen(
             pygame, res, surface, size, game_clock, game_manager)
 
-        self.settings_screen = Settings_screen(
+        self.settings_screen = Settings_Screen(
             pygame, res, surface, size, game_manager)
 
-        self.game_over_screen = Game_over_screen(
+        self.game_over_screen = Game_Over_Screen(
             pygame, res, surface, size, game_manager)
 
-        self.tutorial_screen = Tutorial_screen(
+        self.tutorial_screen = Tutorial_Screen(
             pygame, res, surface, size)
 
-        self.credits_screen = Credits_screen(
+        self.credits_screen = Credits_Screen(
             pygame, res, surface, size)
 
         self.game_mode_screen = Game_Mode_Screen(
@@ -69,43 +69,43 @@ class Screens_Manager:
         return self.game_mode_to_screen(game_mode).update(events)
 
     def game_mode_to_screen(self, game_mode):
-        if game_mode == Game_mode.MAIN_MENU:
+        if game_mode == Game_Mode.MAIN_MENU:
             return self.main_menu_screen
 
-        elif game_mode == Game_mode.CLASSIC:
+        elif game_mode == Game_Mode.CLASSIC:
             return self.classic_game_screen
 
-        elif game_mode == Game_mode.SETTINGS:
+        elif game_mode == Game_Mode.SETTINGS:
             return self.settings_screen
 
-        elif game_mode == Game_mode.GAME_OVER:
+        elif game_mode == Game_Mode.GAME_OVER:
             return self.game_over_screen
 
-        elif game_mode == Game_mode.TUTORIAL:
+        elif game_mode == Game_Mode.TUTORIAL:
             return self.tutorial_screen
 
-        elif game_mode == Game_mode.CREDITS:
+        elif game_mode == Game_Mode.CREDITS:
             return self.credits_screen
 
-        elif game_mode == Game_mode.GAME_MODE:
+        elif game_mode == Game_Mode.GAME_MODE:
             return self.game_mode_screen
 
-        elif game_mode == Game_mode.INTRODUCTION:
+        elif game_mode == Game_Mode.INTRODUCTION:
             return self.game_introduction_screen
 
-        elif game_mode == Game_mode.INFINITE:
+        elif game_mode == Game_Mode.INFINITE:
             return self.infinite_game_screen
 
-        elif game_mode == Game_mode.ONE_V_ONE:
+        elif game_mode == Game_Mode.ONE_V_ONE:
             return self.one_v_one_game_screen
 
-        elif game_mode == Game_mode.AI:
+        elif game_mode == Game_Mode.AI:
             return self.ai_game_screen
 
-        elif game_mode == Game_mode.HARDCORE:
+        elif game_mode == Game_Mode.HARDCORE:
             return self.hardcore_game_screen
 
-        elif game_mode == Game_mode.HEIST:
+        elif game_mode == Game_Mode.HEIST:
             return self.heist_game_screen
 
         else:

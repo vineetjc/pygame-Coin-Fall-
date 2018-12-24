@@ -1,4 +1,4 @@
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 
 
 class Screen(object):
@@ -14,4 +14,4 @@ class Screen(object):
         self.center_y = size[1] / 2
 
     def update(self, events):
-        return Game_mode.MAIN_MENU
+        return Game_Mode.MAIN_MENU

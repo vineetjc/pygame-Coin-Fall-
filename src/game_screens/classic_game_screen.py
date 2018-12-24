@@ -3,7 +3,7 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode, Entity
+from src.misc.game_enums import Game_Mode, Entity
 from src.ui.image import Image
 from src.ui.text import Text
 
@@ -72,9 +72,9 @@ class Classic_Game_Screen(Screen):
 
             if self.wait_death_timer > self.wait_death_time:
                 self.need_reset = True
-                return Game_mode.GAME_OVER
+                return Game_Mode.GAME_OVER
             else:
-                return Game_mode.CLASSIC
+                return Game_Mode.CLASSIC
 
         self.params = self.game_manager.params
 
@@ -122,9 +122,9 @@ class Classic_Game_Screen(Screen):
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.CLASSIC
+        return Game_Mode.CLASSIC
 
     def get_random_entity(self):
 
