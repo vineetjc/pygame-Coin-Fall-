@@ -13,6 +13,7 @@ class Game_over_screen(Screen):
     def __init__(self, pygame, res, surface, size, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
+        self.highscore_manager = self.game_manager.highscore_manager
 
         self.texts['Heading1'] = Text(
             pygame, res, surface, (self.center_x + 3, 70 + 3), 'Game Over', res.heading1_font, res.BLACK)
@@ -23,38 +24,43 @@ class Game_over_screen(Screen):
         self.texts['Body'] = Text(
             pygame, res, surface, (self.center_x, 130), 'Game score and performance', res.body_font, res.body_text_color)
 
+        self.texts['Game Mode'] = Text(
+            pygame, res, surface, (self.center_x, 300), 'Game mode', res.heading3_font, res.heading3_text_color)
+
+        self.texts['Score'] = Text(
+            pygame, res, surface, (self.center_x, 380), 'Score: 0', res.body_font, res.body_text_color)
+
+        self.texts['Highscore'] = Text(
+            pygame, res, surface, (self.center_x, 420), 'Highscore: 0', res.body_font, res.body_text_color)
+
         self.buttons['Restart'] = Button(
             pygame, res, surface, (self.center_x, 620), "Restart")
+
         self.buttons['Back'] = Button(
             pygame, res, surface, (self.center_x, 700), "Back")
 
     def update(self, events):
-        if not os.path.isfile("highscore.txt"):
-            with open("highscore.txt", "w") as hiscore_file:
-                hiscore_file.write("0")
-        hisc = open("highscore.txt", "r")
-        highscore = hisc.read()
-        maxscore = max(int(highscore), int(self.game_manager.score))
-        if int(highscore) < int(self.game_manager.score):
-            hisc.close()
-            hisc = open("highscore.txt", "w")
-            hisc.write(str(self.game_manager.score))
-        hisc.close()
-
-        textsurface2 = self.res.body_font.render(
-            'Score: ' + str(self.game_manager.score), True, self.res.WHITE)
-
-        textsurface3 = self.res.body_font.render(
-            'Highscore: ' + str(maxscore), True, self.res.WHITE)
         self.surface.blit(self.res.EBG, (0, 0))
-        self.surface.blit(textsurface2, (20, 100))
-        self.surface.blit(textsurface3, (20, 150))
+
+        old_highscore = self.highscore_manager.data[self.game_manager.params['key']]
+        new_score = self.game_manager.score
+
+        if new_score > old_highscore:
+            self.highscore_manager.data[self.game_manager.params['key']] = new_score
+            self.highscore_manager.save_highscore_to_file()
+            self.highscore_manager.load_highscore_from_file()
 
         for text in self.texts:
             self.texts[text].draw()
 
         for button in self.buttons:
             self.buttons[button].draw()
+
+        self.texts['Game Mode'].change_text(
+            self.game_manager.params['game_over_name'])
+
+        self.texts['Score'].change_text('Score: ' + str(new_score))
+        self.texts['Highscore'].change_text('Highscore: ' + str(old_highscore))
 
         mouseup_event = next(
             (x for x in events if x.type == MOUSEBUTTONUP and x.button == LEFT), None)

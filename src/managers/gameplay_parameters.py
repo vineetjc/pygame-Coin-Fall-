@@ -26,7 +26,9 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['classic_easy'] = {
+            'key':              'classic_easy',
             'display_name':     'Classic Mode',
+            'game_over_name':   'Classic Easy Mode',
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
@@ -39,7 +41,9 @@ class Gameplay_Parameters:
         }
 
         self.params_list['classic_medium'] = {
+            'key':              'classic_medium',
             'display_name':     'Classic Mode',
+            'game_over_name':   'Classic Medium Mode',
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
@@ -52,7 +56,9 @@ class Gameplay_Parameters:
         }
 
         self.params_list['classic_hard'] = {
+            'key':              'classic_hard',
             'display_name':     'Classic Mode',
+            'game_over_name':   'Classic Hard Mode',
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
@@ -80,7 +86,9 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['infinite'] = {
+            'key':              'infinite',
             'display_name':     'Infinite Mode',
+            'game_over_name':   'Infinite Mode',
             'introduction':     ('The infinite game mode, avoid bombs and '
                                  'collect as many coins as possible without.'
                                  'the time limit.'
@@ -109,7 +117,9 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['1v1'] = {
+            'key':              '1v1',
             'display_name':     '1 v 1 Mode',
+            'game_over_name':   '1 v 1 Mode',
             'introduction':     ('The 1 v 1 game mode, '
                                  'Player 1 (Blue) controls by WASD, '
                                  'Player 2 (Red) controls by Arrow Keys.'
@@ -138,7 +148,9 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['ai'] = {
+            'key':              'ai',
             'display_name':     'AI Mode',
+            'game_over_name':   'AI Mode',
             'introduction':     ('The AI game mode, design you own AI to '
                                  'compete for AI highscore.'
                                  ),
@@ -166,7 +178,9 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['hardcore'] = {
+            'key':              'hardcore',
             'display_name':     'Hardcore Mode',
+            'game_over_name':   'Hardcore Mode',
             'introduction':     ('The hardcore game mode, try to survive '
                                  'long as you can in a rain on bombs.'
                                  ),
@@ -194,7 +208,9 @@ class Gameplay_Parameters:
         # Note: all chances in fraction. 0.10 = 10% chance of spawning
 
         self.params_list['heist'] = {
+            'key':              'heist',
             'display_name':     'Heist Mode',
+            'game_over_name':   'Heist Mode',
             'introduction':     ('The Heist game mode, collect as many '
                                  'coins as you can but don\'t miss too '
                                  'many in a row.'

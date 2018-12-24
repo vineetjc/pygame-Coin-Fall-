@@ -14,6 +14,9 @@ class Game_manager(object):
     def set_input(self, input):
         self.input = input
 
+    def set_highscore(self, highscore_manager):
+        self.highscore_manager = highscore_manager
+
     def reset(self):
         self.score = 0
         self.time = 0

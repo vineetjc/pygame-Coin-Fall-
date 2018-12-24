@@ -32,7 +32,7 @@ class Screens_Manager:
             pygame, res, surface, size, game_clock, game_manager)
 
         self.settings_screen = Settings_screen(
-            pygame, res, surface, size)
+            pygame, res, surface, size, game_manager)
 
         self.game_over_screen = Game_over_screen(
             pygame, res, surface, size, game_manager)
