@@ -32,7 +32,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
-            'game_mode':        Game_mode.GAME,
+            'game_mode':        Game_mode.CLASSIC,
             'score_multiplier': 1.0,
             'spawn_chance':     0.030,
             'silver_chance':    0.60,
@@ -47,7 +47,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
-            'game_mode':        Game_mode.GAME,
+            'game_mode':        Game_mode.CLASSIC,
             'score_multiplier': 3.0,
             'spawn_chance':     0.075,
             'silver_chance':    0.55,
@@ -62,7 +62,7 @@ class Gameplay_Parameters:
             'introduction':     ('The classic game mode, avoid bombs and '
                                  'collect as many coins as possible in 30 seconds.'
                                  ),
-            'game_mode':        Game_mode.GAME,
+            'game_mode':        Game_mode.CLASSIC,
             'score_multiplier': 5.0,
             'spawn_chance':     0.120,
             'silver_chance':    0.45,

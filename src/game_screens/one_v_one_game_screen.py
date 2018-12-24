@@ -3,7 +3,7 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
-from src.game_screens.game_screen import Game_screen
+from src.game_screens.classic_game_screen import Classic_Game_Screen
 from src.misc.game_enums import Game_mode, Entity
 from src.ui.image import Image
 from src.ui.text import Text
@@ -11,9 +11,9 @@ from src.ui.text import Text
 from src.objects import *
 
 
-class One_V_One_Game_Screen(Game_screen):
+class One_V_One_Game_Screen(Classic_Game_Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
-        Game_screen.__init__(self, pygame, res, surface,
+        Classic_Game_Screen.__init__(self, pygame, res, surface,
                              size, gameclock, game_manager)
 
         score_x, score_y = res.score_bg_image_size

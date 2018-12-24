@@ -10,7 +10,7 @@ from src.ui.text import Text
 from src.objects import *
 
 
-class Game_screen(Screen):
+class Classic_Game_Screen(Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
 
@@ -74,7 +74,7 @@ class Game_screen(Screen):
                 self.need_reset = True
                 return Game_mode.GAME_OVER
             else:
-                return Game_mode.GAME
+                return Game_mode.CLASSIC
 
         self.params = self.game_manager.params
 
@@ -124,7 +124,7 @@ class Game_screen(Screen):
             if event.type == QUIT:
                 return Game_mode.QUIT
 
-        return Game_mode.GAME
+        return Game_mode.CLASSIC
 
     def get_random_entity(self):
 

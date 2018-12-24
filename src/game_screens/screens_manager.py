@@ -2,7 +2,7 @@
 # Manages all the screens
 #########################################
 from .main_menu_screen import Main_menu_screen
-from .game_screen import Game_screen
+from .classic_game_screen import Classic_Game_Screen
 from .settings_screen import Settings_screen
 from .game_over_screen import Game_over_screen
 from .tutorial_screen import Tutorial_screen
@@ -28,7 +28,7 @@ class Screens_Manager:
         self.main_menu_screen = Main_menu_screen(
             pygame, res, surface, size)
 
-        self.game_screen = Game_screen(
+        self.classic_game_screen = Classic_Game_Screen(
             pygame, res, surface, size, game_clock, game_manager)
 
         self.settings_screen = Settings_screen(
@@ -72,8 +72,8 @@ class Screens_Manager:
         if game_mode == Game_mode.MAIN_MENU:
             return self.main_menu_screen
 
-        elif game_mode == Game_mode.GAME:
-            return self.game_screen
+        elif game_mode == Game_mode.CLASSIC:
+            return self.classic_game_screen
 
         elif game_mode == Game_mode.SETTINGS:
             return self.settings_screen
