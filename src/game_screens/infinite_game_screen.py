@@ -71,13 +71,14 @@ class Infinite_Game_Screen(Classic_Game_Screen):
         seconds = self.gameclock.get_time() / 1000.0
         self.timer += seconds
 
+        time_factor = 2.0
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
+        self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score + int_timer * time_factor)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         if self.cart.dead:
-            self.game_manager.score = int(self.game_manager.score)
+            self.game_manager.score = int(self.game_manager.score + int_timer * time_factor)
             self.waiting_death_explosion = True
 
         for event in events:

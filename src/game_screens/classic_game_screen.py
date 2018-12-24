@@ -41,7 +41,7 @@ class Classic_Game_Screen(Screen):
         self.waiting_death_explosion = False
         self.wait_death_timer = 0
         self.wait_death_time = 100
-        self.random_pos_x = self.size[0] / 2
+        self.spawn_pos_x = self.size[0] / 2
         self.death_zone = Death_Zone(self.size)
         self.res.set_random_bg(self.pygame, self.size)
 
@@ -131,26 +131,26 @@ class Classic_Game_Screen(Screen):
         if random.random() < self.params['spawn_chance']:
 
             coin_select_random = random.random()
-            self.new_random_x()
+            self.pick_new_spawn_pos_x()
 
             if coin_select_random < self.params['silver_chance']:
-                return Coin(self.res, self.size, self.surface, self.random_pos_x, -50)
+                return Coin(self.res, self.size, self.surface, self.spawn_pos_x, -50)
             elif coin_select_random < (self.params['silver_chance'] + self.params['gold_chance']):
-                return BlueCoin(self.res, self.size, self.surface, self.random_pos_x, -50)
+                return BlueCoin(self.res, self.size, self.surface, self.spawn_pos_x, -50)
             else:
-                return Bomb(self.res, self.size, self.surface, self.random_pos_x, -50)
+                return Bomb(self.res, self.size, self.surface, self.spawn_pos_x, -50)
 
         else:
             return None
 
-    def new_random_x(self):
+    def pick_new_spawn_pos_x(self):
         new_rand = random.randint(50, self.size[0] - 50)
 
-        # to prevent overlaping spawn
-        if abs(new_rand - self.random_pos_x) < 50:
-            self.new_random_x()
+        # to prevent overlapping spawn
+        if abs(new_rand - self.spawn_pos_x) < 50:
+            self.pick_new_spawn_pos_x()
         else:
-            self.random_pos_x = new_rand
+            self.spawn_pos_x = new_rand
 
     def scoring_function(self, coin):
         if coin.collected:

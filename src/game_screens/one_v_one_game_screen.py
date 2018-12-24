@@ -47,7 +47,7 @@ class One_V_One_Game_Screen(Classic_Game_Screen):
         self.score_player2 = 0
 
     def reset_before_restart(self):
-        Game_screen.reset_before_restart(self)
+        Classic_Game_Screen.reset_before_restart(self)
 
         self.cart_player1 = Cart_One_V_One(
             self.res, self.size, self.surface, self.game_manager, self.res.cart_player1_img, 'horizontal_player1', -100)

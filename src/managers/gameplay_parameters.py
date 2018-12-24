@@ -212,8 +212,8 @@ class Gameplay_Parameters:
             'display_name':     'Heist Mode',
             'game_over_name':   'Heist Mode',
             'introduction':     ('The Heist game mode, collect as many '
-                                 'coins as you can but don\'t miss too '
-                                 'many in a row.'
+                                 'coins as you can but don\'t miss 4 '
+                                 'coins in a row.'
                                  ),
             'game_mode':        Game_Mode.HEIST,
             'score_multiplier': 3.0,
