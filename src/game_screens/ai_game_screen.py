@@ -87,7 +87,7 @@ class AI_Game_Screen(Game_screen):
             'Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
-        if self.timer > 30 or self.cart.dead:
+        if self.timer > 60 or self.cart.dead:
             self.game_manager.score = int(self.game_manager.score)
             self.waiting_death_explosion = True
 
