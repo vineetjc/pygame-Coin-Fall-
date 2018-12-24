@@ -7,7 +7,6 @@ from src.game_screens.game_screen import Game_screen
 from src.misc.game_enums import Game_mode
 from src.ui.image import Image
 from src.ui.text import Text
-from src.simplex_noise_package.noise import PerlinNoise, normalize
 
 from src.objects import *
 
@@ -20,16 +19,11 @@ class AI_Game_Screen(Game_screen):
         self.cart = Cart_AI(self.res, self.size, self.surface,
                             self.game_manager, self.res.cart_ai_img)
 
-        self.pn = PerlinNoise(num_octaves=7, persistence=0.1)
-        self.noise_index = 0
-
     def reset_before_restart(self):
         Game_screen.reset_before_restart(self)
 
         self.cart = Cart_AI(self.res, self.size, self.surface,
                             self.game_manager, self.res.cart_ai_img)
-
-        self.noise_index = 0
 
     def update(self, events):
         # if we are restarting the game
@@ -75,12 +69,10 @@ class AI_Game_Screen(Game_screen):
                 self.coinlist.remove(coin)
                 del coin
 
-        self.noise_index += 1
-        random_movement = normalize(self.pn.noise(self.noise_index)) * 2 - 1
-        if abs(random_movement) < 0.03:
-            random_movement = 0
-        
-        self.cart.move(random_movement)
+        ai_movement = self.game_manager.ai_manager.update(
+            self.coinlist, self.cart)
+
+        self.cart.move(ai_movement)
         self.cart.draw()
 
         self.animation_manager.draw_animations()

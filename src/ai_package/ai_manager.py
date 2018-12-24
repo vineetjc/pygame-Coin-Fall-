@@ -2,18 +2,19 @@
 # AI Manager which acts as interface
 # between the AI and the game
 #########################################
+from .ai_simplex import AI_Simplex
 
 
 class AI_Manager():
 
     def __init__(self):
-        pass
+        self.ai = AI_Simplex()
 
     def restart(self):
-        pass
+        self.ai.restart()
 
-    def update(self):
-        pass
+    def update(self, entity_list, cart):
+        return self.ai.update(entity_list, cart)
 
     def game_over(self):
-        pass
+        self.ai.game_over()
