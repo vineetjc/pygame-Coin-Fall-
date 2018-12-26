@@ -39,6 +39,8 @@ class Heist_Game_Screen(Classic_Game_Screen):
         if self.waiting_death_explosion:
             self.surface.blit(self.res.BG, (0, 0))
             self.cart.draw()
+            self.game_over_text1.draw()
+            self.game_over_text2.draw()
             self.animation_manager.draw_animations()
             self.wait_death_timer += 1
 

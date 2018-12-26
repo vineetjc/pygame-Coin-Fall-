@@ -26,6 +26,8 @@ class Infinite_Game_Screen(Classic_Game_Screen):
             self.surface.blit(self.pygame.transform.scale(
                 self.res.BG, self.size), (0, 0))
             self.cart.draw()
+            self.game_over_text1.draw()
+            self.game_over_text2.draw()
             self.animation_manager.draw_animations()
             self.wait_death_timer += 1
 

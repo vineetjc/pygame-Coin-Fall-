@@ -14,7 +14,7 @@ from src.objects import *
 class One_V_One_Game_Screen(Classic_Game_Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
         Classic_Game_Screen.__init__(self, pygame, res, surface,
-                             size, gameclock, game_manager)
+                                     size, gameclock, game_manager)
 
         score_x, score_y = res.score_bg_image_size
 
@@ -66,6 +66,9 @@ class One_V_One_Game_Screen(Classic_Game_Screen):
             self.surface.blit(self.res.BG, (0, 0))
             self.cart_player1.draw()
             self.cart_player2.draw()
+            self.game_over_text1.draw()
+            self.game_over_text2.draw()
+
             self.animation_manager.draw_animations()
             self.wait_death_timer += 1
 
@@ -130,6 +133,13 @@ class One_V_One_Game_Screen(Classic_Game_Screen):
             self.game_manager.score = int(self.game_manager.score)
             self.waiting_death_explosion = True
 
+            if self.cart_player1.dead:
+                self.game_over_text1.change_text('PLAYER 2 WINS')
+                self.game_over_text2.change_text('PLAYER 2 WINS')
+            else:
+                self.game_over_text1.change_text('PLAYER 1 WINS')
+                self.game_over_text2.change_text('PLAYER 1 WINS')
+
         for event in events:
             if event.type == QUIT:
                 return Game_Mode.QUIT
@@ -145,7 +155,7 @@ class One_V_One_Game_Screen(Classic_Game_Screen):
                 self.score_player1 += 3 * self.params['score_multiplier']
             else:
                 self.score_player2 += 3 * self.params['score_multiplier']
-            
+
             self.animation_manager.create_new_effect(
                 self.res.blast_anim3, self.res.blast_anim3_size, 4, False, coin.collision_rect().midbottom)
 
@@ -154,7 +164,7 @@ class One_V_One_Game_Screen(Classic_Game_Screen):
                 self.score_player1 += 1 * self.params['score_multiplier']
             else:
                 self.score_player2 += 1 * self.params['score_multiplier']
-            
+
             self.animation_manager.create_new_effect(
                 self.res.blast_anim2, self.res.blast_anim2_size, 4, False, coin.collision_rect().midbottom)
 

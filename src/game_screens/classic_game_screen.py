@@ -27,6 +27,12 @@ class Classic_Game_Screen(Screen):
         self.texts['Time'] = Text(
             pygame, res, surface, (self.center_x * 2 - score_x / 2 - 65, score_y / 2), 'Time: 50', res.score_font, res.score_text_color, alignment='left')
 
+        self.game_over_text1 = Text(
+            pygame, res, surface, (self.center_x + 3, self.center_y + 3), 'GAME OVER', res.game_title_font, res.BLACK)
+
+        self.game_over_text2 = Text(
+            pygame, res, surface, (self.center_x, self.center_y), 'GAME OVER', res.game_title_font, res.game_title_text_color)
+
         # set up initial variables
         self.need_reset = False
         self.size = size
@@ -67,6 +73,8 @@ class Classic_Game_Screen(Screen):
         if self.waiting_death_explosion:
             self.surface.blit(self.res.BG, (0, 0))
             self.cart.draw()
+            self.game_over_text1.draw()
+            self.game_over_text2.draw()
             self.animation_manager.draw_animations()
             self.wait_death_timer += 1
 
@@ -113,7 +121,8 @@ class Classic_Game_Screen(Screen):
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
+        self.texts['Score'].change_text(
+            'Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         if self.timer > 30 or self.cart.dead:
