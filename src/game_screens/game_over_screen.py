@@ -1,7 +1,7 @@
 import os
 
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode
+from src.misc.game_enums import Game_Mode
 from pygame.locals import QUIT, KEYUP, MOUSEBUTTONUP
 from src.ui.text import Text
 from src.ui.button import Button
@@ -9,7 +9,7 @@ from src.ui.button import Button
 LEFT = 1
 
 
-class Game_over_screen(Screen):
+class Game_Over_Screen(Screen):
     def __init__(self, pygame, res, surface, size, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
         self.game_manager = game_manager
@@ -70,10 +70,10 @@ class Game_over_screen(Screen):
                 return self.game_manager.params['game_mode']
 
             if self.buttons['Back'].check_click(mouseup_event.pos):
-                return Game_mode.MAIN_MENU
+                return Game_Mode.MAIN_MENU
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.GAME_OVER
+        return Game_Mode.GAME_OVER

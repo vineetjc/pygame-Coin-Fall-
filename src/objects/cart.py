@@ -37,5 +37,9 @@ class Cart(object):
             cart_image_rect.midtop[0], cart_image_rect.midtop[1] + 20)
         return temp_rect
 
+    def get_center(self):
+        cart_image_rect = pygame.Rect(self.x, self.y, 160, 134)
+        return cart_image_rect.center
+
     def check_collision(self, coin):
         return self.collision_rect().colliderect(coin.collision_rect())

@@ -1,11 +1,12 @@
 import sys
 import pygame
 from pygame.locals import QUIT, KEYUP, DOUBLEBUF, HWSURFACE
-from src.misc.game_enums import Game_mode, Entity
+from src.misc.game_enums import Game_Mode, Entity
 from src.managers import *
 from src.game_screens.screens_manager import Screens_Manager
 from src.input_package.input_manager import Input_Manager
 from src.managers.highscore_manager import Highscore_Manager
+from src.ai_package.ai_manager import AI_Manager
 from src.animation_package import *
 
 
@@ -19,15 +20,16 @@ def game_loop():
     res = Resources(pygame, size)
     pygame.display.set_icon(res.logo)
     game_clock = pygame.time.Clock()
-    game_mode = Game_mode.MAIN_MENU
+    game_mode = Game_Mode.MAIN_MENU
     animation_manager = Animation_Manager(windowSurface)
-    game_manager = Game_manager(animation_manager)
+    game_manager = Game_Manager(animation_manager)
     game_manager.set_input(Input_Manager())
     game_manager.set_highscore(Highscore_Manager())
+    game_manager.set_ai(AI_Manager())
     screens_manager = Screens_Manager(
         pygame, res, windowSurface, size, game_clock, game_manager)
-    play_music = Play_sound('background_music')
-    play_music.play_background_music()
+    sound_manager = Sound_Manager('background_music')
+    sound_manager.play_background_music()
 
     while True:
         events = pygame.event.get()

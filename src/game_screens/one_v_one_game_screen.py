@@ -3,18 +3,18 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
-from src.game_screens.game_screen import Game_screen
-from src.misc.game_enums import Game_mode, Entity
+from src.game_screens.classic_game_screen import Classic_Game_Screen
+from src.misc.game_enums import Game_Mode, Entity
 from src.ui.image import Image
 from src.ui.text import Text
 
 from src.objects import *
 
 
-class One_V_One_Game_Screen(Game_screen):
+class One_V_One_Game_Screen(Classic_Game_Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
-        Game_screen.__init__(self, pygame, res, surface,
-                             size, gameclock, game_manager)
+        Classic_Game_Screen.__init__(self, pygame, res, surface,
+                                     size, gameclock, game_manager)
 
         score_x, score_y = res.score_bg_image_size
 
@@ -47,7 +47,7 @@ class One_V_One_Game_Screen(Game_screen):
         self.score_player2 = 0
 
     def reset_before_restart(self):
-        Game_screen.reset_before_restart(self)
+        Classic_Game_Screen.reset_before_restart(self)
 
         self.cart_player1 = Cart_One_V_One(
             self.res, self.size, self.surface, self.game_manager, self.res.cart_player1_img, 'horizontal_player1', -100)
@@ -66,14 +66,17 @@ class One_V_One_Game_Screen(Game_screen):
             self.surface.blit(self.res.BG, (0, 0))
             self.cart_player1.draw()
             self.cart_player2.draw()
+            self.game_over_text1.draw()
+            self.game_over_text2.draw()
+
             self.animation_manager.draw_animations()
             self.wait_death_timer += 1
 
             if self.wait_death_timer > self.wait_death_time:
                 self.need_reset = True
-                return Game_mode.GAME_OVER
+                return Game_Mode.GAME_OVER
             else:
-                return Game_mode.ONE_V_ONE
+                return Game_Mode.ONE_V_ONE
 
         self.params = self.game_manager.params
 
@@ -130,11 +133,18 @@ class One_V_One_Game_Screen(Game_screen):
             self.game_manager.score = int(self.game_manager.score)
             self.waiting_death_explosion = True
 
+            if self.cart_player1.dead:
+                self.game_over_text1.change_text('PLAYER 2 WINS')
+                self.game_over_text2.change_text('PLAYER 2 WINS')
+            else:
+                self.game_over_text1.change_text('PLAYER 1 WINS')
+                self.game_over_text2.change_text('PLAYER 1 WINS')
+
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.ONE_V_ONE
+        return Game_Mode.ONE_V_ONE
 
     def scoring_function(self, coin, score, is_player1):
         if coin.collected:
@@ -145,7 +155,7 @@ class One_V_One_Game_Screen(Game_screen):
                 self.score_player1 += 3 * self.params['score_multiplier']
             else:
                 self.score_player2 += 3 * self.params['score_multiplier']
-            
+
             self.animation_manager.create_new_effect(
                 self.res.blast_anim3, self.res.blast_anim3_size, 4, False, coin.collision_rect().midbottom)
 
@@ -154,7 +164,7 @@ class One_V_One_Game_Screen(Game_screen):
                 self.score_player1 += 1 * self.params['score_multiplier']
             else:
                 self.score_player2 += 1 * self.params['score_multiplier']
-            
+
             self.animation_manager.create_new_effect(
                 self.res.blast_anim2, self.res.blast_anim2_size, 4, False, coin.collision_rect().midbottom)
 

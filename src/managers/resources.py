@@ -45,11 +45,13 @@ class Resources:
         self.logo = pygame.image.load(
             'res/images/misc/logo.png').convert_alpha()
         self.cart_img = pygame.image.load(
-            'res/images/bg/cart.png').convert_alpha()
+            'res/images/objects/cart_new.png').convert_alpha()
         self.cart_player1_img = pygame.image.load(
-            'res/images/bg/cart_player1.png').convert_alpha()
+            'res/images/objects/cart_player1.png').convert_alpha()
         self.cart_player2_img = pygame.image.load(
-            'res/images/bg/cart_player2.png').convert_alpha()
+            'res/images/objects/cart_player2.png').convert_alpha()
+        self.cart_ai_img = pygame.image.load(
+            'res/images/objects/cart_ai.png').convert_alpha()
         self.coin_img = pygame.image.load(
             'res/images/bg/coin.jpg').convert()
         self.bluecoin = pygame.image.load(

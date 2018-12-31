@@ -3,14 +3,14 @@ import math
 
 from pygame.locals import QUIT, KEYUP
 from src.game_screens.screen import Screen
-from src.misc.game_enums import Game_mode, Entity
+from src.misc.game_enums import Game_Mode, Entity
 from src.ui.image import Image
 from src.ui.text import Text
 
 from src.objects import *
 
 
-class Game_screen(Screen):
+class Classic_Game_Screen(Screen):
     def __init__(self, pygame, res, surface, size, gameclock, game_manager):
         Screen.__init__(self, pygame, res, surface, size)
 
@@ -27,6 +27,12 @@ class Game_screen(Screen):
         self.texts['Time'] = Text(
             pygame, res, surface, (self.center_x * 2 - score_x / 2 - 65, score_y / 2), 'Time: 50', res.score_font, res.score_text_color, alignment='left')
 
+        self.game_over_text1 = Text(
+            pygame, res, surface, (self.center_x + 3, self.center_y + 3), 'GAME OVER', res.game_title_font, res.BLACK)
+
+        self.game_over_text2 = Text(
+            pygame, res, surface, (self.center_x, self.center_y), 'GAME OVER', res.game_title_font, res.game_title_text_color)
+
         # set up initial variables
         self.need_reset = False
         self.size = size
@@ -41,7 +47,7 @@ class Game_screen(Screen):
         self.waiting_death_explosion = False
         self.wait_death_timer = 0
         self.wait_death_time = 100
-        self.random_pos_x = self.size[0] / 2
+        self.spawn_pos_x = self.size[0] / 2
         self.death_zone = Death_Zone(self.size)
         self.res.set_random_bg(self.pygame, self.size)
 
@@ -67,14 +73,16 @@ class Game_screen(Screen):
         if self.waiting_death_explosion:
             self.surface.blit(self.res.BG, (0, 0))
             self.cart.draw()
+            self.game_over_text1.draw()
+            self.game_over_text2.draw()
             self.animation_manager.draw_animations()
             self.wait_death_timer += 1
 
             if self.wait_death_timer > self.wait_death_time:
                 self.need_reset = True
-                return Game_mode.GAME_OVER
+                return Game_Mode.GAME_OVER
             else:
-                return Game_mode.GAME
+                return Game_Mode.CLASSIC
 
         self.params = self.game_manager.params
 
@@ -113,7 +121,8 @@ class Game_screen(Screen):
 
         # returns real value of timer to int value
         int_timer = math.trunc(self.timer)
-        self.texts['Score'].change_text('Score: ' + str(int(self.game_manager.score)))
+        self.texts['Score'].change_text(
+            'Score: ' + str(int(self.game_manager.score)))
         self.texts['Time'].change_text('Time: ' + str(int_timer))
 
         if self.timer > 30 or self.cart.dead:
@@ -122,35 +131,35 @@ class Game_screen(Screen):
 
         for event in events:
             if event.type == QUIT:
-                return Game_mode.QUIT
+                return Game_Mode.QUIT
 
-        return Game_mode.GAME
+        return Game_Mode.CLASSIC
 
     def get_random_entity(self):
 
         if random.random() < self.params['spawn_chance']:
 
             coin_select_random = random.random()
-            self.new_random_x()
+            self.pick_new_spawn_pos_x()
 
             if coin_select_random < self.params['silver_chance']:
-                return Coin(self.res, self.size, self.surface, self.random_pos_x, -50)
+                return Coin(self.res, self.size, self.surface, self.spawn_pos_x, -50)
             elif coin_select_random < (self.params['silver_chance'] + self.params['gold_chance']):
-                return BlueCoin(self.res, self.size, self.surface, self.random_pos_x, -50)
+                return BlueCoin(self.res, self.size, self.surface, self.spawn_pos_x, -50)
             else:
-                return Bomb(self.res, self.size, self.surface, self.random_pos_x, -50)
+                return Bomb(self.res, self.size, self.surface, self.spawn_pos_x, -50)
 
         else:
             return None
 
-    def new_random_x(self):
+    def pick_new_spawn_pos_x(self):
         new_rand = random.randint(50, self.size[0] - 50)
 
-        # to prevent overlaping spawn
-        if abs(new_rand - self.random_pos_x) < 50:
-            self.new_random_x()
+        # to prevent overlapping spawn
+        if abs(new_rand - self.spawn_pos_x) < 50:
+            self.pick_new_spawn_pos_x()
         else:
-            self.random_pos_x = new_rand
+            self.spawn_pos_x = new_rand
 
     def scoring_function(self, coin):
         if coin.collected:
