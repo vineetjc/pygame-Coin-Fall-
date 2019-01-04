@@ -25,18 +25,51 @@ class Renderer():
         dy = model.position[1]
         dz = model.position[2]
 
-        sx = model.scale[0]
-        sy = model.scale[1]
-        sz = model.scale[2]
+        rx = model.scale[0]
+        ry = model.scale[1]
+        rz = model.scale[2]
 
-        MVP = np.array([[sx, 00, 00, dx],
-                        [00, sy, 00, dy],
-                        [00, 00, sz, dz],
-                        [00, 00, 00,  1]])
+        cx = math.cos(model.rotation[0])
+        sx = math.sin(model.rotation[0])
+        cy = math.cos(model.rotation[1])
+        sy = math.sin(model.rotation[1])
+        cz = math.cos(model.rotation[2])
+        sz = math.sin(model.rotation[2])
+
+        scale_matrix = np.array([[rx, 00, 00, 00],
+                                 [00, ry, 00, 00],
+                                 [00, 00, rz, 00],
+                                 [00, 00, 00, 1]])
+
+        translation_matrix = np.array([[1, 00, 00, dx],
+                                       [00, 1, 00, dy],
+                                       [00, 00, 1, dz],
+                                       [00, 00, 00, 1]])
+
+        rot_total_matrix = np.array([
+            [cy * cz,                   cy * sz,                    -sy,        0],
+            [sx * sy * cz - cx * sz,    sx * sy * sz + cx * cz,     sx * cy,    0],
+            [cx * sy * cz + sx * sz,    cx * sy * sz - sx * cz,     cx * cy,    0],
+            [0,                         0,                          0,          1]
+        ])
+
+        model_matrix = np.matmul(translation_matrix, np.matmul(
+            scale_matrix, rot_total_matrix))
 
         for index, vertex in enumerate(mesh.vertices):
-            mesh.mvp_vertices[index] = self.multi_MVP(
-                mesh.vertices[index], MVP)
+            mesh.mvp_vertices[index] = np.matmul(
+                model_matrix, mesh.vertices[index])
+
+        for index, face in enumerate(mesh.faces):
+            v1 = mesh.mvp_vertices[face[1]] - mesh.mvp_vertices[face[0]]
+            v2 = mesh.mvp_vertices[face[2]] - mesh.mvp_vertices[face[0]]
+            face_normal = np.cross(v1[:3], v2[:3])
+            length = np.sqrt((np.sum(face_normal**2)))
+
+            if length is not 0:
+                face_normal = face_normal / length
+
+            mesh.face_normals[index] = face_normal
 
         for index, face in enumerate(mesh.faces):
             if mesh.face_normals[index][2] > 0:
@@ -46,27 +79,11 @@ class Renderer():
                                         mesh.mvp_vertices[face[0]][:2], mesh.mvp_vertices[face[1]][:2], mesh.mvp_vertices[face[2]][:2]])
 
     def get_color(self, color, face_normal):
-        face_light = np.dot(face_normal, self.light_dir) * self.light_intensity + self.ambient_intensity
+        face_light = np.dot(face_normal, self.light_dir) * \
+            self.light_intensity + self.ambient_intensity
 
         if face_light < 0:
             return [0, 0, 0]
 
         face_light = min(face_light, 1.0)
         return face_light * color
-
-    def multi_MVP(self, vertex, MVP):
-        result = [
-            vertex[0] * MVP[0][0] + vertex[1] * MVP[0][1] +
-            vertex[2] * MVP[0][2] + vertex[3] * MVP[0][3],
-
-            vertex[0] * MVP[1][0] + vertex[1] * MVP[1][1] +
-            vertex[2] * MVP[1][2] + vertex[3] * MVP[1][3],
-
-            vertex[0] * MVP[2][0] + vertex[1] * MVP[2][1] +
-            vertex[2] * MVP[2][2] + vertex[3] * MVP[2][3],
-
-            vertex[0] * MVP[3][0] + vertex[1] * MVP[3][1] +
-            vertex[2] * MVP[3][2] + vertex[3] * MVP[3][3]
-        ]
-
-        return result

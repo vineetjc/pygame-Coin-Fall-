@@ -9,14 +9,15 @@ import pygame
 
 
 def main():
-    global width, height, input, renderer
+    global width, height, input, renderer, time
     width = 1024
     height = 768
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Coin Fall')
     background = (40, 40, 40)
+    time = pygame.time.Clock()
 
-    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\coin2.objx"
+    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\bomb.objx"
     mesh = OBJ_Loader.load(path)
     model = Model()
     model.mesh = mesh
@@ -42,15 +43,23 @@ def game_loop(screen, background, model):
         h = input.get_axis('horizontal')
         v = input.get_axis('vertical')
         r = input.get_axis('rotation')
+        r2 = input.get_axis('rotation2')
+        r3 = input.get_axis('rotation3') 
+        r4 = input.get_axis('rotation4')        
 
         model.position[0] += h
         model.position[1] += v
         model.scale[0] += r
         model.scale[1] += r
         model.scale[2] += r
+        model.rotation[0] += r2 * 0.01
+        model.rotation[1] += r3 * 0.01
+        model.rotation[2] += r4 * 0.01
 
         screen.fill(background)
         renderer.render(model)
+        print(time.get_fps())
+        time.tick()
         pygame.display.flip()
 
 

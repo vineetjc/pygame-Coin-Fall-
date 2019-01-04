@@ -59,4 +59,16 @@ def get_input_list():
     input_list['rotation'] = Axis(
         'rotation', {(pygame.K_q, pygame.K_e)})
 
+    # rotation2
+    input_list['rotation2'] = Axis(
+        'rotation2', {(pygame.K_o, pygame.K_l)})
+
+    # rotation3
+    input_list['rotation3'] = Axis(
+        'rotation3', {(pygame.K_i, pygame.K_k)})
+
+    # rotation4
+    input_list['rotation4'] = Axis(
+        'rotation4', {(pygame.K_u, pygame.K_j)})
+
     return input_list
