@@ -24,6 +24,7 @@ class OBJ_Loader():
                 new_vertex = [float(values[1]), float(
                     values[2]), float(values[3]), 1.0]
                 mesh.vertices = np.vstack((mesh.vertices, new_vertex))
+                mesh.mvp_vertices = np.vstack((mesh.mvp_vertices, new_vertex))
             elif values[0] == 'f':
                 new_face = [int(values[1]) - 1, int(values[2]
                                                     ) - 1, int(values[3]) - 1]

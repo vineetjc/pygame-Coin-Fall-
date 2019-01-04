@@ -5,6 +5,7 @@ class Mesh():
 
     def __init__(self):
         self.vertices = np.zeros((0, 4))
+        self.mvp_vertices = np.zeros((0, 4))
         self.faces = np.zeros((0, 3), dtype=int)
         self.face_normals = np.zeros((0, 3))
 
@@ -15,8 +16,11 @@ class Model():
         self.position = [0, 0, 0]
         self.rotation = [0, 0, 0]
         self.scale = [1, 1, 1]
-        self.color = [255, 255, 255]
+        self.color = np.array([255, 255, 255])
         self.mesh = None
+
+    def set_color(self, color):
+        self.color = np.array([color[0], color[1], color[2]])
 
 
 class Vertex():
