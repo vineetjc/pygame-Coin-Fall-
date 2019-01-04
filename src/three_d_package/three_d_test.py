@@ -16,7 +16,7 @@ def main():
     pygame.display.set_caption('Coin Fall')
     background = (40, 40, 40)
 
-    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\bomb.objx"
+    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\coin2.objx"
     mesh = OBJ_Loader.load(path)
     model = Model()
     model.mesh = mesh
