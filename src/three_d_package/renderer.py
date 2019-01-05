@@ -60,23 +60,23 @@ class Renderer():
             mesh.mvp_vertices[index] = np.matmul(
                 model_matrix, mesh.vertices[index])
 
+
         for index, face in enumerate(mesh.faces):
             v1 = mesh.mvp_vertices[face[1]] - mesh.mvp_vertices[face[0]]
             v2 = mesh.mvp_vertices[face[2]] - mesh.mvp_vertices[face[0]]
-            face_normal = np.cross(v1[:3], v2[:3])
-            length = np.sqrt((np.sum(face_normal**2)))
+            mesh.face_normals[index] = self.cross(v2[:3], v1[:3])
 
-            if length is not 0:
-                face_normal = face_normal / length
-
-            mesh.face_normals[index] = face_normal
+        self.screen.lock()
 
         for index, face in enumerate(mesh.faces):
             if mesh.face_normals[index][2] > 0:
                 color = self.get_color(model.color, mesh.face_normals[index])
                 if color is not [0, 0, 0]:
                     pygame.draw.polygon(self.screen, color, [
-                                        mesh.mvp_vertices[face[0]][:2], mesh.mvp_vertices[face[1]][:2], mesh.mvp_vertices[face[2]][:2]])
+                        mesh.mvp_vertices[face[0]][:2], mesh.mvp_vertices[face[1]][:2], mesh.mvp_vertices[face[2]][:2]])
+
+        self.screen.unlock()
+
 
     def get_color(self, color, face_normal):
         face_light = np.dot(face_normal, self.light_dir) * \
@@ -87,3 +87,18 @@ class Renderer():
 
         face_light = min(face_light, 1.0)
         return face_light * color
+
+    def cross(self, right, left):
+        value = np.array([0, 0, 0])
+
+        value[0] = ((left[1] * right[2]) - (left[2] * right[1]))
+        value[1] = ((left[2] * right[0]) - (left[0] * right[2]))
+        value[2] = ((left[0] * right[1]) - (left[1] * right[0]))
+
+        length = math.sqrt(value[0] * value[0] + value[1]
+                           * value[1] + value[2] * value[2])
+
+        if length != 0:
+            value = value / length
+
+        return value
