@@ -61,17 +61,26 @@ class Renderer():
                 model_matrix, mesh.vertices[index])
 
         for index, face in enumerate(mesh.faces):
-            v1 = mesh.mvp_vertices[face[1]] - mesh.mvp_vertices[face[0]]
-            v2 = mesh.mvp_vertices[face[2]] - mesh.mvp_vertices[face[0]]
+            v0 = mesh.mvp_vertices[face[0]]
+            v1 = mesh.mvp_vertices[face[1]]
+            v2 = mesh.mvp_vertices[face[2]]
 
-            mesh.face_normals[index] = self.cross(v2[:3], v1[:3])
+            vd1 = v1 - v0
+            vd2 = v2 - v0
+
+            mesh.face_normals[index] = self.cross(vd2[:3], vd1[:3])
+
+            mesh.face_centers[index] = ((v0 + v1 + v2) / 3)[2]
+
+        z_order = np.argsort(mesh.face_centers)
 
         self.screen.lock()
 
-        for index, face in enumerate(mesh.faces):
+        for index in z_order:
             if mesh.face_normals[index][2] > 0:
                 color = self.get_color(model.color, mesh.face_normals[index])
                 if color is not [0, 0, 0]:
+                    face = mesh.faces[index]
                     pygame.draw.polygon(self.screen, color, [
                         mesh.mvp_vertices[face[0]][:2], mesh.mvp_vertices[face[1]][:2], mesh.mvp_vertices[face[2]][:2]])
 
@@ -98,9 +107,8 @@ class Renderer():
         value[1] = (left[2] * right[0]) - (left[0] * right[2])
         value[2] = (left[0] * right[1]) - (left[1] * right[0])
 
-        sqr = value[0] * value[0] + value[1] * value[1] + value[2] * value[2]
-
-        length = math.sqrt(sqr)
+        length = math.sqrt(value[0] * value[0] + value[1]
+                           * value[1] + value[2] * value[2])
 
         if length != 0:
             value = value / length

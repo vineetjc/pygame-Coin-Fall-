@@ -8,6 +8,7 @@ class Mesh():
         self.mvp_vertices = np.zeros((0, 4))
         self.faces = np.zeros((0, 3), dtype=int)
         self.face_normals = np.zeros((0, 3))
+        self.face_centers = np.zeros(0)
 
 
 class Model():

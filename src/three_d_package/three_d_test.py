@@ -17,13 +17,13 @@ def main():
     background = (40, 40, 40)
     time = pygame.time.Clock()
 
-    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\coin2.objx"
+    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\monkey.objx"
     mesh = OBJ_Loader.load(path)
     model = Model()
     model.mesh = mesh
     model.position = [width // 2, height // 2, 0]
-    model.scale = [100, 100, 100]
-    model.set_color((0, 250, 250))
+    model.scale = [250, 250, 250]
+    model.set_color((255, 215, 0))
 
     input = Input_Manager()
     renderer = Renderer(screen, [512, 384, 0], 1024, 768, [1, -1, 1], 0.8, 0.1)
@@ -52,9 +52,9 @@ def game_loop(screen, background, model):
         model.scale[0] += r
         model.scale[1] += r
         model.scale[2] += r
-        model.rotation[0] += r2 * 0.01
-        model.rotation[1] += r3 * 0.01
-        model.rotation[2] += r4 * 0.01
+        model.rotation[0] += r2 * 0.03
+        model.rotation[1] += r3 * 0.03
+        model.rotation[2] += r4 * 0.03
 
         screen.fill(background)
         renderer.render(model)

@@ -30,14 +30,22 @@ class OBJ_Loader():
                                                     ) - 1, int(values[3]) - 1]
                 mesh.faces = np.vstack((mesh.faces, new_face))
 
-        for face in mesh.faces:
-            v1 = mesh.vertices[face[1]] - mesh.vertices[face[0]]
-            v2 = mesh.vertices[face[2]] - mesh.vertices[face[0]]
-            face_normal = np.cross(v1[:3], v2[:3])
+        for index, face in enumerate(mesh.faces):
+            v0 = mesh.vertices[face[0]]
+            v1 = mesh.vertices[face[1]]
+            v2 = mesh.vertices[face[2]]
+
+            vd1 = v1 - v0
+            vd2 = v2 - v0
+
+            face_normal = np.cross(vd1[:3], vd2[:3])
             length = np.sqrt((np.sum(face_normal**2)))
+
             if length is not 0:
                 face_normal = face_normal / length
 
             mesh.face_normals = np.vstack((mesh.face_normals, face_normal))
+
+            mesh.face_centers = np.append(mesh.face_centers, ((v0 + v1 + v2) / 3)[2])
 
         return mesh
