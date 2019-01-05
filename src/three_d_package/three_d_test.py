@@ -17,13 +17,13 @@ def main():
     background = (40, 40, 40)
     time = pygame.time.Clock()
 
-    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\bomb.objx"
+    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\coin2.objx"
     mesh = OBJ_Loader.load(path)
     model = Model()
     model.mesh = mesh
     model.position = [width // 2, height // 2, 0]
-    model.scale = [200, 200, 200]
-    model.set_color((250, 250, 150))
+    model.scale = [100, 100, 100]
+    model.set_color((0, 250, 250))
 
     input = Input_Manager()
     renderer = Renderer(screen, [512, 384, 0], 1024, 768, [1, -1, 1], 0.8, 0.1)

@@ -13,9 +13,9 @@ class Mesh():
 class Model():
 
     def __init__(self):
-        self.position = [0, 0, 0]
-        self.rotation = [0, 0, 0]
-        self.scale = [1, 1, 1]
+        self.position = [0.0, 0.0, 0.0]
+        self.rotation = [0.0, 0.0, 0.0]
+        self.scale = [1.0, 1.0, 1.0]
         self.color = np.array([255, 255, 255])
         self.mesh = None
 

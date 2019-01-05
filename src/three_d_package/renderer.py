@@ -60,10 +60,10 @@ class Renderer():
             mesh.mvp_vertices[index] = np.matmul(
                 model_matrix, mesh.vertices[index])
 
-
         for index, face in enumerate(mesh.faces):
             v1 = mesh.mvp_vertices[face[1]] - mesh.mvp_vertices[face[0]]
             v2 = mesh.mvp_vertices[face[2]] - mesh.mvp_vertices[face[0]]
+
             mesh.face_normals[index] = self.cross(v2[:3], v1[:3])
 
         self.screen.lock()
@@ -77,28 +77,35 @@ class Renderer():
 
         self.screen.unlock()
 
-
     def get_color(self, color, face_normal):
-        face_light = np.dot(face_normal, self.light_dir) * \
-            self.light_intensity + self.ambient_intensity
+        face_light = self.dot(
+            face_normal, self.light_dir) * self.light_intensity
 
         if face_light < 0:
-            return [0, 0, 0]
+            face_light = 0
 
-        face_light = min(face_light, 1.0)
+        face_light += self.ambient_intensity
+
+        if face_light > 1:
+            face_light = 1
+
         return face_light * color
 
     def cross(self, right, left):
-        value = np.array([0, 0, 0])
+        value = np.array([0.0, 0.0, 0.0])
 
-        value[0] = ((left[1] * right[2]) - (left[2] * right[1]))
-        value[1] = ((left[2] * right[0]) - (left[0] * right[2]))
-        value[2] = ((left[0] * right[1]) - (left[1] * right[0]))
+        value[0] = (left[1] * right[2]) - (left[2] * right[1])
+        value[1] = (left[2] * right[0]) - (left[0] * right[2])
+        value[2] = (left[0] * right[1]) - (left[1] * right[0])
 
-        length = math.sqrt(value[0] * value[0] + value[1]
-                           * value[1] + value[2] * value[2])
+        sqr = value[0] * value[0] + value[1] * value[1] + value[2] * value[2]
+
+        length = math.sqrt(sqr)
 
         if length != 0:
             value = value / length
 
         return value
+
+    def dot(self, right, left):
+        return right[0] * left[0] + right[1] * left[1] + right[2] * left[2]
