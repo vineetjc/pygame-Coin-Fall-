@@ -9,6 +9,10 @@ class Mesh():
         self.faces = np.zeros((0, 3), dtype=int)
         self.face_normals = np.zeros((0, 3))
         self.face_centers = np.zeros(0)
+        self.face_color_r = np.zeros(0, np.uint8)
+        self.face_color_g = np.zeros(0, np.uint8)
+        self.face_color_b = np.zeros(0, np.uint8)
+        self.face_light = np.zeros(0)
 
 
 class Model():

@@ -46,6 +46,13 @@ class OBJ_Loader():
 
             mesh.face_normals = np.vstack((mesh.face_normals, face_normal))
 
-            mesh.face_centers = np.append(mesh.face_centers, ((v0 + v1 + v2) / 3)[2])
+            mesh.face_centers = np.append(
+                mesh.face_centers, ((v0 + v1 + v2) / 3)[2])
+
+            mesh.face_color_r = np.append(mesh.face_color_r, np.uint8(255))
+            mesh.face_color_g = np.append(mesh.face_color_g, np.uint8(255))
+            mesh.face_color_b = np.append(mesh.face_color_b, np.uint8(255))
+
+            mesh.face_light = np.append(mesh.face_light, 0.0)
 
         return mesh
