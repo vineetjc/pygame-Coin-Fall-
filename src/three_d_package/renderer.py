@@ -21,8 +21,6 @@ class Renderer():
 
     def render(self, model):
 
-        # total time = 18ms
-
         mesh = model.mesh
 
         dx = model.position[0]
@@ -57,40 +55,45 @@ class Renderer():
             [0,                         0,                          0,          1]
         ])
 
-        # time = 0ms
-
         model_matrix = np.matmul(translation_matrix, np.matmul(
             scale_matrix, rot_total_matrix))
-
-        # time = 1ms
 
         for index, vertex in enumerate(mesh.vertices):
             mesh.mvp_vertices[index] = np.matmul(
                 model_matrix, mesh.vertices[index])
 
-        # time = 10ms
+        mesh.mvp_vert_x = mesh.mvp_vertices[:, 0]
+        mesh.mvp_vert_y = mesh.mvp_vertices[:, 1]
+        mesh.mvp_vert_z = mesh.mvp_vertices[:, 2]
 
         for index, face in enumerate(mesh.faces):
-            v0 = mesh.mvp_vertices[face[0]]
-            v1 = mesh.mvp_vertices[face[1]]
-            v2 = mesh.mvp_vertices[face[2]]
+            a1 = mesh.mvp_vert_x[face[1]] - mesh.mvp_vert_x[face[0]]
+            a2 = mesh.mvp_vert_y[face[1]] - mesh.mvp_vert_y[face[0]]
+            a3 = mesh.mvp_vert_z[face[1]] - mesh.mvp_vert_z[face[0]]
 
-            vd1 = v1 - v0
-            vd2 = v2 - v0
+            b1 = mesh.mvp_vert_x[face[2]] - mesh.mvp_vert_x[face[0]]
+            b2 = mesh.mvp_vert_y[face[2]] - mesh.mvp_vert_y[face[0]]
+            b3 = mesh.mvp_vert_z[face[2]] - mesh.mvp_vert_z[face[0]]
 
-            mesh.face_normals[index] = self.cross(vd2[:3], vd1[:3])
+            mesh.face_normals_x[index] = (a2 * b3) - (a3 * b2)
+            mesh.face_normals_y[index] = (a1 * b3) - (a3 * b1)
+            mesh.face_normals_z[index] = (a1 * b2) - (a2 * b1)
 
-            mesh.face_centers[index] = ((v0 + v1 + v2) / 3)[2]
+            length = math.sqrt(mesh.face_normals_x[index] * mesh.face_normals_x[index] +
+                               mesh.face_normals_y[index] * mesh.face_normals_y[index] +
+                               mesh.face_normals_z[index] * mesh.face_normals_z[index])
 
-        # time = 0ms
+            if length != 0:
+                mesh.face_normals_x[index] = mesh.face_normals_x[index] / length
+                mesh.face_normals_y[index] = mesh.face_normals_y[index] / length
+                mesh.face_normals_z[index] = mesh.face_normals_z[index] / length
+
+            mesh.face_centers[index] = (
+                mesh.mvp_vert_z[face[0]] + mesh.mvp_vert_z[face[0]] + mesh.mvp_vert_z[face[0]]) / 3
 
         z_order = np.argsort(mesh.face_centers)
 
-        self.screen.lock()
-
-        # time = 4ms
-
-        mesh.face_light = self.light(mesh.face_normals[:, 0], mesh.face_normals[:, 1], mesh.face_normals[:, 2],
+        mesh.face_light = self.light(mesh.face_normals_x,  mesh.face_normals_y,  mesh.face_normals_z,
                                      self.light_dir[0], self.light_dir[1], self.light_dir[2],
                                      self.light_intensity, self.ambient_intensity)
 
@@ -98,26 +101,25 @@ class Renderer():
         mesh.face_color_g = self.final_color(mesh.face_light, model.color[1])
         mesh.face_color_b = self.final_color(mesh.face_light, model.color[2])
 
-        #time1 = time.time()
+        self.screen.lock()
 
-        for index in z_order:
-            if mesh.face_normals[index][2] > 0:
-                # time = 0ms
-
+        for index in np.nditer(z_order):
+            if mesh.face_normals_z[index] >= 0:
                 face_color = (
                     mesh.face_color_r[index], mesh.face_color_g[index], mesh.face_color_b[index])
 
-                # time = 4ms
-
                 face = mesh.faces[index]
+                v0 = face[0]
+                v1 = face[1]
+                v2 = face[2]
+
                 pygame.draw.polygon(self.screen, face_color, [
-                    mesh.mvp_vertices[face[0]][:2], mesh.mvp_vertices[face[1]][:2], mesh.mvp_vertices[face[2]][:2]])
+                    [mesh.mvp_vert_x[v0], mesh.mvp_vert_y[v0]],
+                    [mesh.mvp_vert_x[v1], mesh.mvp_vert_y[v1]],
+                    [mesh.mvp_vert_x[v2], mesh.mvp_vert_y[v2]]
+                ])
 
         self.screen.unlock()
-
-        #time2 = time.time()
-
-        #print((time2 - time1) * 1000)
 
     def light(self, face_normals_x, face_normal_y, face_normal_z, light_dir_x, light_dir_y, light_dir_z, light_intensity, ambient_intensity):
         light = face_normals_x * light_dir_x + face_normal_y * \
@@ -129,18 +131,3 @@ class Renderer():
     def final_color(self, face_light, color):
         result = np.multiply(face_light, color)
         return np.uint8(result)
-
-    def cross(self, right, left):
-        value = np.array([0.0, 0.0, 0.0])
-
-        value[0] = (left[1] * right[2]) - (left[2] * right[1])
-        value[1] = (left[2] * right[0]) - (left[0] * right[2])
-        value[2] = (left[0] * right[1]) - (left[1] * right[0])
-
-        length = math.sqrt(value[0] * value[0] + value[1]
-                           * value[1] + value[2] * value[2])
-
-        if length != 0:
-            value = value / length
-
-        return value

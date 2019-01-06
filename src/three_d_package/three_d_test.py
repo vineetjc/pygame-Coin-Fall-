@@ -17,7 +17,7 @@ def main():
     background = (40, 40, 40)
     time = pygame.time.Clock()
 
-    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\monkey.objx"
+    path = r"E:\Game\KWOC\CoinFall\pygame-Coin-Fall-\res\three_d\reference.objx"
     mesh = OBJ_Loader.load(path)
     model = Model()
     model.mesh = mesh
